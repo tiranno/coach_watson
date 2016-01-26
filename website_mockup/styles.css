@@ -1,0 +1,19 @@
+html, body {
+  width: 100%;
+}
+
+.top-bar {
+  height: 50px;
+  width: 100%;
+  background-color: red;
+}
+.guery-bar {
+  width: 60%
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  background-color: gray;
+}
