@@ -4,7 +4,7 @@ class Bob:
     def __init__(self):
         self.qa_dict = {
             'What workouts should I do this week?' : 'All of them.',
-            'What should I eat for dinner?' : 'Pizza and ice cream',
+            'What should I eat for dinner?' : 'Pizza and ice cream.',
             'How do I perform a dead lift?' : 'Don\'t bend your knees. It\'s all in the back.',
             'How many miles should I run to lose 5 pounds?' : '30.',
             'What muscles do crunches target?' : 'Biceps.'

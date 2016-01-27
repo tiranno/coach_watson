@@ -60,3 +60,6 @@ target/
 # Temporary files
 *.swp
 *~
+
+# Why, Steve, why?
+.DS_Store
