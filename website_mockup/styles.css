@@ -1,0 +1,49 @@
+html, body {
+  width: 100%;
+  margin: 0;
+}
+
+#top-bar {
+  height: 40px;
+  width: 100%;
+  padding: 5px;
+  background-color: red;
+}
+#top-bar > div {
+  float: left;
+}
+#logo {
+  width: 20%;
+}
+#query-bar {
+  width: 60%;
+}
+#query-bar > input{
+  width: 90%;
+}
+#user-info {
+  width: 20%;
+}
+
+
+#main-container {
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  position: relative;
+}
+#main-container > section {
+  height: 100%
+}
+#panel-left {
+  height: 100%;
+  width: 20%;
+  background-color: gray;
+  position: absolute;
+}
+#panel-center {
+  width: 80%;
+}
+#panel-right {
+
+}
