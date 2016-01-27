@@ -2,7 +2,7 @@ body {
   min-height: 100%;
   height: 100%;
   padding-top: 50px;
-
+  font-family: 'Roboto', sans-serif;
   background-url: http://api.thumbr.it/whitenoise-361x370.png?background=#F5F5F5ff&noise=626262&density=13&opacity=6;
 }
 
@@ -20,11 +20,36 @@ body {
 /*Main content styles*/
 #panel-left {
   min-height: 100%;
-  height: 100%;
+  /*height: 100%;*/
+  padding: 0px;
   background-color: #006064;
+  float: none;
+  display: table-cell;
 }
+.nav-pills {
+  width: 100%;
+}
+.nav-pills>li {
+  color: white;
+}
+.nav-pills>li>a {
+  border-radius: 0;
+  color: rgba(255,255,255,.7);
+}
+.nav-pills>li.active>a {
+  color: rgba(255,255,255,1);
+  background-color: #00838F;
+}
+.nav-pills>li>a:hover, .nav-pills>li.active>a:hover {
+  color: rgba(255,255,255,1);
+  background-color: #0097A7;
+}
+
 #panel-center {
+  height: 100%;
   padding-top: 15px;
+  float: none;
+  display: table-cell;
 }
 .panel-answer {
   width: auto;
