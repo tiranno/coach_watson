@@ -4,45 +4,92 @@
   <meta charset="UTF-8">
   <title>Watson PT</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="col-xs-12">
 
   <!-- nav bar -->
-  <div class="col-md-12"></div>
+  <nav class="navbar navbar-default navbar-fixed-top" id="top-bar">
+    <div class="container">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          Coach Watson
+        </a>
+        <form class="navbar-form navbar-left" id="nav-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Can I help you?">
+          </div>
+          <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+        </form>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">USER <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+
+  </nav>
 
   <!-- panels -->
-  <div class="col-md-12"></div>
-
-
-  <!-- old shit -->
-  <div id="top-bar">
-    <div id="logo">
-      COACH WATSON
+  <div class="row">
+    <div class="col-sm-3" id="panel-left">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><a href="#">Ask Watson</a></li>
+        <li role="presentation"><a href="#">Workouts</a></li>
+        <li role="presentation"><a href="#">Nutrition</a></li>
+        <li role="presentation"><a href="#">Goal Tracker</a></li>
+      </ul>
     </div>
-    <div id="query-bar">
-      <input type="text">
-    </div>
-    <div id="user-info">
-      USER
+    <div class="col-sm-9" id="panel-center">
+
+      <div class="panel panel-default panel-answer">
+        <div class="panel-heading">
+          I think this might work for you ...
+        </div>
+        <div class="panel-body">
+          <div class="media">
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="barbellsquat.png" height="100px">
+              </a>
+            </div>
+            <div class="media-body">
+              <h3 class="media-heading">Barbell Squats</h3>
+              <p>Primary muscles:  Quadricepts</p>
+              <p>Secondary muscles: Calves, Glutes, Hamstrings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default panel-question">
+        <div class="panel-body">
+          What's a good weight training exercise for legs?
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="main-container">
-    <section id="panel-left">
-
-    </section>
-    <section id="panel-center">
-      <article class="answer">
-
-      </article>
-      <article class="query">
-
-      </article>
-    </section>
-    <section id="panel-right">
-
-    </section>
-  </div>
 
 </body>
 </html>
