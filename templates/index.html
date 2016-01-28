@@ -10,7 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="/static/js/index.js"></script>
-  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="../static/css/styles.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -29,14 +29,13 @@
         </button>
 
         <a class="navbar-brand col-xs-2 col-sm-3 col-md-2" href="#">
-          <span><img src="static/res/watson_logo.png" alt="" height="24px"></span>
+          <span><img src="../static/res/watson_logo.png" alt="" height="24px"></span>
           Coach Watson
         </a>
 
-        <form class="col-xs-8 col-sm-6 col-md-8" role="search">
+        <form autocomplete="off" class="col-xs-8 col-sm-6 col-md-8" role="search">
           <!-- <div class="form-group"> -->
-            <input type="text" id="mainquerybar" class="form-control" placeholder="How can I help you?">
-          <!-- </div> -->
+            <input type="text" autocomplete="off" id="mainquerybar" class="form-control" placeholder="How can I help you?">          <!-- </div> -->
           <!-- <button type="submit" class="btn btn-default">Submit</button> -->
         </form>
 
@@ -162,7 +161,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object" src="static/res/barbellsquat.png" height="100px">
+                      <img class="media-object" src="../static/res/barbellsquat.png" height="100px">
                     </a>
                   </div>
                   <div class="media-body">
