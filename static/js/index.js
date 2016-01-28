@@ -9,10 +9,15 @@ $(function () {
         answer.append($('<div />', {
             'class': 'panel panel-default panel-answer'
         }))
-        answer.children(0).append($('<div />', {
-            'class': 'panel-body',
-            text: evt.data
-        }))
+        if(evt.data[0] === '<') {
+            answer.children(0).append($('<div class="panel-heading">I think this might work for you ...</div>'));
+            answer.children(0).append($(evt.data));
+        } else {
+            answer.children(0).append($('<div />', {
+                'class': 'panel-body' ,
+                text: evt.data
+            }))
+        }
         $('#dialog-pane').prepend(answer);
     }
 
