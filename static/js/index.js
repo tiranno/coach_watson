@@ -30,6 +30,11 @@ $(function () {
             'class': 'panel-body',
             text: question_text
         }))
+        var line_break = $('<div />', {
+            'class': 'col-xs-12'
+        })
+        line_break.append('<hr>');
+        $('#dialog-pane').prepend(line_break);
         $('#dialog-pane').prepend(question);
         // Prevents page from reloading
         return false;
