@@ -3,7 +3,12 @@ body {
   height: 100%;
   padding-top: 50px;
   font-family: 'Roboto', sans-serif;
-  background-url: http://api.thumbr.it/whitenoise-361x370.png?background=#F5F5F5ff&noise=626262&density=13&opacity=6;
+  background-color: rgba(0,0,0,.005)
+  /*background-url: http://api.thumbr.it/whitenoise-361x370.png?background=#F5F5F5ff&noise=626262&density=13&opacity=6;*/
+}
+
+hr {
+  background-color: rgba(0,0,0,.12)
 }
 
 /*Top nav styles*/
@@ -20,6 +25,9 @@ body {
 }
 .navbar-header {
   float: none;
+}
+#mainquerybar {
+  margin-top: 7px;
 }
 
 
