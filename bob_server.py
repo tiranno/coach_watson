@@ -44,7 +44,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def open(self):
         print('WebSocket opened.')
-        self.write_message('Welcome!')
+        # self.write_message('Welcome!')
 
     def check_origin(self, origin):
         return True
