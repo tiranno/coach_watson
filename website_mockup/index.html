@@ -2,31 +2,36 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Watson PT</title>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
-<body class="col-xs-12">
+<body>
 
   <!-- nav bar -->
   <nav class="navbar navbar-default navbar-fixed-top" id="top-bar">
-    <div class="container" style="float:left">
+    <div class="container">
 
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
+      <div class="navbar-header row">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+
+        <a class="navbar-brand col-xs-2 col-sm-3 col-md-2" href="#">
           Coach Watson
         </a>
-        <form class="navbar-form navbar-left" id="nav-search" role="search">
+
+        <form class="navbar-form col-xs-8 col-sm-7 col-md-6" role="search">
           <div class="form-group">
             <input type="text" id="mainquerybar" class="form-control" placeholder="How can I help you?">
           </div>
@@ -37,77 +42,99 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-		<div class="dropdown" style="margin-top: 8px; margin-right: 20px">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Account Menu
-			<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a href="#">See Current Schedule</a></li>
-					<li><a href="#">My Workout History</a></li>
-					<li><a href="#">Edit Profile Settings</a></li>
-					<li><a href="#">Change Theme</a></li>
-					<li><a href="#">User Manual</a></li>
-					<li><a href="#">Sign in with Different Account</a></li>
-					<li><a href="#">Log Out</a></li>
-				</ul>
-		</div>
-		</ul>
+		      <li class="dropdown" style="margin-top: 8px; margin-right: 20px">
+		    	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Account Menu
+		    	  <span class="caret"></span></button>
+		    		<ul class="dropdown-menu">
+		    			<li><a href="#">Account Settings</a></li>
+              <li><a href="#">User Preferences</a></li>
+		    			<li><a href="#">History and Stats</a></li>
+	    				<li><a href="#">User Manual</a></li>
+			  		  <li><a href="#">Log Out</a></li>
+				    </ul>
+		      </li>
+		    </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 
   </nav>
 
   <!-- panels -->
-  <div class="row">
-    <div class="col-sm-3 col-md-2" id="panel-left">
-      <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-		<li role="presentation"><a href="#">Ask Watson</a></li>
-		<li role="presentation"><a href="#">Workouts</a></li>
-        <li role="presentation"><a href="#">See My Calendar</a></li>
-        <li role="presentation"><a href="#">Nutrition Planner</a></li>
-        <li role="presentation"><a href="#">Goal Tracker</a></li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-md-6" id="panel-center">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left -->
+      <div class="col-sm-3 col-md-2" id="panel-left">
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation" class="active">
+            <a href="#">Ask Watson
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="float:right"></span>
+            </a>
+          </li>
+  		    <li role="presentation">
+            <a href="#">Workouts
+              <span class="glyphicon glyphicon-heart" aria-hidden="true" style="float:right"></span>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#">Nutrition Planner
+              <span class="glyphicon glyphicon-apple" aria-hidden="true" style="float:right"></span>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#">Goal Tracker
+              <span class="glyphicon glyphicon-stats" aria-hidden="true" style="float:right"></span>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#">Calendar
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="float:right"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <div class="panel panel-default panel-answer">
-        <div class="panel-heading">
-          I think this might work for you ...
-        </div>
-        <div class="panel-body">
-          <div class="media">
-            <div class="media-left">
-              <a href="#">
-                <img class="media-object" src="barbellsquat.png" height="100px">
-              </a>
-            </div>
-            <div class="media-body">
-              <h3 class="media-heading">Barbell Squats</h3>
-			  <br>
-              <p>Primary muscles:  <a href="https://en.wikipedia.org/wiki/Quadriceps_femoris_muscle">Quadricepts</a></p>
-              <p>Secondary muscles: <a href="https://en.wikipedia.org/wiki/Calf_(leg)">Calves</a>, <a href="https://en.wikipedia.org/wiki/Gluteal_muscles">Glutes</a>, <a href="https://en.wikipedia.org/wiki/Hamstring">Hamstrings</a></p>
-			  <p>Based on your profile stats and goals, I recommend you complete this exercise 2 times/week,
-				at an approximate weight of 100 lbs and set/rep count of 3/10.</p>
-			  <a href="#">See more info about this exercise routine</a>
+      <!-- center -->
+      <div class="col-sm-9 col-md-6" id="panel-center">
+        <div class="panel panel-default panel-answer">
+          <div class="panel-heading">
+            I think this might work for you ...
+          </div>
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object" src="barbellsquat.png" height="100px">
+                </a>
+              </div>
+              <div class="media-body">
+                <h3 class="media-heading">Barbell Squats</h3>
+    		        <br>
+                <p>Primary muscles:  <a href="https://en.wikipedia.org/wiki/Quadriceps_femoris_muscle">Quadricepts</a></p>
+                <p>Secondary muscles: <a href="https://en.wikipedia.org/wiki/Calf_(leg)">Calves</a>, <a href="https://en.wikipedia.org/wiki/Gluteal_muscles">Glutes</a>, <a href="https://en.wikipedia.org/wiki/Hamstring">Hamstrings</a></p>
+    		  <p>Based on your profile stats and goals, I recommend you complete this exercise 2 times/week,
+    			at an approximate weight of 100 lbs and set/rep count of 3/10.</p>
+    		  <a href="#">See more info about this exercise >>> </a>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="panel panel-default panel-question">
+  		    <!-- <div style="margin-left: 5px"><h3>Related Queries:</h3></div> -->
+          <div class="panel-body">
+            <a href="#">What's a good weight training exercise for legs?</a>
+  		      <!-- <br>
+  		      <a href="#">What's a good weight training exercise for calf muscles?</a>
+  		      <br>
+  		      <a href="#">What is a good nutrition plan for gaining leg muscle?</a>
+  		      <br>
+  		      <a href="#">What is a good nutrition plan for gaining cardio endurance?</a> -->
+          </div>
+        </div>
+
+
       </div>
 
-      <div class="panel panel-default panel-question">
-		<div style="margin-left: 5px"><h3>Related Queries:</h3></div>
-        <div class="panel-body">
-          <a href="#">What's a good weight training exercise for legs?</a>
-		  <br>
-		  <a href="#">What's a good weight training exercise for calf muscles?</a>
-		  <br>
-		  <a href="#">What is a good nutrition plan for gaining leg muscle?</a>
-		  <br>
-		  <a href="#">What is a good nutrition plan for gaining cardio endurance?</a>
-		  <br>
-		  <a href="#">What is the capital city of Italy?</a>
-        </div>
-      </div>
     </div>
   </div>
 
