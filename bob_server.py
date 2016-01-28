@@ -13,6 +13,7 @@ from tornado.options import define, options
 from tornado import gen
 
 # Define commandline options
+# Serves at http://localhost:8000
 define('port', default=8000, help='listen on the given port', type=int)
 
 class Application(tornado.web.Application):
