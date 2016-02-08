@@ -4,8 +4,6 @@ import requests
 import json
 import sys
 
-# curl -u "osu2_student1":"KK5DnNBV" -H "content-type: application/json" -H "accept: application/json" -H "X-SyncTimeout: 30" -X POST -d '{"question":{"questionText":"What is protein?"}}'  "https://dal09-gateway.watsonplatform.net/instance/579/deepqa/v1/question" | python -m json.tool
-
 class Watson:
     QA_URL = 'https://dal09-gateway.watsonplatform.net/instance/579/deepqa/v1/question'
 
