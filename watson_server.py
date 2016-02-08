@@ -10,9 +10,6 @@ import tornado.web
 import tornado.websocket
 import tornado.escape
 
-#from tornado.options import define, options
-#from tornado import gen
-
 class Application(tornado.web.Application):
 
     def __init__(self):
@@ -61,6 +58,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 def main():
     # Define commandline options
     # Serves at http://localhost:8000
+    # Usage ./watson_server --watson-user='Bob' --watson-pass='Swordfish'
     tornado.options.define('port', default=8000, help='listen on the given port', type=int)
     tornado.options.define('watson_user', help='user name for the Watson instance')
     tornado.options.define('watson_pass', help='password for the Watson instance')
