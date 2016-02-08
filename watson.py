@@ -23,7 +23,6 @@ class Watson:
 def main(question, user, password):
     watson = Watson(user, password)
     answer = watson.ask(question)
-    print(question)
     print(answer)
 
 if __name__ == '__main__':
