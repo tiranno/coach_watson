@@ -1,45 +1,29 @@
+/* Material Icons */
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+
+
+/* Page Components */
 body {
-  /*min-height: 100%;*/
-  height: 100%;
-  padding-top: 50px;
+  min-height: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: rgba(0,0,0,.005)
-  /*background-url: http://api.thumbr.it/whitenoise-361x370.png?background=#F5F5F5ff&noise=626262&density=13&opacity=6;*/
+  background-color: rgba(0,0,0,.05);
+  overflow-y: hidden;
 }
 
 hr {
   background-color: rgba(0,0,0,.12)
 }
 
-/*Top nav styles*/
-.navbar-default {
-  border-width: 0px;
-  border-radius: 0px;
-}
-#top-bar {
-  background-color: #d2dfe1;
-}
-#top-bar .container {
-  width: 100%;
-  margin: 0;
-}
-.navbar-header {
-  float: none;
-}
-#mainquerybar {
-  margin-top: 7px;
-}
-
 
 /*Main content styles*/
 #panel-left {
-  min-height: 100%;
-  /*height: 100%;*/
+  height: 100vh;
+  min-height: 500px;
   padding: 0px;
   background-color: #006064;
-}
-.nav-pills {
-  width: 100%;
 }
 .nav-pills>li {
   color: white;
@@ -62,7 +46,41 @@ hr {
 
 #panel-center {
   height: 100%;
+  padding-top: 0px;
+}
+#center-nav {
+  padding: 15px 0px;
+  background-color: #0097A7;
+}
+.input-group {
+  height: 36px;
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.input-group > input, .input-group > input:focus {
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.input-group-addon {
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+}
+.form-control {
+  border: 0px;
+  background-color: white;
+}
+
+#center-content {
   padding-top: 15px;
+  overflow-y: auto;
+}
+.panel{
+  border: 0px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .panel-answer {
   width: auto;
@@ -74,7 +92,10 @@ hr {
   max-width: 80%;
   float: right;
 }
+.panel-answer .panel-heading {
+  background-color: #8cc640;
+}
 .panel-question .panel-body {
-  background-color: #E0F7FA;
+  background-color: #e0f7fa;
   text-align: right;
 }

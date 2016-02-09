@@ -12,194 +12,109 @@
   <script src="/static/js/index.js"></script>
   <link rel="stylesheet" href="../static/css/styles.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+<body class="container-fluid">
+  <div class="row">
 
-  <!-- nav bar -->
-  <nav class="navbar navbar-default navbar-fixed-top" id="top-bar">
-    <div class="container">
+    <div id="panel-left" class="hidden-xs col-xs-4 col-sm-3 col-md-2">
 
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header row">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a href="#">
+            <span><img src="../static/res/watson_logo.png" alt="" height="48px"></span>
+            <p>Coach Watson</p>
+          </a>
+        </li>
+      </ul>
 
-        <a class="navbar-brand col-xs-2 col-sm-3 col-md-2" href="#">
-          <span><img src="../static/res/watson_logo.png" alt="" height="24px"></span>
-          Coach Watson
-        </a>
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active">
+          <a href="#">Ask Watson
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="float:right"></span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#">Workouts
+            <span class="glyphicon glyphicon-heart" aria-hidden="true" style="float:right"></span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#">Nutrition Planner
+            <span class="glyphicon glyphicon-apple" aria-hidden="true" style="float:right"></span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#">Goal Tracker
+            <span class="glyphicon glyphicon-stats" aria-hidden="true" style="float:right"></span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#">Calendar
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="float:right"></span>
+          </a>
+        </li>
+      </ul>
 
-        <form autocomplete="off" class="col-xs-8 col-sm-6 col-md-8" role="search">
-          <!-- <div class="form-group"> -->
-            <input type="text" autocomplete="off" id="mainquerybar" class="form-control" placeholder="How can I help you?">          <!-- </div> -->
-          <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-        </form>
+    </div>
 
-        <ul class="nav navbar-nav navbar-right col-sm-3 col-md-2">
-		      <li class="dropdown" style="margin-top: 7px; float: right;">
-		    	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Account Menu
-		    	  <span class="caret"></span></button>
-		    		<ul class="dropdown-menu">
-		    			<li><a href="#">Account Settings</a></li>
-              <li><a href="#">User Preferences</a></li>
-		    			<li><a href="#">History and Stats</a></li>
-	    				<li><a href="#">User Manual</a></li>
-			  		  <li><a href="#">Log Out</a></li>
-				    </ul>
-		      </li>
-		    </ul>
-      </div>
+    <div id="panel-center" class="col-sm-9 col-md-10">
 
-    </div><!-- /.container-fluid -->
+      <!-- top nav bar -->
+      <div id="center-nav" class="row">
+        <div class="col-xs-12">
 
-  </nav>
-
-  <!-- panels -->
-  <div class="container-fluid">
-    <div class="row">
-      <!-- left -->
-      <div class="col-sm-3 col-md-2" id="panel-left">
-        <ul class="nav nav-pills nav-stacked">
-          <li role="presentation" class="active">
-            <a href="#">Ask Watson
-              <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="float:right"></span>
-            </a>
-          </li>
-  		    <li role="presentation">
-            <a href="#">Workouts
-              <span class="glyphicon glyphicon-heart" aria-hidden="true" style="float:right"></span>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="#">Nutrition Planner
-              <span class="glyphicon glyphicon-apple" aria-hidden="true" style="float:right"></span>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="#">Goal Tracker
-              <span class="glyphicon glyphicon-stats" aria-hidden="true" style="float:right"></span>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="#">Calendar
-              <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="float:right"></span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- center -->
-      <div class="col-sm-9 col-md-8" id="panel-center">
-        <div class="row" id="dialog-pane">
-
-          <!-- schedule question -->
-          <div class="col-xs-12 ">
-            <div class="panel panel-default panel-answer">
-              <div class="panel-heading">
-                I made this for you by looking at your schedule. Let me know how I did!
-              </div>
-              <div class="">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Mon.</th>
-                      <th>Tue.</th>
-                      <th>Wed.</th>
-                      <th>Thu.</th>
-                      <th>Fri.</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Cardio, 30m</td><!-- mon -->
-                      <td>Bicep Curls 3x10</td><!-- tues -->
-                      <td>Crunches, 2x20</td><!-- wedn -->
-                      <td>Walking lunges, 3x10</td><!-- thurs -->
-                      <td>REST</td><!-- fri -->
-                    </tr>
-                    <tr>
-                      <td></td><!-- mon -->
-                      <td>Shoulder press, 2x15</td><!-- tues -->
-                      <td>Plank, 4x30s</td><!-- wedn -->
-                      <td>Calf raises, 3x30</td><!-- thurs -->
-                      <td></td><!-- fri -->
-                    </tr>
-                    <tr>
-                      <td></td><!-- mon -->
-                      <td></td><!-- tues -->
-                      <td>Russian Twists 2x30</td><!-- wedn -->
-                      <td>Jump squat, 2x10</td><!-- thurs -->
-                      <td></td><!-- fri -->
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="material-icons">menu</i></span>
+            <input type="text" class="form-control" placeholder="What can I do ya for?" aria-describedby="basic-addon1">
+            <span class="input-group-addon"><i class="material-icons">mic</i></span>
           </div>
-          <!-- schedule answer -->
-          <div class="col-xs-12">
-            <div class="panel panel-default panel-question">
-              <div class="panel-body">
-              Hey Watson, what workouts do I have this week?
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-12"><hr></div>
-
-          <!-- barbell answer -->
-          <div class=col-xs-12>
-            <div class="panel panel-default panel-answer">
-              <div class="panel-heading">
-                I think this might work for you ...
-              </div>
-              <div class="panel-body">
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" src="../static/res/barbellsquat.png" height="100px">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h3 class="media-heading">Barbell Squats</h3>
-        		        <br>
-                    <p>Primary muscles:  <a href="https://en.wikipedia.org/wiki/Quadriceps_femoris_muscle">Quadricepts</a></p>
-                    <p>Secondary muscles: <a href="https://en.wikipedia.org/wiki/Calf_(leg)">Calves</a>, <a href="https://en.wikipedia.org/wiki/Gluteal_muscles">Glutes</a>, <a href="https://en.wikipedia.org/wiki/Hamstring">Hamstrings</a></p>
-        		  <p>Based on your profile stats and goals, I recommend you complete this exercise 2 times/week,
-        			at an approximate weight of 100 lbs and set/rep count of 3/10.</p>
-        		  <a href="#">See more info about this exercise >>> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- barbell question -->
-          <div class="col-xs-12">
-            <div class="panel panel-default panel-question">
-              <!-- <div style="margin-left: 5px"><h3>Related Queries:</h3></div> -->
-              <div class="panel-body">
-                What's a good weight training exercise for legs?
-                <!-- <br>
-                <a href="#">What's a good weight training exercise for calf muscles?</a>
-                <br>
-                <a href="#">What is a good nutrition plan for gaining leg muscle?</a>
-                <br>
-                <a href="#">What is a good nutrition plan for gaining cardio endurance?</a> -->
-              </div>
-            </div>
-          </div>
-
 
         </div>
       </div>
 
+      <!-- Dialog -->
+      <div id="center-content" class="row">
+        <div class="col-xs-12">
+
+          <!-- answer -->
+          <div class="panel panel-default panel-answer">
+            <div class="panel-heading">
+              I think this might work for you ...
+            </div>
+            <div class="panel-body">
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="../static/res/barbellsquat.png" height="100px">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">Barbell Squats</h3>
+                  <br>
+                  <p>Primary muscles:  <a href="https://en.wikipedia.org/wiki/Quadriceps_femoris_muscle">Quadricepts</a></p>
+                  <p>Secondary muscles: <a href="https://en.wikipedia.org/wiki/Calf_(leg)">Calves</a>, <a href="https://en.wikipedia.org/wiki/Gluteal_muscles">Glutes</a>, <a href="https://en.wikipedia.org/wiki/Hamstring">Hamstrings</a></p>
+                  <p>Based on your profile stats and goals, I recommend you complete this exercise 2 times/week,
+                  at an approximate weight of 100 lbs and set/rep count of 3/10.</p>
+                  <a href="#">See more info about this exercise >>> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- question -->
+          <div class="panel panel-default panel-question">
+            <div class="panel-body">
+              What's a good weight training exercise for legs?
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
     </div>
+
   </div>
-
-
 </body>
 </html>
