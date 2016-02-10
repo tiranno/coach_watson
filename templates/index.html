@@ -14,68 +14,82 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body class="container-fluid">
   <div class="row">
 
-    <div id="panel-left" class="hidden-xs col-xs-4 col-sm-3 col-md-2">
+    <div id="panel-left" class="hidden-xs col-xs-4 col-sm-3 col-lg-2">
 
-      <ul class="nav nav-pills nav-stacked">
-        <li>
-          <a href="#">
-            <span><img src="../static/res/watson_logo.png" alt="" height="48px"></span>
-            <p>Coach Watson</p>
-          </a>
-        </li>
-      </ul>
+      <div class="row header">
+        <a class="col-xs-12" href="#">
+          <span>
+            <img src="../static/res/watson_logo.png" alt="Watson_Logo" class="img-responsive center-block"/>
+          </span>
+          <h2 class="text-center">Coach <b>Watson</b></h2>
+        </a>
+
+        <a class="col-xs-12" href="#">
+          <span class="row">
+            <i class="material-icons col-xs-2">account_circle</i>
+            <h4 class="text-center col-xs-8" style="margin:0px;">Username</h4>
+            <i class="material-icons col-xs-2">expand_more</i>
+          </span>
+        </a>
+      </div>
 
       <ul class="nav nav-pills nav-stacked">
         <li role="presentation" class="active">
-          <a href="#">Ask Watson
-            <span class="glyphicon glyphicon-list-alt" aria-hidden="true" style="float:right"></span>
+          <a href="#">
+            Ask Watson
+            <i class="material-icons">question_answer</i>
           </a>
         </li>
         <li role="presentation">
-          <a href="#">Workouts
-            <span class="glyphicon glyphicon-heart" aria-hidden="true" style="float:right"></span>
+          <a href="#">
+            Workouts
+            <i class="material-icons">favorite</i>
           </a>
         </li>
         <li role="presentation">
-          <a href="#">Nutrition Planner
-            <span class="glyphicon glyphicon-apple" aria-hidden="true" style="float:right"></span>
+          <a href="#">
+            Nutrition Planner
+            <i class="material-icons">local_dining</i>
           </a>
         </li>
         <li role="presentation">
-          <a href="#">Goal Tracker
-            <span class="glyphicon glyphicon-stats" aria-hidden="true" style="float:right"></span>
+          <a href="#">
+            Goal Tracker
+            <i class="material-icons">timeline</i>
           </a>
         </li>
         <li role="presentation">
-          <a href="#">Calendar
-            <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="float:right"></span>
+          <a href="#">
+            Calendar
+            <i class="material-icons">event</i>
           </a>
         </li>
       </ul>
 
     </div>
 
-    <div id="panel-center" class="col-sm-9 col-md-10">
+    <div id="panel-center" class="col-xs-12 col-sm-9 col-lg-10">
 
       <!-- top nav bar -->
       <div id="center-nav" class="row">
         <div class="col-xs-12">
 
-          <div class="input-group">
+          <form class="input-group">
             <span class="input-group-addon"><i class="material-icons">menu</i></span>
-            <input type="text" class="form-control" placeholder="What can I do ya for?" aria-describedby="basic-addon1">
+            <input id="query-bar" type="text" class="form-control" placeholder="What can I do ya for?" aria-describedby="basic-addon1">
             <span class="input-group-addon"><i class="material-icons">mic</i></span>
-          </div>
+          </form>
 
         </div>
       </div>
 
       <!-- Dialog -->
       <div id="center-content" class="row">
-        <div class="col-xs-12">
+        <div id="center-dialog" class="col-xs-12">
 
           <!-- answer -->
           <div class="panel panel-default panel-answer">

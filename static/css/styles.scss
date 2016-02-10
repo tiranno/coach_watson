@@ -1,0 +1,133 @@
+/* Material Icons */
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+
+/* Page Components */
+body {
+  max-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(0,0,0,.05);
+  overflow-y: hidden;
+}
+
+hr {
+  height: 1px;
+  background-color: rgba(0,0,0,.12);
+}
+
+
+/*Main content styles*/
+#panel-left {
+  height: 100vh;
+  padding: 0px;
+  background-color: #006064;
+
+  .header {
+    padding: 20px 15px;
+    a {
+      color: white;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+    .img-responsive {
+      max-width: 60%;
+    }
+  }
+
+  .nav-pills > li {
+    i {
+      float:right;
+    }
+    &.active > a {
+      color: rgba(255,255,255,1);
+      background-color: #00838F;
+    }
+    a {
+      border-radius: 0;
+      color: rgba(255,255,255,.7);
+      font-size: 16px;
+
+      &:hover {
+        background-color: #0097A7;
+      }
+      &:focus {
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+
+#panel-center {
+  max-height: 100vh;
+  padding-top: 0px;
+}
+#center-nav {
+  padding: 15px 0px;
+  background-color: #0097A7;
+}
+#center-content {
+  max-height: calc(100vh - 70px);
+  padding-top: 15px;
+  overflow-y: auto;
+}
+
+
+// Booststrap override
+.input-group {
+  height: 36px;
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  & input, & input:focus {
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: none;
+  }
+}
+.input-group-addon {
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+}
+.form-control {
+  border: 0px;
+  background-color: white;
+}
+
+
+.panel{
+  border: 0px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  .panel-heading {
+    border: none;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+}
+.panel-answer {
+  width: auto;
+  max-width: 80%;
+  float: left;
+
+  .panel-heading {
+    background-color: #8cc640;
+  }
+}
+.panel-question {
+  width: auto;
+  max-width: 80%;
+  float: right;
+
+  .panel-body {
+    background-color: #e0f7fa;
+    text-align: right;
+  }
+}
