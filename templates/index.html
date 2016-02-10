@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="/static/js/index.js"></script>
+  <script src="../static/js/index.js"></script>
   <link rel="stylesheet" href="../static/css/styles.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,23 +18,24 @@
 <body class="container-fluid">
   <div class="row">
 
-    <div id="panel-left" class="hidden-xs col-xs-4 col-sm-3 col-lg-2">
+    <!-- LEFT PANEL -->
+    <div id="panel-left" class="hidden-xs col-sm-4 col-sm-3 col-lg-2">
 
       <div class="row header">
         <a class="col-xs-12" href="#">
           <span>
-            <img src="../static/res/watson_logo.png" alt="Watson_Logo" class="img-responsive center-block"/>
+            <img src="../static/res/watson_logo.png" alt="Watson_Logo" class="center-block"/>
           </span>
           <h2 class="text-center">Coach <b>Watson</b></h2>
         </a>
 
-        <a class="col-xs-12" href="#">
+        <div class="col-xs-12">
           <span class="row">
             <i class="material-icons col-xs-2">account_circle</i>
             <h4 class="text-center col-xs-8" style="margin:0px;">Username</h4>
             <i class="material-icons col-xs-2">expand_more</i>
           </span>
-        </a>
+        </div>
       </div>
 
       <ul class="nav nav-pills nav-stacked">
@@ -72,6 +73,8 @@
 
     </div>
 
+
+    <!-- CENTER PANEL -->
     <div id="panel-center" class="col-xs-12 col-sm-9 col-lg-10">
 
       <!-- top nav bar -->
@@ -79,9 +82,13 @@
         <div class="col-xs-12">
 
           <form class="input-group">
-            <span class="input-group-addon"><i class="material-icons">menu</i></span>
+            <span id="input-menu" class="input-group-addon"><i class="material-icons">menu</i></span>
+            <span id="input-logo" class="input-group-addon">
+              <img src="../static/res/watson_logo_87op.png" alt="Watson_Logo" height="24px"/>
+            </span>
             <input id="query-bar" type="text" class="form-control" placeholder="What can I do ya for?" aria-describedby="basic-addon1">
-            <span class="input-group-addon"><i class="material-icons">mic</i></span>
+            <span id="input-mic" class="input-group-addon"><i class="material-icons">mic</i></span>
+            <span id="input-submit" class="input-group-addon"><i class="material-icons">arrow_forward</i></span>
           </form>
 
         </div>

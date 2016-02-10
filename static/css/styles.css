@@ -19,13 +19,15 @@ hr {
   padding: 0px;
   background-color: #006064; }
   #panel-left .header {
-    padding: 20px 15px; }
+    padding: 20px 15px;
+    color: white; }
     #panel-left .header a {
       color: white; }
       #panel-left .header a:hover, #panel-left .header a:focus {
         text-decoration: none; }
-    #panel-left .header .img-responsive {
-      max-width: 60%; }
+    #panel-left .header img {
+      width: 60%;
+      max-width: 100px; }
   #panel-left .nav-pills > li i {
     float: right; }
   #panel-left .nav-pills > li.active > a {
@@ -63,15 +65,22 @@ hr {
     height: 100%;
     border-radius: 3px;
     box-shadow: none; }
+  .input-group input:focus + #input-mic {
+    display: none; }
+  .input-group input:focus + #input-submit {
+    display: block; }
 
 .input-group-addon {
   border: 0px;
-  border-radius: 3px;
+  border-radius: 3px !important;
   background-color: white; }
 
 .form-control {
   border: 0px;
   background-color: white; }
+
+#input-submit, #input-logo {
+  display: none; }
 
 .panel {
   border: 0px;

@@ -26,14 +26,16 @@ hr {
 
   .header {
     padding: 20px 15px;
+    color: white;
     a {
       color: white;
       &:hover, &:focus {
         text-decoration: none;
       }
     }
-    .img-responsive {
-      max-width: 60%;
+    img {
+      width: 60%;
+      max-width: 100px;
     }
   }
 
@@ -89,19 +91,28 @@ hr {
     border-radius: 3px;
     box-shadow: none;
   }
+  & input:focus + #input-mic {
+    display: none;
+  }
+  & input:focus + #input-submit {
+    display: block;
+  }
 }
 .input-group-addon {
   border: 0px;
-  border-radius: 3px;
+  border-radius: 3px !important;
   background-color: white;
 }
 .form-control {
   border: 0px;
   background-color: white;
 }
+#input-submit, #input-logo {
+  display: none;
+}
 
 
-.panel{
+.panel {
   border: 0px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
