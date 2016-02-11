@@ -52,5 +52,17 @@ $(function () {
         $('#query-bar').val('');
     });
 
-    
+  /* Side drawer functions*/
+  // $('#panel-center').click(function() {
+  //     if($('#panel-left').hasClass('expanded')) {
+  //         $('#panel-left').removeClass('expanded');
+  //     }
+  // });
+    $('#input-menu').click(function() {
+        if($('#panel-left').hasClass('expanded')) {
+            $('#panel-left').removeClass('expanded');
+        } else {
+            $('#panel-left').addClass('expanded');
+        }
+    });
 });

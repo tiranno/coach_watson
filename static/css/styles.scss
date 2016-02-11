@@ -19,6 +19,23 @@ hr {
 
 
 /*Main content styles*/
+
+// Styles for small screens
+@media screen and (max-width: 768px) {
+  #panel-left {
+    height: 100vh;
+    max-width: 350px;
+    position: absolute;
+    z-index: 999;
+    transform: translate(-100%);
+  }
+  #panel-left.expanded {
+    transform: translate(0%);
+    transition: transform .4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+}
+
+
 #panel-left {
   height: 100vh;
   padding: 0px;
@@ -94,8 +111,8 @@ hr {
   & input:focus + #input-mic {
     display: none;
   }
-  & input:focus + #input-submit {
-    display: block;
+  & input:focus + #input-mic + #input-submit {
+    display: table-cell;
   }
 }
 .input-group-addon {
@@ -107,7 +124,7 @@ hr {
   border: 0px;
   background-color: white;
 }
-#input-submit, #input-logo {
+#input-submit {
   display: none;
 }
 
