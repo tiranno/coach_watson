@@ -47,9 +47,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.watson = watson
 
     def on_message(self, message):
+        # How do I perform a push-up?
         if self.ws_connection:
             print(message)
-            self.write_message(self.watson.ask(message))
+            raw_answer = self.watson.ask(message)
+            answer = tornado.escape.json_decode(raw_answer)[u'question'][u'evidencelist'][0][u'text']
+            #for key in answer.keys():
+                # print key
+            #    pass
+            # answer = answer[u'question']
+            # answer = answer[u'answers']
+            # print(raw_answer)
+            self.write_message(tornado.escape.json_encode(answer))
 
     def on_close(self):
         print('WebSocket closed.')
