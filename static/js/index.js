@@ -53,16 +53,24 @@ $(function () {
     });
 
   /* Side drawer functions*/
-  // $('#panel-center').click(function() {
-  //     if($('#panel-left').hasClass('expanded')) {
-  //         $('#panel-left').removeClass('expanded');
-  //     }
-  // });
+    $('#page-mask').click(function() {
+        closeDrawer();
+    });
+    $('#drawer-exit').click(function() {
+        closeDrawer();
+    });
+    function closeDrawer() {
+      if($('#panel-left').hasClass('expanded')) {
+          $('#panel-left').removeClass('expanded');
+      }
+      $('#page-mask').removeClass('visible');
+    }
     $('#input-menu').click(function() {
         if($('#panel-left').hasClass('expanded')) {
             $('#panel-left').removeClass('expanded');
         } else {
             $('#panel-left').addClass('expanded');
         }
+        $('#page-mask').addClass('visible');
     });
 });
