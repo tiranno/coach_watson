@@ -50,21 +50,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         # How do I perform a push-up?
         if self.ws_connection:
             print(message)
-            raw_answer = self.watson.ask(message)
-            answer = tornado.escape.json_decode(raw_answer)[u'question'][u'evidencelist']# [0][u'text']
-            filtered_answer = ''
-            # print answer
-            for a in answer:
-                if a.has_key(u'text'):
-                    if a.has_key(u'metadataMap'):
-                        if a[u'metadataMap'].has_key(u'originalfile'):
-                            answer = a
-                            print a[u'metadataMap'][u'originalfile'][:11]
-                            if a[u'metadataMap'][u'originalfile'][:11] == 'CoachWatson':
-                                filtered_answer = a[u'text']
-                                break
-
-            self.write_message(tornado.escape.json_encode(filtered_answer))
+            answer = self.watson.ask(message)
+            self.write_message(tornado.escape.json_encode(answer))
 
     def on_close(self):
         print('WebSocket closed.')
