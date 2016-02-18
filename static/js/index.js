@@ -47,24 +47,24 @@ $(function () {
         return false;
     });
     // Submit button for input is clicked
-    $('#ask-button').click(function() {
+    $('#input-submit').click(function() {
         ws.send($('#query-bar').val());
         $('#query-bar').val('');
     });
 
   /* Side drawer functions*/
     $('#page-mask').click(function() {
-        closeDrawer();
-    });
-    $('#drawer-exit').click(function() {
-        closeDrawer();
-    });
-    function closeDrawer() {
       if($('#panel-left').hasClass('expanded')) {
           $('#panel-left').removeClass('expanded');
       }
       $('#page-mask').removeClass('visible');
-    }
+    });
+    $('#drawer-exit').click(function() {
+      if($('#panel-left').hasClass('expanded')) {
+          $('#panel-left').removeClass('expanded');
+      }
+      $('#page-mask').removeClass('visible');
+    });
     $('#input-menu').click(function() {
         if($('#panel-left').hasClass('expanded')) {
             $('#panel-left').removeClass('expanded');

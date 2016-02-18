@@ -24,6 +24,7 @@ hr {
     height: 100vh;
     max-width: 350px;
     position: absolute;
+    box-shadow: none !important;
     z-index: 999;
     transform: translate(-100%);
     overflow-y: auto;
@@ -93,8 +94,15 @@ hr {
 
 #center-nav {
   padding: 20px 0px 15px 0px;
-  background-color: #0097A7;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28); }
+  background-color: #0097A7; }
+  #center-nav::before {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    content: "";
+    height: 73px;
+    left: -2%;
+    top: 0;
+    position: fixed;
+    width: 104%; }
 
 #center-content {
   max-height: calc(100vh - 70px);
