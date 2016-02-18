@@ -23,7 +23,9 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-.sass-cache/
+static/css/sass-cache/
+static/css/styles.css.map
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
