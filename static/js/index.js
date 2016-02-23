@@ -1,4 +1,6 @@
 $(function () {
+  /* Fucntions for updating the dialog stream */
+    // Websocket with server to preprocess sumbissions before sending to Watson
     var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
     };
@@ -18,13 +20,13 @@ $(function () {
                 text: evt.data
             }))
         }
-        $('#dialog-pane').prepend(answer);
+        $('#center-dialog').prepend(answer);
     }
-
+    // Upon submission of a quesiton
     $('form').submit(function(){
-        var question_text = $('#mainquerybar').val();
+        var question_text = $('#query-bar').val();
         ws.send(question_text);
-        $('#mainquerybar').val('');
+        $('#query-bar').val('');
         var question = $('<div />', {
             'class': 'col-xs-12'
         })
@@ -39,14 +41,36 @@ $(function () {
             'class': 'col-xs-12'
         })
         line_break.append('<hr>');
-        $('#dialog-pane').prepend(line_break);
-        $('#dialog-pane').prepend(question);
+        $('#center-dialog').prepend(line_break);
+        $('#center-dialog').prepend(question);
+        // Unhide the center-dialog and hide the placeholder
+        if(!$('#center-dialog').hasClass('visible')) {
+            $('#center-dialog').addClass('visible');
+        }
+        $('#no-content').addClass('invisible');
         // Prevents page from reloading
         return false;
     });
 
-    $('#ask-button').click(function() {
-        ws.send($('#mainquerybar').val());
-        $('#mainquerybar').val('');
+  /* Side drawer functions*/
+    $('#page-mask').click(function() {
+      if($('#panel-left').hasClass('expanded')) {
+          $('#panel-left').removeClass('expanded');
+      }
+      $('#page-mask').removeClass('visible');
+    });
+    $('#drawer-exit').click(function() {
+      if($('#panel-left').hasClass('expanded')) {
+          $('#panel-left').removeClass('expanded');
+      }
+      $('#page-mask').removeClass('visible');
+    });
+    $('#input-menu').click(function() {
+        if($('#panel-left').hasClass('expanded')) {
+            $('#panel-left').removeClass('expanded');
+        } else {
+            $('#panel-left').addClass('expanded');
+        }
+        $('#page-mask').addClass('visible');
     });
 });

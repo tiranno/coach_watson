@@ -1,0 +1,304 @@
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+}
+
+
+/* Universal Page Components */
+body {
+  max-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(0,0,0,.05);
+  overflow-y: hidden;
+
+  & > .row {
+    overflow-y: hidden;
+  }
+}
+hr {
+  height: 1px;
+  background-color: rgba(0,0,0,.12);
+}
+
+
+
+/*Main content styles*/
+
+// Styles for small screens
+@media screen and (max-width: 767px) {
+  #panel-left {
+    height: 100vh;
+    max-width: 350px;
+    position: absolute;
+    box-shadow: none !important;
+    z-index: 999;
+    transform: translate(-100%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform .218s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  #panel-left.expanded {
+    transform: translate(0%);
+    transition: transform .218s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  #page-mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    z-index: 40;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &.visible {
+      display: block;
+    }
+  }
+  #input-menu {
+    display: table-cell !important;
+  }
+  #drawer-exit {
+    color: white;
+    display: inline !important;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+
+#panel-left {
+  height: 100vh;
+  padding: 0px;
+  background-color: #006064;
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  z-index: 50;
+
+  .header {
+    padding: 20px 15px;
+    color: white;
+    a {
+      color: white;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+    img {
+      width: 60%;
+      max-width: 100px;
+    }
+  }
+
+  .nav-pills > li {
+    margin-top: 0;
+
+    i {
+      float:right;
+    }
+    &.active > a {
+      color: rgba(255,255,255,1);
+      background-color: #00838F;
+    }
+    a {
+      border-radius: 0;
+      color: rgba(255,255,255,.7);
+      font-size: 16px;
+
+      &:hover {
+        background-color: #0097A7;
+      }
+      &:focus {
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+
+#panel-center {
+  max-height: 100vh;
+  padding-top: 0px;
+}
+#center-nav {
+  padding: 20px 0px 15px 0px;
+  background-color: #0097A7;
+
+  &::before {
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    content: "";
+    height: 73px;
+    left: -2%;
+    top: 0;
+    position: fixed;
+    width: 104%;
+  }
+}
+#center-content {
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
+  padding-top: 15px;
+  overflow-y: auto;
+}
+#center-dialog {
+  display: none;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 15px;
+
+  &.visible {
+    display: block;
+  }
+}
+#no-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-70%);
+
+  &.invisible {
+    display: none;
+  }
+}
+
+
+// Booststrap override
+.input-group {
+  max-width: 720px;
+  height: 36px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0px;
+  border-radius: 3px;
+  background-color: white;
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  & input, & input:focus {
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: none;
+  }
+  & input:focus + #input-mic {
+    display: none;
+  }
+  & input:focus + #input-mic + #input-clear {
+    display: table-cell;
+  }
+}
+.input-group-addon {
+  border: 0px;
+  border-radius: 3px !important;
+  background-color: white;
+}
+.form-control {
+  border: 0px;
+  background-color: white;
+}
+#input-menu {
+  display: none;
+}
+#input-clear {
+  display: none;
+}
+#drawer-exit {
+  display: none;
+}
+
+
+.panel {
+  border: 0px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  .panel-heading {
+    border: none;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+}
+.panel-answer {
+  width: auto;
+  max-width: 80%;
+  float: left;
+
+  .panel-heading {
+    background-color: #8cc640;
+  }
+}
+.panel-question {
+  width: auto;
+  max-width: 80%;
+  float: right;
+
+  .panel-body {
+    background-color: #e0f7fa;
+    text-align: right;
+  }
+}
+
+
+/* Material Design components */
+// Material Icons
+.material-icons.md-18 {
+  font-size: 18px;
+}
+// Material Card
+.card {
+  padding-bottom: 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: white;
+
+  .card-heading {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: aqua;
+    padding-bottom: 16px;
+
+    .title {
+      padding: 24px 16px 0px;
+      font-size: 24px;
+      .subtitle {
+        font-size: 16px;
+      }
+    }
+  }
+  .card-body {
+    padding: 16px 16px 0px;
+    font-size: 16px;
+  }
+  .card-actions {
+    padding: 8px;
+  }
+}
+// Specific for qa service
+.card-question {
+  width: auto;
+  max-width: 80%;
+  background-color: #e0f7fa;
+  text-align: right;
+  float: right;
+}
+.card-answer {
+  width: auto;
+  max-width: 80%;
+  float: left;
+}
+
+ul.tabs {
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+
+  li {
+    margin: 0;
+    padding: 0px 10px;
+    display: inline;
+  }
+}
