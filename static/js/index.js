@@ -43,13 +43,13 @@ $(function () {
         line_break.append('<hr>');
         $('#center-dialog').prepend(line_break);
         $('#center-dialog').prepend(question);
+        // Unhide the center-dialog and hide the placeholder
+        if(!$('#center-dialog').hasClass('visible')) {
+            $('#center-dialog').addClass('visible');
+        }
+        $('#no-content').addClass('invisible');
         // Prevents page from reloading
         return false;
-    });
-    // Submit button for input is clicked
-    $('#input-submit').click(function() {
-        ws.send($('#query-bar').val());
-        $('#query-bar').val('');
     });
 
   /* Side drawer functions*/

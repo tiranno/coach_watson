@@ -19,7 +19,7 @@ hr {
   background-color: rgba(0, 0, 0, 0.12); }
 
 /*Main content styles*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   #panel-left {
     height: 100vh;
     max-width: 350px;
@@ -105,15 +105,26 @@ hr {
     width: 104%; }
 
 #center-content {
+  height: calc(100vh - 70px);
   max-height: calc(100vh - 70px);
   padding-top: 15px;
   overflow-y: auto; }
 
 #center-dialog {
+  display: none;
   max-width: 850px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 15px; }
+  #center-dialog.visible {
+    display: block; }
+
+#no-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-70%); }
+  #no-content.invisible {
+    display: none; }
 
 .input-group {
   max-width: 720px;
@@ -129,7 +140,7 @@ hr {
     box-shadow: none; }
   .input-group input:focus + #input-mic {
     display: none; }
-  .input-group input:focus + #input-mic + #input-submit {
+  .input-group input:focus + #input-mic + #input-clear {
     display: table-cell; }
 
 .input-group-addon {
@@ -144,7 +155,7 @@ hr {
 #input-menu {
   display: none; }
 
-#input-submit {
+#input-clear {
   display: none; }
 
 #drawer-exit {
@@ -179,21 +190,26 @@ hr {
   font-size: 18px; }
 
 .card {
+  padding-bottom: 24px;
   margin-bottom: 20px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  background-color: white;
-  padding-bottom: 16px; }
+  background-color: white; }
   .card .card-heading {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
-    background-color: aqua; }
+    background-color: aqua;
+    padding-bottom: 16px; }
     .card .card-heading .title {
       padding: 24px 16px 0px;
       font-size: 24px; }
-
-.card-actions {
-  padding: 8px; }
+      .card .card-heading .title .subtitle {
+        font-size: 16px; }
+  .card .card-body {
+    padding: 16px 16px 0px;
+    font-size: 16px; }
+  .card .card-actions {
+    padding: 8px; }
 
 .card-question {
   width: auto;
