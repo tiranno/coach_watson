@@ -35,23 +35,17 @@ class Watson:
         data = json.dumps({'question':{'questionText':question}})
         headers = {'content-type':'application/json', 'accept':'application/json', 'X-SyncTimeout':'30'}
         answer = ''
-        try:
-            auth = requests.auth.HTTPBasicAuth(self.USER, self.PASS)
-            r = requests.post(Watson.QA_URL, data=data, headers=headers, auth=auth)
-            answer = json.loads(r.text)[u'question'][u'evidencelist']
-            for a in answer:
-                if a.has_key(u'text'):
-                    if a.has_key(u'metadataMap'):
-                        if a[u'metadataMap'].has_key(u'originalfile'):
-                            print a[u'metadataMap'][u'originalfile'][:11]
-                            if a[u'metadataMap'][u'originalfile'][:11] == 'CoachWatson':
-                                answer = a[u'text']
-                                break
-        except:
-            if Watson.failsafe.has_key(question):
-                answer = Watson.failsafe[question]
-            else:
-                answer = 'Please ask again.'
+        auth = requests.auth.HTTPBasicAuth(self.USER, self.PASS)
+        r = requests.post(Watson.QA_URL, data=data, headers=headers, auth=auth)
+        answer = json.loads(r.text)[u'question'][u'evidencelist']
+        for a in answer:
+            if a.has_key(u'text'):
+                if a.has_key(u'metadataMap'):
+                    if a[u'metadataMap'].has_key(u'originalfile'):
+                        print a[u'metadataMap'][u'originalfile'][:11]
+                        if a[u'metadataMap'][u'originalfile'][:11] == 'CoachWatson':
+                            answer = a[u'text']
+                            break
 
         return answer
 
