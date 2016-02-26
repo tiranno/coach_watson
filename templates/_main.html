@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Watson PT</title>
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="../static/bootstrap-3.3.6-dist/css/bootstrap.min.css" type='text/css'>
+  <script src="../static/js/jquery.js"></script>
+  <script src="../static/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+  <!-- fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- My files -->
+  <script src="../static/js/index.js"></script>
+  <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+
+<body class="container-fluid">
+  <div class="row">
+
+    <!-- LEFT PANEL -->
+    <div id="panel-left" class="col-xs-8 col-sm-4 col-sm-3 col-lg-2">
+      <span id="drawer-exit">
+        <i class="material-icons">cancel</i>
+      </span>
+
+      <div class="row header">
+        <span class="col-xs-12">
+          <h2 class="text-center">Coach <b>Watson</b></h2>
+        </span>
+
+        <div class="col-xs-12">
+          <i class="material-icons">account_circle</i>
+          <h4 class="text-center" style="margin:0px;">Username</h4>
+          <i class="material-icons">expand_more</i>
+        </div>
+      </div>
+
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active">
+          <a href="/index">
+            Ask Watson
+            <i class="material-icons">question_answer</i>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="/workout">
+            Workouts
+            <i class="material-icons">favorite</i>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="/nutrition">
+            Nutrition Planner
+            <i class="material-icons">local_dining</i>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="goals">
+            Goal Tracker
+            <i class="material-icons">timeline</i>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="calendar">
+            Calendar
+            <i class="material-icons">event</i>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- Page mask for mobile -->
+    <div id="page-mask"></div>
+
+    <!-- CENTER PANEL -->
+    <div id="panel-center" class="col-xs-12 col-sm-9 col-lg-10">
+
+      <!-- Top Nav bar -->
+      <div id="center-nav" class="row">
+        <div class="col-xs-12">
+          <form class="input-group">
+            <span id="input-menu" class="input-group-addon"><i class="material-icons">menu</i></span>
+            <input id="query-bar" type="text" class="form-control" placeholder="What can I do ya for?" aria-describedby="basic-addon1" autocomplete="off">
+            <span id="input-mic" class="input-group-addon"><i class="material-icons">mic</i></span>
+            <span id="input-clear" class="input-group-addon"><i class="material-icons">clear</i></span>
+          </form>
+        </div>
+      </div>
+
+      <!-- Center content / Dialog -->
+      <div id="center-content" class="row">
+
+        <!-- THIS AREA WILL BE FILED WITH EACH PAGE CONTENT -->
+        {% module Template(content, show_comments=True) %}
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

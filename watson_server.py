@@ -21,18 +21,37 @@ class Application(tornado.web.Application):
         )
         handlers = [
             (r'/', IndexHandler),
+            (r'/workout', WorkoutHandler),
+            (r'/nutrition', NutritionHandler),
             (r'/ws', WebSocketHandler, {'watson':watson})
         ]
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
+# PAGE REQUEST HANDLERS
 class IndexHandler(tornado.web.RequestHandler):
-
     def get(self):
-        self.render('index.html')
+        self.render('_main.html', content='_index.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
+
+
+class WorkoutHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('_main.html', content='_workout.html')
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
+
+
+class NutritionHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('_main.html', content='_nutrition.html')
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
+
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
