@@ -72,26 +72,49 @@ hr {
 
 #panel-left {
   height: 100vh;
-  padding: 0px;
   background-color: #006064;
+  color: white;
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
   z-index: 50;
 
   .header {
-    padding: 20px 15px;
-    color: white;
+    height: 64px;
+
+    .bg-img {
+      position: absolute;
+      -webkit-filter: blur(0px);
+      img {
+        width: 100%;
+      }
+    }
+
     a {
       color: white;
       &:hover, &:focus {
         text-decoration: none;
       }
     }
-    img {
-      width: 60%;
-      max-width: 100px;
+  }
+
+  #account {
+    padding: 16px 0px;
+
+    span .user-pic {
+      font-size: 36px;
+      margin-bottom: 4px;
+    }
+    span .user-name {
+      margin: 0px;
+      float: left;
+    }
+    span .carrot {
+      float: right;
     }
   }
 
+  .nav-pills {
+    margin: 0px -15px;
+  }
   .nav-pills > li {
     margin-top: 0;
 
@@ -122,21 +145,43 @@ hr {
   max-height: 100vh;
   padding-top: 0px;
 }
-#center-nav {
-  padding: 20px 0px 15px 0px;
+#cw-app-bar {
+  height: 64px;
   background-color: #0097A7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  .app-bar-container {
+    height: 48px;
+
+    .input-group {
+      max-width: 720px;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      border: 0px;
+      border-radius: 3px;
+      background-color: white;
+      // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    input {
+      height: 48px;
+    }
+  }
+
+  // appbar shadow
   &::before {
     box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
     content: "";
-    height: 73px;
+    height: 64px;
     left: -2%;
     top: 0;
     position: fixed;
     width: 104%;
   }
 }
-#center-content {
+#cw-app-content {
   height: calc(100vh - 70px);
   max-height: calc(100vh - 70px);
   padding-top: 15px;
@@ -166,17 +211,7 @@ hr {
 
 // Booststrap override
 .input-group {
-  max-width: 720px;
-  height: 36px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 0px;
-  border-radius: 3px;
-  background-color: white;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
   & input, & input:focus {
-    height: 100%;
     border-radius: 3px;
     box-shadow: none;
   }

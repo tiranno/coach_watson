@@ -10,8 +10,8 @@ import tornado.web
 import tornado.websocket
 import tornado.escape
 
+# SERVER APPLICATION
 class Application(tornado.web.Application):
-
     def __init__(self):
         options = tornado.options.options
         watson = Watson(options.watson_user, options.watson_pass)
@@ -20,12 +20,22 @@ class Application(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), 'static')
         )
         handlers = [
+            (r'/about', AboutHandler),
             (r'/', IndexHandler),
             (r'/workout', WorkoutHandler),
             (r'/nutrition', NutritionHandler),
             (r'/ws', WebSocketHandler, {'watson':watson})
         ]
         tornado.web.Application.__init__(self, handlers, **settings)
+
+
+# ABOUT PAGE HANDLER
+class AboutHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('about.html')
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
 
 
 # PAGE REQUEST HANDLERS
@@ -55,7 +65,6 @@ class NutritionHandler(tornado.web.RequestHandler):
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
-
     def open(self):
         print('WebSocket opened.')
 

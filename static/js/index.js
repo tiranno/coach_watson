@@ -53,19 +53,19 @@ $(function () {
     });
 
   /* Side drawer functions*/
-    $('#page-mask').click(function() {
+    $('#page-mask').on('tap click', function() {
       if($('#panel-left').hasClass('expanded')) {
           $('#panel-left').removeClass('expanded');
       }
       $('#page-mask').removeClass('visible');
     });
-    $('#drawer-exit').click(function() {
+    $('#drawer-exit').on('tap click', function() {
       if($('#panel-left').hasClass('expanded')) {
           $('#panel-left').removeClass('expanded');
       }
       $('#page-mask').removeClass('visible');
     });
-    $('#input-menu').click(function() {
+    $('#input-menu').on('tap click', function() {
         if($('#panel-left').hasClass('expanded')) {
             $('#panel-left').removeClass('expanded');
         } else {
