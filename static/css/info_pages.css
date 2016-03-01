@@ -1,7 +1,11 @@
-/* Material Design components */
+/*
+  Material Design components
+*/
+/* Material Icons */
 .material-icons.md-18 {
   font-size: 18px; }
 
+/* Card */
 .card {
   padding-bottom: 24px;
   margin-bottom: 20px;
@@ -24,6 +28,7 @@
   .card .card-actions {
     padding: 8px; }
 
+/* Tabs */
 ul.tabs {
   padding: 0px;
   margin-top: 0px;
@@ -36,6 +41,7 @@ ul.tabs {
     padding: 0px 10px;
     display: inline; }
 
+/* Buttons */
 .md-button {
   min-width: 64px;
   height: 36px;
@@ -57,6 +63,24 @@ ul.tabs {
     background-color: rgba(152, 152, 152, 0.12); }
   .md-button:active, .md-button:focus {
     background-color: rgba(152, 152, 152, 0.4); }
+
+/* Text fields */
+.md-form * {
+  margin-top: 8px; }
+.md-form input {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-bottom: 1px solid rgba(117, 117, 117, 0.15);
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 300; }
+  .md-form input.active, .md-form input:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+    box-shadow: none; }
 
 body {
   font-family: 'Roboto', sans-serif;
