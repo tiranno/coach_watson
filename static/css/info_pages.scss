@@ -1,0 +1,65 @@
+@import "material";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(0,0,0,.05);
+}
+
+#about-app-bar {
+  height: 64px;
+  position: fixed;
+  padding-top: 15px;
+  background-color: white;
+  z-index: 500;
+
+  h2 {
+    margin: 0px;
+  }
+
+  button {
+    float: right;
+  }
+}
+
+#app-bar-shadow {
+  width: 100vw;
+  height: 6px;
+  bottom: -6px;
+  margin-left: -15px;
+  box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 64px;
+}
+
+#page-content {
+  padding-top: 64px;
+  overflow: hidden;
+
+  .banner {
+    width: 100vw;
+    margin-left: -15px;
+    overflow: hidden;
+    position: initial;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #content-stream {
+    margin: 30px auto;
+    position: relative;
+  }
+}
+
+#footer-links {
+  list-style: none;
+  padding: 0 0 16px;
+  margin: auto;
+  display: table;
+
+  li {
+    padding: 0 8px;
+    display: inline;
+  }
+}

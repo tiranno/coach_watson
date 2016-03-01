@@ -1,3 +1,63 @@
+/* Material Design components */
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.card {
+  padding-bottom: 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: white; }
+  .card .card-heading {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: aqua;
+    padding-bottom: 16px; }
+    .card .card-heading .title {
+      padding: 24px 16px 0px;
+      font-size: 24px; }
+      .card .card-heading .title .subtitle {
+        font-size: 16px; }
+  .card .card-body {
+    padding: 16px 16px 0px;
+    font-size: 16px; }
+  .card .card-actions {
+    padding: 8px; }
+
+ul.tabs {
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  display: table; }
+  ul.tabs li {
+    margin: 0;
+    padding: 0px 10px;
+    display: inline; }
+
+.md-button {
+  min-width: 64px;
+  height: 36px;
+  padding: 0px 16px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 3px;
+  z-index: 0;
+  /* Color classes */ }
+  .md-button .btn-dense {
+    height: 32px; }
+  .md-button.primary {
+    background-color: #00b8d4; }
+  .md-button.primary:hover {
+    background-color: rgba(0, 184, 212, 0.12); }
+  .md-button.primary:active, .md-button.primary:focus {
+    background-color: rgba(0, 184, 212, 0.4); }
+  .md-button:hover {
+    background-color: rgba(152, 152, 152, 0.12); }
+  .md-button:active, .md-button:focus {
+    background-color: rgba(152, 152, 152, 0.4); }
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 10px; }
@@ -204,32 +264,7 @@ hr {
     background-color: #e0f7fa;
     text-align: right; }
 
-/* Material Design components */
-.material-icons.md-18 {
-  font-size: 18px; }
-
-.card {
-  padding-bottom: 24px;
-  margin-bottom: 20px;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  background-color: white; }
-  .card .card-heading {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-    background-color: aqua;
-    padding-bottom: 16px; }
-    .card .card-heading .title {
-      padding: 24px 16px 0px;
-      font-size: 24px; }
-      .card .card-heading .title .subtitle {
-        font-size: 16px; }
-  .card .card-body {
-    padding: 16px 16px 0px;
-    font-size: 16px; }
-  .card .card-actions {
-    padding: 8px; }
-
+/* Material extenders */
 .card-question {
   width: auto;
   max-width: 80%;
@@ -241,17 +276,5 @@ hr {
   width: auto;
   max-width: 80%;
   float: left; }
-
-ul.tabs {
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: auto;
-  margin-right: auto;
-  display: table; }
-  ul.tabs li {
-    margin: 0;
-    padding: 0px 10px;
-    display: inline; }
 
 /*# sourceMappingURL=cw_app.css.map */
