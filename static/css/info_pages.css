@@ -103,7 +103,7 @@ body {
   bottom: -6px;
   margin-left: -15px;
   box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-  position: fixed;
+  position: absolute;
   top: 64px; }
 
 #page-content {
