@@ -92,8 +92,9 @@ body {
   padding-top: 15px;
   background-color: white;
   z-index: 500;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4) h2;
-    box-shadow-margin: 0px; }
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4); }
+  #about-app-bar h2 {
+    margin: 0px; }
   #about-app-bar button {
     float: right; }
 
