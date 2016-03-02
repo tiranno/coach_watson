@@ -2,8 +2,10 @@
   Material Design components
 */
 /* Material Icons */
-.material-icons.md-18 {
-  font-size: 18px; }
+.material-icons {
+  user-select: none; }
+  .material-icons.md-18 {
+    font-size: 18px; }
 
 /* Card */
 .card {

@@ -4,6 +4,8 @@
 
 /* Material Icons */
 .material-icons {
+  user-select: none;
+
   &.md-18 {
     font-size: 18px;
   }
