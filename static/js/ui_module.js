@@ -1,9 +1,4 @@
 $(function () {
-  /* JQuery mobile overrides */
-  $( document ).ready(function() {
-    $.mobile.loadingMessage = false;
-  })
-
   /* Side drawer functions*/
   var drawerExpand = function() {
     $('#panel-left').addClass('expanded');
@@ -16,8 +11,8 @@ $(function () {
     return;
   };
 
-  $('#panel-center').on("swipe", drawerExpand);
-  $('#page-mask').on('tap click', drawerClose);
-  $('#drawer-exit').on('tap click', drawerClose);
-  $('#input-menu').on('tap click', drawerExpand);
+  $('#panel-center').bind('swipeone', drawerExpand);
+  $('#page-mask').bind('tap click', drawerClose);
+  $('#drawer-exit').bind('tap click', drawerClose);
+  $('#input-menu').bind('tap click', drawerExpand);
 });

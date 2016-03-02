@@ -13,12 +13,19 @@
 
 /* Card */
 .card {
-  padding-bottom: 24px;
+  padding-bottom: 24px; //default
   margin-bottom: 20px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color: white;
 
+  &.bottom-0  {  padding-bottom: 0px;   }
+  &.bottom-16 {  padding-bottom: 16px;  }
+  &.bottom-24 {  padding-bottom: 24px;  }
+
+
+  // Note: each module in card should have no bottom padding.
+  // The previous module and bottom of card should take care of this.
   .card-heading {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
@@ -37,8 +44,26 @@
     padding: 16px 16px 0px;
     font-size: 16px;
   }
-  .card-actions {
+  .card-actions-layer {  //Wrapper for actions
     padding: 8px;
+    margin-top: 16px;
+
+    .action-text {
+      padding: 8px;
+      margin-right: 8px;
+    }
+    .action-icon {
+      margin-right: 8px;
+    }
+  }
+  .card-actions-stacked {  //Wrapper for actions
+    padding: 8px 8px 4px 8px;
+    margin-top: 16px;
+
+    .action-text {
+      padding: 8px;
+      margin-bottom: 4px;
+    }
   }
 }
 

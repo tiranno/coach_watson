@@ -14,6 +14,12 @@
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: white; }
+  .card.bottom-0 {
+    padding-bottom: 0px; }
+  .card.bottom-16 {
+    padding-bottom: 16px; }
+  .card.bottom-24 {
+    padding-bottom: 24px; }
   .card .card-heading {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
@@ -27,8 +33,20 @@
   .card .card-body {
     padding: 16px 16px 0px;
     font-size: 16px; }
-  .card .card-actions {
-    padding: 8px; }
+  .card .card-actions-layer {
+    padding: 8px;
+    margin-top: 16px; }
+    .card .card-actions-layer .action-text {
+      padding: 8px;
+      margin-right: 8px; }
+    .card .card-actions-layer .action-icon {
+      margin-right: 8px; }
+  .card .card-actions-stacked {
+    padding: 8px 8px 4px 8px;
+    margin-top: 16px; }
+    .card .card-actions-stacked .action-text {
+      padding: 8px;
+      margin-bottom: 4px; }
 
 /* Tabs */
 ul.tabs {
