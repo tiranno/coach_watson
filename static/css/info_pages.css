@@ -114,12 +114,11 @@ body {
     width: 100vw;
     margin-left: -15px;
     overflow: hidden;
-    position: initial; }
+    position: absolute; }
     #page-content .banner img {
       width: 100%; }
   #page-content #content-stream {
-    margin: 30px auto;
-    position: relative; }
+    margin-top: 50%; }
 
 #footer-links {
   list-style: none;

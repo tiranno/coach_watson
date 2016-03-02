@@ -40,7 +40,7 @@ body {
     width: 100vw;
     margin-left: -15px;
     overflow: hidden;
-    position: initial;
+    position: absolute;
 
     img {
       width: 100%;
@@ -48,8 +48,7 @@ body {
   }
 
   #content-stream {
-    margin: 30px auto;
-    position: relative;
+    margin-top: 50%;
   }
 }
 
