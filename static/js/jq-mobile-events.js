@@ -19,8 +19,8 @@
 // The current version exposes the following virtual events to jQuery bind methods:
 // "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
-(function( $, window, document, undefined ) {
-
+(function($, window, document, undefined ) {
+$.attrFn = $.attrFn || {};
 var dataPropertyName = "virtualMouseBindings",
 	touchTargetPropertyName = "virtualTouchID",
 	virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split( " " ),
@@ -280,8 +280,7 @@ function handleTouchEnd( event ) {
 
 	disableTouchBindings();
 
-	var flags = getVirtualBindingFlags( event.target ),
-		t;
+	var flags = getVirtualBindingFlags( event.target ), t;
 	triggerVirtualEvent( "vmouseup", event, flags );
 
 	if ( !didScroll ) {
@@ -323,7 +322,7 @@ function hasVirtualBindings( ele ) {
 	return false;
 }
 
-function dummyMouseHandler(){}
+function dummyMouseHandler(){};
 
 function getSpecialEventObject( eventType ) {
 	var realType = eventType.substr( 1 );
@@ -355,7 +354,7 @@ function getSpecialEventObject( eventType ) {
 			// for elements unless they actually have handlers registered on them.
 			// To get around this, we register dummy handlers on the elements.
 
-			$( this ).bind( realType, dummyMouseHandler );
+			$(this).bind(realType, dummyMouseHandler);
 
 			// For now, if event capture is not supported, we rely on mouse handlers.
 			if ( eventCaptureSupported ) {
@@ -443,7 +442,7 @@ for ( var i = 0; i < virtualEventNames.length; i++ ){
 // Add a capture click handler to block clicks.
 // Note that we require event capture support for this so if the device
 // doesn't support it, we punt for now and rely solely on mouse events.
-if ( eventCaptureSupported ) {
+if (eventCaptureSupported) {
 	document.addEventListener( "click", function( e ){
 		var cnt = clickBlockList.length,
 			target = e.target,
@@ -483,7 +482,7 @@ if ( eventCaptureSupported ) {
 
 			ele = target;
 
-			while ( ele ) {
+			while (ele) {
 				for ( i = 0; i < cnt; i++ ) {
 					o = clickBlockList[ i ];
 					touchID = 0;
@@ -505,34 +504,32 @@ if ( eventCaptureSupported ) {
 })( jQuery, window, document );
 
 
-(function( $, window, undefined ) {
+(function( $, window, undefined ) {// add new event shortcuts
+$.each(("touchstart touchmove touchend tap taphold swipe swipeleft swiperight" ).split(""), function(i, name) {
 
-// add new event shortcuts
-$.each(
-	("touchstart touchmove touchend tap taphold swipe swipeleft swiperight" ).split( " " ),
-	function( i, name ) {
-		$.fn[ name ] = function( fn ) {
-			return fn ? this.bind( name, fn ) : this.trigger( name );
+		$.fn[name] = function(fn) {
+			return fn ? this.bind(name, fn) : this.trigger(name);
 		};
 
-		$.attrFn[ name ] = true;
+		$.attrFn[name] = true;
 	}
 );
 
-function triggerCustomEvent( obj, eventType, event ) {
+function triggerCustomEvent(obj, eventType, event) {
 	var originalType = event.type;
 	event.type = eventType;
-	$.event.handle.call( obj, event );
+	$.event.dispatch.call( obj, event );
 	event.type = originalType;
 }
 
 // also handles taphold
 $.event.special.tap = {
+
 	setup: function() {
 		var thisObject = this,
-			$this = $( thisObject );
+			$this = $(thisObject);
 
-		$this.bind( "touchstart", function( event ) {
+			$this.bind( "touchstart", function( event ) {
 
 			if ( event.which && event.which !== 1 ) {
 				return false;
