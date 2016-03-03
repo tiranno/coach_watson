@@ -218,7 +218,9 @@ hr {
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: fixed;
+  z-index: 30; }
   #cw-app-bar .app-bar-container {
     height: 48px; }
     #cw-app-bar .app-bar-container .input-group {
