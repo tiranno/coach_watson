@@ -11,8 +11,8 @@ $(function () {
     return;
   };
 
-  $('#panel-center').bind('swipeone', drawerExpand);
-  $('#page-mask').bind('tap click', drawerClose);
+  $('#panel-center').on('swipeone', drawerExpand);
+  $('#page-mask').on('tap click', drawerClose);
   $('#drawer-exit').bind('tap click', drawerClose);
   $('#input-menu').bind('tap click', drawerExpand);
 });
