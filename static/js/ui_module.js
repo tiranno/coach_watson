@@ -12,7 +12,7 @@ $(function () {
   };
 
   $('#panel-center').on('swiperight', drawerExpand);
-  $('#panel-center').on('swipeleft', drawerExpand);
+  $('#panel-center').on('swipeleft', drawerClose);
 
   $('#page-mask').on('tap', drawerClose);
   $('#page-mask').on('click', drawerClose);
