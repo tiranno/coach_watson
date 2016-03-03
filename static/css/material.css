@@ -3,6 +3,7 @@
 */
 /* Material Icons */
 .material-icons {
+  -webkit-user-select: none;
   user-select: none; }
   .material-icons.md-18 {
     font-size: 18px; }

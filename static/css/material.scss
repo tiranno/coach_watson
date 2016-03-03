@@ -4,6 +4,7 @@
 
 /* Material Icons */
 .material-icons {
+  -webkit-user-select: none;
   user-select: none;
 
   &.md-18 {
