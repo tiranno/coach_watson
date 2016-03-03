@@ -12,6 +12,7 @@ $(function () {
   };
 
   $('#panel-center').on('swiperight', drawerExpand);
+  $('#panel-center').on('swipeleft', drawerExpand);
 
   $('#page-mask').on('tap', drawerClose);
   $('#page-mask').on('click', drawerClose);
