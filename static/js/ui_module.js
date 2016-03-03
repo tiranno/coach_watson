@@ -11,11 +11,11 @@ $(function () {
     return;
   };
 
-  jQuery('#panel-center').bind('swiperight', drawerExpand);
+  $('#panel-center').on('swiperight', drawerExpand);
 
-  $('#page-mask').on('tapone', drawerClose);
+  $('#page-mask').on('tap', drawerClose);
   $('#page-mask').on('click', drawerClose);
 
-  $('#input-menu').on('tapone', drawerExpand);
+  $('#input-menu').on('tap', drawerExpand);
   $('#input-menu').on('click', drawerExpand);
 });
