@@ -11,8 +11,8 @@ $(function () {
     return;
   };
 
-  $('#panel-center').bind('swiperight', drawerExpand);
-  $('#page-mask').bind('tapone click', drawerClose);
-  $('#drawer-exit').bind('tapone click', drawerClose);
-  $('#input-menu').bind('tapone click', drawerExpand);
+  $('#panel-center').on('swiperight', drawerExpand);
+  $('#page-mask').on('tapone click', drawerClose);
+  $('#drawer-exit').on('tapone click', drawerClose);
+  $('#input-menu').on('tapone click', drawerExpand);
 });
