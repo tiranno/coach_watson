@@ -11,8 +11,8 @@ $(function () {
     return;
   };
 
-  $('#panel-center').on('swipeone', drawerExpand);
-  $('#page-mask').on('tap click', drawerClose);
-  $('#drawer-exit').bind('tap click', drawerClose);
-  $('#input-menu').bind('tap click', drawerExpand);
+  jQuery('#panel-center').bind('swipeone', drawerExpand);
+  jQuery('#page-mask').bind('tap click', drawerClose);
+  jQuery('#drawer-exit').bind('tap click', drawerClose);
+  jQuery('#input-menu').bind('tap click', drawerExpand);
 });
