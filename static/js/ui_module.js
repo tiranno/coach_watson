@@ -12,7 +12,10 @@ $(function () {
   };
 
   $('#panel-center').on('swiperight', drawerExpand);
-  $('#page-mask').on('tapone click', drawerClose);
-  $('#drawer-exit').on('tapone click', drawerClose);
-  $('#input-menu').on('tapone click', drawerExpand);
+  $('#page-mask').on('tapone', drawerClose);
+  $('#page-mask').on('click', drawerClose);
+  $('#drawer-exit').on('tapone', drawerClose);
+  $('#drawer-exit').on('click', drawerClose);
+  $('#input-menu').on('tapone', drawerExpand);
+  $('#input-menu').on('click', drawerExpand);
 });
