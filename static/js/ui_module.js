@@ -1,12 +1,12 @@
 $(function () {
   /* Side drawer functions*/
   var drawerExpand = function() {
-    $('#panel-left').addClass('expanded');
-    window.setTimeout(deB,0.3);
+    window.setTimeout(deA,0.3);
+    $('#page-mask').addClass('visible');
     return;
   };
-  var deB = function() {
-    $('#page-mask').addClass('visible');
+  var deA = function() {
+    $('#panel-left').addClass('expanded');
   }
   var drawerClose = function() {
     $('#panel-left').removeClass('expanded');
