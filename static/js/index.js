@@ -6,7 +6,7 @@ $(function () {
     };
     ws.onmessage = function(evt) {
         var answer = $('<div />', {
-            'class': 'card card-answer'
+            'class': 'card card-answer bottom-16'
         });
         if(evt.data[0] === '<') {
             answer.children(0).append($('<div class="card-heading">I think this might work for you ...</div>'));
@@ -25,7 +25,7 @@ $(function () {
         ws.send(question_text);
         $('#query-bar').val('');
         var question = $('<div />', {
-            'class': 'card card-question'
+            'class': 'card card-question bottom-16'
         });
         question.children(0).append($('<div />', {
             'class': 'card-body',
