@@ -26,11 +26,11 @@ $(function () {
         $('#query-bar').val('');
         var question = $('<div />', {
             'class': 'card card-question bottom-16'
-        });
+        })
         question.children(0).append($('<div />', {
             'class': 'card-body',
             text: question_text
-        }));
+        }))
         var line_break = $('<hr>');
         $('#center-dialog').prepend(line_break);
         $('#center-dialog').prepend(question);
