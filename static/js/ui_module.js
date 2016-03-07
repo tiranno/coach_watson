@@ -2,7 +2,7 @@ $(function () {
   /* Side drawer functions*/
   var drawerExpand = function() {
     $('#panel-left').addClass('expanded');
-    window.setTimeout(deB,300);
+    window.setTimeout(deB,100);
     return;
   };
   var deB = function() {
