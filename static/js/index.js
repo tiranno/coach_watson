@@ -1,7 +1,7 @@
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('wss://' + window.location.host + '/ws');
+    var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
     };
     ws.onmessage = function(evt) {
@@ -46,6 +46,7 @@ $(function () {
         }
         $('#no-content').addClass('invisible');
         // Prevents page from reloading
+        $('#cw-app-content').scrollTop(0);
         return false;
     });
 });
