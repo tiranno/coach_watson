@@ -6,17 +6,14 @@ $(function () {
     };
     ws.onmessage = function(evt) {
         var answer = $('<div />', {
-            'class': 'col-xs-12'
-        })
-        answer.append($('<div />', {
-            'class': 'panel panel-default panel-answer'
-        }))
+            'class': 'card card=answer'
+        });
         if(evt.data[0] === '<') {
-            answer.children(0).append($('<div class="panel-heading">I think this might work for you ...</div>'));
+            answer.children(0).append($('<div class="card-heading">I think this might work for you ...</div>'));
             answer.children(0).append($(evt.data));
         } else {
             answer.children(0).append($('<div />', {
-                'class': 'panel-body' ,
+                'class': 'card-body' ,
                 text: evt.data
             }))
         }
@@ -28,26 +25,20 @@ $(function () {
         ws.send(question_text);
         $('#query-bar').val('');
         var question = $('<div />', {
-            'class': 'col-xs-12'
-        })
-        question.append($('<div />', {
-            'class': 'panel panel-default panel-question'
-        }))
+            'class': 'card card-answer'
+        }));
         question.children(0).append($('<div />', {
-            'class': 'panel-body',
+            'class': 'card-body',
             text: question_text
-        }))
-        var line_break = $('<div />', {
-            'class': 'col-xs-12'
-        })
-        line_break.append('<hr>');
+        }));
+        var line_break = $('<hr>');
         $('#center-dialog').prepend(line_break);
         $('#center-dialog').prepend(question);
         // Unhide the center-dialog and hide the placeholder
         if(!$('#center-dialog').hasClass('visible')) {
             $('#center-dialog').addClass('visible');
+            $('#no-content').addClass('invisible');
         }
-        $('#no-content').addClass('invisible');
         // Prevents page from reloading
         return false;
     });
