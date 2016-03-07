@@ -11,8 +11,9 @@ $(function () {
     return;
   };
 
-  $('#panel-center').on('swiperight', drawerExpand);
-  $('#panel-center').on('swipeleft', drawerClose);
+  // Issues with sideway scrolling currently (get rid of sideways scroll)
+  // $('#panel-center').on('swiperight', drawerExpand);
+  // $('#panel-center').on('swipeleft', drawerClose);
 
   $('#page-mask').on('tap', drawerClose);
   $('#page-mask').on('click', drawerClose);

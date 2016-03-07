@@ -124,15 +124,15 @@ body {
 #page-content {
   padding-top: 64px;
   overflow: hidden; }
-  #page-content .banner {
+  #page-content #banner {
     width: 100vw;
     margin-left: -15px;
     overflow: hidden;
     position: absolute; }
-    #page-content .banner img {
+    #page-content #banner img {
       width: 100%; }
   #page-content #content-stream {
-    margin-top: 50%; }
+    margin-top: 45%; }
 
 #footer-links {
   list-style: none;
@@ -142,5 +142,17 @@ body {
   #footer-links li {
     padding: 0 8px;
     display: inline; }
+
+@media screen and (min-width: 600px) {
+  #page-content > .row {
+    max-width: 950px !important;
+    margin-left: auto !important;
+    margin-right: auto !important; }
+
+  #content-stream {
+    margin-top: 35% !important; }
+
+  #banner {
+    transform: translate(0, -15%) !important; } }
 
 /*# sourceMappingURL=info_pages.css.map */
