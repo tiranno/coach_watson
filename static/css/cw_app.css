@@ -106,10 +106,10 @@ ul.tabs {
     box-shadow: none; }
 
 /* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 10px; }
+::-webkit-scrollbar, ::-webkit-scrollbar:horizontal {
+  width: 12px; }
 
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:horizontal {
   background-color: rgba(0, 0, 0, 0.3); }
 
 /* Universal Page Components */
@@ -268,6 +268,8 @@ hr {
   padding: 5px 15px; }
   #center-dialog.visible {
     display: block; }
+  #center-dialog .col-xs-12 {
+    padding: 0; }
 
 #no-content {
   position: relative;
