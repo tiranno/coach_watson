@@ -26,7 +26,7 @@ $(function () {
         $('#query-bar').val('');
         var question = $('<div />', {
             'class': 'card card-answer'
-        }));
+        });
         question.children(0).append($('<div />', {
             'class': 'card-body',
             text: question_text
