@@ -158,7 +158,7 @@ class RegisterHandler(LoginHandler):
         user['lastname'] = self.get_argument('last-name','')
 
         auth = self.application.db['users'].insert_one(user).inserted_id
-        print(auth['_id'])
+        # print(auth['_id'])
         self.set_current_user(email)
 
         self.redirect('/watson')
