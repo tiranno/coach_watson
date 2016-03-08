@@ -35,7 +35,7 @@ class Application(tornado.web.Application):
         )
         handlers = [
             (r'/', IndexHandler),
-            (r'/watson', WatsonHandler),
+            (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
             (r'/nutrition', NutritionHandler),
             (r'/ws', WebSocketHandler, {'watson':watson}),
@@ -64,10 +64,10 @@ class IndexHandler(tornado.web.RequestHandler):
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
-class WatsonHandler(BaseHandler):
+class QueryPageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_watson.html')
+        self.render('app.html', content='_askwatson.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
