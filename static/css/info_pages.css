@@ -143,16 +143,4 @@ body {
     padding: 0 8px;
     display: inline; }
 
-@media screen and (min-width: 600px) {
-  #page-content > .row {
-    max-width: 950px !important;
-    margin-left: auto !important;
-    margin-right: auto !important; }
-
-  #content-stream {
-    margin-top: 35% !important; }
-
-  #banner {
-    transform: translate(0, -15%) !important; } }
-
 /*# sourceMappingURL=info_pages.css.map */
