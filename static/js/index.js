@@ -23,7 +23,7 @@ $(function () {
         $('#center-dialog').prepend(answer);
     }
     // Upon submission of a quesiton
-    $('form').submit(function(){
+    $('#query-bar').submit(function(){
         var question_text = $('#query-bar').val();
         ws.send(question_text);
         $('#query-bar').val('');

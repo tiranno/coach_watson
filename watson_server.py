@@ -67,7 +67,7 @@ class IndexHandler(tornado.web.RequestHandler):
 class WatsonHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('_main.html', content='_index.html')
+        self.render('app.html', content='_watson.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -75,7 +75,7 @@ class WatsonHandler(BaseHandler):
 class WorkoutHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('_main.html', content='_workout.html')
+        self.render('app.html', content='_workout.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -83,7 +83,7 @@ class WorkoutHandler(BaseHandler):
 class NutritionHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('_main.html', content='_nutrition.html')
+        self.render('app.html', content='_nutrition.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
