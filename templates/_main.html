@@ -45,7 +45,8 @@
           <!-- <i class="material-icons carrot">expand_more</i> -->
         </span>
         <span>
-          <button class="md-button" href="/auth/logout" type="button" name="button" style="float:right">SIGN OUT</button>
+          <form id="logout" style="display:none" action="/auth/logout" method="get"></form>
+          <button class="md-button" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
         </span>
       </div>
 
