@@ -53,13 +53,13 @@
               </div>
             </div>
             <div class="card-body">
-              <form class="md-form" action="">
-                <input id="user-name" placeholder="Email" type="text">
-                <input id="user-pass" placeholder="Password" type="text">
+              <form id="login-form" class="md-form" action="/auth/login" method="post">
+                <input name="user-name" placeholder="Email" type="text">
+                <input name="user-pass" placeholder="Password" type="password">
               </form>
             </div>
             <div class="card-actions-layer">
-              <button class="md-button" type="button" name="button">
+              <button class="md-button" type="submit" form="login-form">
                 SIGN IN
               </button>
             </div>
@@ -73,15 +73,16 @@
               </div>
             </div>
             <div class="card-body">
-              <form class="md-form" action="">
-                <input id="first-name" placeholder="First name" type="text">
-                <input id="last-name" placeholder="Last name" type="text">
-                <input id="user-name" placeholder="Email" type="text">
-                <input id="user-pass" placeholder="Password" type="text">
+              <form id="signup-form" class="md-form" action="/auth/register" method="post">
+                <input name="first-name" placeholder="First name" type="text">
+                <input name="last-name" placeholder="Last name" type="text">
+                <input name="user-name" placeholder="Email" type="text">
+                <input name="user-pass-first" placeholder="Password" type="password">
+                <input name="user-pass-second" placeholder="Verify Password" type="password">
               </form>
             </div>
             <div class="card-actions-layer">
-              <button class="md-button" type="button" name="button">
+              <button class="md-button" type="submit" form="signup-form">
                 CONFIRM
               </button>
             </div>

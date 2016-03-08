@@ -39,8 +39,13 @@
           <i class="material-icons user-pic">account_circle</i>
         </span>
         <span class="col-xs-12">
-          <h4 class="user-name">name</h4>
-          <i class="material-icons carrot">expand_more</i>
+          <h4 class="user-name">
+            {{ escape(current_user) }}
+          </h4>
+          <!-- <i class="material-icons carrot">expand_more</i> -->
+        </span>
+        <span>
+          <button class="md-button" href="/auth/logout" type="button" name="button" style="float:right">SIGN OUT</button>
         </span>
       </div>
 
@@ -49,7 +54,7 @@
       <div>
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation" class="active">
-            <a href="/">
+            <a href="/watson">
               Ask Watson
               <i class="material-icons">question_answer</i>
             </a>
