@@ -121,7 +121,7 @@ class LoginHandler(BaseHandler):
 
         if user and user['password'] and bcrypt.hashpw(password.encode('utf-8'), user['password'].encode('utf-8')) == user['password']:
             self.set_current_user(email)
-            self.redirect('/watson')
+            self.redirect('/askwatson')
         else:
             # error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
             self.redirect('/')
@@ -161,7 +161,7 @@ class RegisterHandler(LoginHandler):
         # print(auth['_id'])
         self.set_current_user(email)
 
-        self.redirect('/watson')
+        self.redirect('/askwatson')
 
 
 
