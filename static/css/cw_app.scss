@@ -6,6 +6,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: rgba(0,0,0,.05);
   overflow-y: hidden;
+  text-rendering: optimizeLegibility;
 
   & > .row {
     overflow-y: hidden;
@@ -149,7 +150,7 @@ hr {
   height: 64px;
   width: 100%;
   background-color: #0097A7;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,6 +161,12 @@ hr {
     height: 48px;
   }
 }
+
+// Query Bar icons
+#input-menu  { display: none;  }
+#input-clear { display: none;  }
+#drawer-exit { display: none;  }
+// Query Bar
 #query-group {
   max-width: 800px;
   margin-left: auto;
@@ -200,20 +207,17 @@ hr {
   margin-top: 64px;
   overflow-y: auto;
 }
-#center-dialog {
-  display: none;
+.center-wrapper {
   max-width: 950px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 15px;
+}
+#center-dialog {
+  display: none;
 
-  &.visible {
-    display: block;
-  }
-
-  .col-xs-12 {
-    padding: 0;
-  }
+  &.visible  {  display: block;}
+  .col-xs-12 {  padding: 0;    }
 }
 #no-content {
   position: relative;
@@ -226,69 +230,12 @@ hr {
 }
 
 
-// Booststrap override
-.input-group {
-  & input, & input:focus {
-    border-radius: 3px;
-    box-shadow: none;
-  }
-  & input:focus + #input-mic {
-    display: none;
-  }
-  & input:focus + #input-mic + #input-clear {
-    display: table-cell;
-  }
-}
-.input-group-addon {
-  border: 0px;
-  border-radius: 3px !important;
-  background-color: white;
-}
+/* Booststrap overrides */
 .form-control {
   border: 0px;
   background-color: white;
 }
-#input-menu {
-  display: none;
-}
-#input-clear {
-  display: none;
-}
-#drawer-exit {
-  display: none;
-}
 
-
-.panel {
-  border: 0px;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
-  .panel-heading {
-    border: none;
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-  }
-}
-.panel-answer {
-  width: auto;
-  max-width: 80%;
-  float: left;
-
-  .panel-heading {
-    background-color: #8cc640;
-  }
-}
-.panel-question {
-  width: auto;
-  max-width: 80%;
-  float: right;
-
-  .panel-body {
-    background-color: #e0f7fa;
-    text-align: right;
-  }
-}
 
 /* Material extenders */
 // Specific for qa service

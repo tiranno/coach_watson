@@ -33,6 +33,8 @@
       font-size: 24px; }
       .card .card-heading .title .subtitle {
         font-size: 16px; }
+    .card .card-heading .md-tabs {
+      margin-bottom: -15px; }
   .card .card-body {
     padding: 16px 16px 0px;
     font-size: 16px; }
@@ -52,17 +54,34 @@
       margin-bottom: 4px; }
 
 /* Tabs */
-ul.tabs {
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: auto;
-  margin-right: auto;
-  display: table; }
-  ul.tabs li {
-    margin: 0;
-    padding: 0px 10px;
-    display: inline; }
+.md-tabs {
+  overflow-x: auto;
+  font-size: 14px; }
+  .md-tabs ul {
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: table; }
+    .md-tabs ul li {
+      min-width: 72px;
+      max-width: 264px;
+      height: 48px;
+      margin: 0;
+      padding: 0px 12px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 46px;
+      text-transform: uppercase; }
+    .md-tabs ul .indicator {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background-color: #f6b2b5;
+      will-change: left, right; }
+  .md-tabs ul.center {
+    margin-left: auto;
+    margin-right: auto; }
 
 /* Buttons */
 .md-button {
@@ -104,5 +123,27 @@ ul.tabs {
     outline: none;
     border-bottom: 2px solid black;
     box-shadow: none; }
+
+/* Data table */
+table.md-table {
+  width: 100%; }
+  table.md-table thead {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px; }
+    table.md-table thead tr {
+      height: 56px;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.12); }
+      table.md-table thead tr th, table.md-table thead tr td {
+        padding: 0 12px; }
+  table.md-table tbody {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 13px; }
+    table.md-table tbody tr {
+      height: 48px;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.12); }
+      table.md-table tbody tr td {
+        padding: 0 12px; }
+      table.md-table tbody tr td.numeric {
+        text-align: right; }
 
 /*# sourceMappingURL=material.css.map */

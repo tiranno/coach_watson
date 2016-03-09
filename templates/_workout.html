@@ -1,24 +1,63 @@
-<div id="center">
+<div class="center-wrapper">
 
     <div class="card">
       <div class="card-heading">
         <div class="title">
-          Weekly plan
+          Workout plan
+          <div class="subtitle">
+            Week of /{ insert the week here/}
+          </div>
         </div>
         <div class="card-actions">
-          <ul class="tabs">
-            <li>TODAY</li>
-            <li>Tuesday</li>
-            <li>Wednesday</li>
-            <li>Thursday</li>
-            <li>Friday</li>
-            <li>Saturday</li>
-            <li>Sunday</li>
-          </ul>
+          <div class="md-tabs">
+            <ul>
+              <!-- select the day that is active -->
+              <li>Monday</li>
+              <li>Tuesday</li>
+              <li>Wednesday</li>
+              <li>Thursday</li>
+              <li>Friday</li>
+              <li>Saturday</li>
+              <li>Sunday</li>
+              <div class="indicator"></div>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="card-body">
-        <div></div>
+        <!-- warm up -->
+
+
+
+        <!-- daily workout -->
+        <!-- insert table/list of day's active workouts -->
+        <div class="table-responsive">
+          <table class="md-table">
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Reps</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Crunches</td>
+                <td class="numeric">3</td>
+                <td class="numeric">25</td>
+              </tr>
+              <tr>
+                <td>Planks</td>
+                <td class="numeric">3</td>
+                <td class="numeric">1 minute</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- cool down -->
+
       </div>
     </div>
 
