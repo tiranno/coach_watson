@@ -69,6 +69,53 @@
   }
 }
 
+/* List feeds */
+.md-list {
+  margin: 0 -15px;
+  font-size: 16px;
+
+  ul {
+    li {
+      &.active > a {
+        color: rgba(255,255,255,1);
+        background-color: #00838F;
+      }
+      a {
+        height: 100%;
+        color: rgba(255,255,255,.7);
+        text-decoration: none;
+        display: block;
+        line-height: 1;
+        &:hover {  background-color: #0097A7;  }
+        &:focus {  background-color: inherit;  }
+      }
+      .icon {
+        padding: 0 0 0 16px;
+        position: absolute;
+        line-height: 0.7;
+      }
+      .text {  padding: 0 16px 0 72px;  }
+    }
+  }
+
+  ul.sparse {
+    padding: 8px 0 0 0;
+    li {
+      height: 48px;
+      display: block;
+      a {  padding: 16px 0;  }
+    }
+  }
+  ul.dense {
+    padding: 4px 0 0 0;
+    li {
+      height: 40px;
+      display: block;
+      a {  padding: 12px 0;  }
+    }
+  }
+}
+
 /* Tabs */
 .md-tabs {
   overflow-x: auto;
