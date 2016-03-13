@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- My files -->
   <script src="../static/js/ui_module.js"></script>
-  <script src="../static/js/index.js"></script>
+  <script src="../static/js/app.js"></script>
   <link rel="stylesheet" href="../static/css/cw_app.css">
 </head>
 
@@ -29,9 +29,7 @@
     <div id="panel-left" class="col-xs-8 col-sm-4 col-sm-3 col-lg-2">
 
       <div class="row header">
-        <span class="col-xs-12">
-          <h2 class="text-center">Coach<b>Watson</b></h2>
-        </span>
+        <h2 class="text-center">Coach<b>Watson</b></h2>
       </div>
 
       <div id="account" class="row">
@@ -46,46 +44,10 @@
         </span>
         <span>
           <form id="logout" style="display:none" action="/auth/logout" method="get"></form>
-          <button class="md-button" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
+          <button class="md-button flat" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
         </span>
       </div>
 
-<!--
-      <div>
-        <ul class="nav nav-pills nav-stacked">
-          <li role="presentation" class="active">
-            <a href="/askwatson">
-              Ask Watson
-              <i class="material-icons">question_answer</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="/workout">
-              Workouts
-              <i class="material-icons">favorite</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="/nutrition">
-              Nutrition Planner
-              <i class="material-icons">local_dining</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="goals">
-              Goal Tracker
-              <i class="material-icons">timeline</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="calendar">
-              Calendar
-              <i class="material-icons">event</i>
-            </a>
-          </li>
-        </ul>
-      </div>
- -->
       <div class="md-list">
         <ul class="sparse">
           <li class="active">
@@ -121,6 +83,8 @@
         </ul>
       </div>
 
+      <button id="feedback" class="md-button flat primary" type="button">GIVE FEEDBACK</button>
+
     </div>
 
     <!-- Page mask for mobile -->
@@ -150,5 +114,32 @@
       </div>
     </div>
   </div>
+
+  <!-- feeedback dialog -->
+  <div id="feedback-dialog">
+    <div class="md-dialog">
+      <div class="md-card bottom-0">
+        <div class="md-card-heading">
+          <div class="title">
+            Give Us Feedback!
+            <div class="subtitle">
+              Something not working? Did Watson give a bad answer? Can we do better?
+              Tell us below and we'll work on it!
+            </div>
+          </div>
+        </div>
+        <div class="md-card-body">
+          <form id="feedback-form" action="/feedback" action="post">
+            <textarea required name="feedback-text" style="display: none;"></textarea>
+            <div contenteditable placeholder="Enter text here..."></div>
+          </form>
+        </div>
+        <div class="md-card-actions-layer">
+          <button class="md-button flat primary" type="submit" form="feedback-form">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

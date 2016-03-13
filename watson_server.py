@@ -28,16 +28,18 @@ class Application(tornado.web.Application):
         options = tornado.options.options
         watson = Watson(options.watson_user, options.watson_pass)
         settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), 'templates'),
-            static_path=os.path.join(os.path.dirname(__file__), 'static'),
-            cookie_secret='cinnamon',
-            login_url='/'
+            template_path = os.path.join(os.path.dirname(__file__), 'templates'),
+            static_path = os.path.join(os.path.dirname(__file__), 'static'),
+            cookie_secret = 'cinnamon',
+            login_url = '/',
+            default_handler_class = fourOhFourHandler
         )
         handlers = [
             (r'/', IndexHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
             (r'/nutrition', NutritionHandler),
+            (r'/404', fourOhFourHandler),
             (r'/ws', WebSocketHandler, {'watson':watson}),
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
@@ -57,6 +59,11 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 # PAGE REQUEST HANDLERS
+class fourOhFourHandler(tornado.web.RequestHandler):
+    def prepare(self):
+        self.set_status(404)
+        self.render('404.html')
+
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('about.html')
@@ -67,7 +74,7 @@ class IndexHandler(tornado.web.RequestHandler):
 class QueryPageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_askwatson.html')
+        self.render('app.html', content='partials/_askwatson.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -75,7 +82,7 @@ class QueryPageHandler(BaseHandler):
 class WorkoutHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_workout.html')
+        self.render('app.html', content='partials/_workout.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -83,13 +90,13 @@ class WorkoutHandler(BaseHandler):
 class NutritionHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_nutrition.html')
+        self.render('app.html', content='partials/_nutrition.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
 
-# WebSocket Handlers
+# WEBSOCKET HANDLERS
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print('WebSocket opened.')
@@ -110,7 +117,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print('WebSocket closed.')
 
 
-#== User account handlers ==#
+# USER AUTHENTICATION AND RE.GISTRATION
 class LoginHandler(BaseHandler):
     def post(self):
         email = self.get_argument('user-name','')
@@ -123,8 +130,8 @@ class LoginHandler(BaseHandler):
             self.set_current_user(email)
             self.redirect('/askwatson')
         else:
-            # error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
-            self.redirect('/')
+            error_msg = u"?error=" + tornado.escape.url_escape("incorrect login")
+            self.redirect('/' + error_msg)
 
     def set_current_user(self, user):
         if user:
@@ -144,9 +151,8 @@ class RegisterHandler(LoginHandler):
 
         in_db = self.application.db['users'].find_one( { 'username': email } )
         if in_db:
-            # error_msg = u"?error=" + tornado.escape.url_escape("Login name already taken")
-            # self.redirect(u"/login" + error_msg)
-            self.redirect('/')
+            error_msg = u"?error=" + tornado.escape.url_escape("email already taken")
+            self.redirect('/' + error_msg)
 
         password = self.get_argument('user-pass-first','')
         passhash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(8).encode('utf-8'))
@@ -158,10 +164,11 @@ class RegisterHandler(LoginHandler):
         user['lastname'] = self.get_argument('last-name','')
 
         auth = self.application.db['users'].insert_one(user).inserted_id
-        # print(auth['_id'])
         self.set_current_user(email)
 
         self.redirect('/askwatson')
+
+# FEEDBACK HANDLER
 
 
 

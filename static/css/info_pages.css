@@ -1,55 +1,62 @@
 /*
   Material Design components
 */
+/* Variables */
 /* Material Icons */
 .material-icons {
   -webkit-user-select: none;
   user-select: none; }
-  .material-icons.md-18 {
+  .material-icons.mi-18 {
     font-size: 18px; }
-  .material-icons.md-24 {
+  .material-icons.mi-24 {
     font-size: 24px; }
+  .material-icons.mi-36 {
+    font-size: 36px; }
+  .material-icons.mi-48 {
+    font-size: 48px; }
 
 /* Card */
-.card {
+.md-card {
   padding-bottom: 24px;
   margin-bottom: 20px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  background-color: white; }
-  .card.bottom-0 {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87); }
+  .md-card.bottom-0 {
     padding-bottom: 0px; }
-  .card.bottom-16 {
+  .md-card.bottom-16 {
     padding-bottom: 16px; }
-  .card.bottom-24 {
+  .md-card.bottom-24 {
     padding-bottom: 24px; }
-  .card .card-heading {
+  .md-card .md-card-heading {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     background-color: aqua;
     padding-bottom: 16px; }
-    .card .card-heading .title {
+    .md-card .md-card-heading .title {
       padding: 24px 16px 0px;
       font-size: 24px; }
-      .card .card-heading .title .subtitle {
-        font-size: 16px; }
-    .card .card-heading .md-tabs {
-      margin-bottom: -15px; }
-  .card .card-body {
+      .md-card .md-card-heading .title .subtitle {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.54); }
+    .md-card .md-card-heading .md-tabs {
+      margin-bottom: -24px; }
+  .md-card .md-card-body {
     padding: 16px 16px 0px;
     font-size: 16px; }
-  .card .card-actions-layer {
+  .md-card .md-card-actions-layer {
     padding: 8px;
     margin-top: 16px; }
-    .card .card-actions-layer .action-text {
+    .md-card .md-card-actions-layer .action-text {
       padding: 8px;
       margin-right: 8px; }
-    .card .card-actions-layer .action-icon {
+    .md-card .md-card-actions-layer .action-icon {
       margin-right: 8px; }
-  .card .card-actions-stacked {
+  .md-card .md-card-actions-stacked {
     padding: 8px 8px 4px 8px;
     margin-top: 16px; }
-    .card .card-actions-stacked .action-text {
+    .md-card .md-card-actions-stacked .action-text {
       padding: 8px;
       margin-bottom: 4px; }
 
@@ -128,39 +135,75 @@
   padding: 0px 16px;
   margin-right: 8px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 2px;
   z-index: 0;
+  line-height: 36px;
+  font-size: 14px;
+  text-transform: uppercase;
   /* Color classes */ }
-  .md-button .btn-dense {
-    height: 32px; }
-  .md-button.primary {
+  .md-button.flat {
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.87); }
+    .md-button.flat:hover {
+      background-color: rgba(153, 153, 153, 0.18); }
+    .md-button.flat:active, .md-button.flat:focus {
+      background-color: rgba(153, 153, 153, 0.4); }
+    .md-button.flat.primary {
+      background: cyan;
+      color: rgba(0, 0, 0, 0.87); }
+      .md-button.flat.primary:hover {
+        background-color: #85ffff; }
+      .md-button.flat.primary:active, .md-button.flat.primary:focus {
+        background-color: white; }
+  .md-button.raised:hover {
+    background-color: rgba(152, 152, 152, 0.12); }
+  .md-button.raised:active, .md-button.raised:focus {
+    background-color: rgba(152, 152, 152, 0.4); }
+  .md-button.raised.primary {
     background-color: #00b8d4; }
-  .md-button.primary:hover {
-    background-color: rgba(0, 184, 212, 0.12); }
-  .md-button.primary:active, .md-button.primary:focus {
-    background-color: rgba(0, 184, 212, 0.4); }
+    .md-button.raised.primary:hover {
+      background-color: rgba(0, 184, 212, 0.12); }
+    .md-button.raised.primary:active, .md-button.raised.primary:focus {
+      background-color: rgba(0, 184, 212, 0.4); }
+  .md-button.dense {
+    height: 32px;
+    font-size: 13px; }
   .md-button:hover {
     background-color: rgba(152, 152, 152, 0.12); }
   .md-button:active, .md-button:focus {
     background-color: rgba(152, 152, 152, 0.4); }
 
-/* Text fields */
-.md-form * {
-  margin-top: 8px; }
-.md-form input {
+/* Text fields and Forms */
+input, textarea, div[contenteditable] {
   width: 100%;
   height: 36px;
   border: none;
   border-bottom: 1px solid rgba(117, 117, 117, 0.15);
   background-color: transparent;
   box-shadow: none;
-  font-size: 15px;
   font-family: inherit;
-  font-weight: 300; }
-  .md-form input.active, .md-form input:focus {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.87); }
+  input.active, input:focus, textarea.active, textarea:focus, div[contenteditable].active, div[contenteditable]:focus {
     outline: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid aqua;
     box-shadow: none; }
+
+textarea, div[contenteditable] {
+  min-height: 36px;
+  height: auto;
+  max-height: 300px;
+  padding-top: 8px;
+  resize: none;
+  overflow: auto; }
+
+div[contenteditable]:empty:before {
+  display: block;
+  content: attr(placeholder);
+  color: rgba(0, 0, 0, 0.54); }
+
+.md-form * {
+  margin-top: 8px; }
 
 /* Data table */
 table.md-table {

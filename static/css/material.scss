@@ -2,22 +2,45 @@
   Material Design components
 */
 
+/* Variables */
+// App Palette Colors
+$palette-primary: aqua;
+$palette-secondary: aqua;
+$palette-accent: aqua;
+$palette-error: rgba(244,67,54,.87);
+
+// Material Text Colors
+  // Dark text for light backgrounds
+$text-dark-primary: rgba(0,0,0,.87); //#000000 87%
+$text-dark-secondary: rgba(0,0,0,.54); //#000000 54%
+$text-dark-disabled: rgba(0,0,0,.38); //#000000 38%
+$text-dark-dividers: rgba(0,0,0,.12); //#000000 12%
+  // Light text for dark backgrounds
+$text-light-primary: rgba(255,255,255,1); //#FFFFFF 100%
+$text-light-secondary: rgba(255,255,255,.70); //#FFFFFF 70%
+$text-light-disabled: rgba(255,255,255,.50); //#FFFFFF 50%
+$text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
+
+
 /* Material Icons */
 .material-icons {
   -webkit-user-select: none;
   user-select: none;
 
-  &.md-18 {  font-size: 18px;  }
-  &.md-24 {  font-size: 24px;  }
+  &.mi-18 {  font-size: 18px;  }
+  &.mi-24 {  font-size: 24px;  }
+  &.mi-36 {  font-size: 36px;  }
+  &.mi-48 {  font-size: 48px;  }
 }
 
 /* Card */
-.card {
+.md-card {
   padding-bottom: 24px; //default
   margin-bottom: 20px;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color: white;
+  color: $text-dark-primary;
 
   &.bottom-0  {  padding-bottom: 0px;   }
   &.bottom-16 {  padding-bottom: 16px;  }
@@ -25,7 +48,7 @@
 
   // Note: each module in card should have no bottom padding.
   // The previous module and bottom of card should take care of this.
-  .card-heading {
+  .md-card-heading {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     background-color: aqua;
@@ -36,17 +59,18 @@
       font-size: 24px;
       .subtitle {
         font-size: 16px;
+        color: $text-dark-secondary;
       }
     }
     .md-tabs {
-      margin-bottom: -15px;
+      margin-bottom: -24px;
     }
   }
-  .card-body {
+  .md-card-body {
     padding: 16px 16px 0px;
     font-size: 16px;
   }
-  .card-actions-layer {  //Wrapper for actions
+  .md-card-actions-layer {  //Wrapper for actions
     padding: 8px;
     margin-top: 16px;
 
@@ -58,7 +82,7 @@
       margin-right: 8px;
     }
   }
-  .card-actions-stacked {  //Wrapper for actions
+  .md-card-actions-stacked {  //Wrapper for actions
     padding: 8px 8px 4px 8px;
     margin-top: 16px;
 
@@ -163,29 +187,61 @@
   padding: 0px 16px;
   margin-right: 8px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 2px;
   z-index: 0;
+  line-height: 36px;
+  font-size: 14px;
+  text-transform: uppercase;
 
   // Style classes
-  .raised {
+  &.flat {
+    background-color: transparent;
+    color: $text-dark-primary;
 
+    &:hover {
+      background-color: rgba(153,153,153,.18);
+    }
+    &:active, &:focus {
+      background-color: rgba(153,153,153,.4);
+    }
+
+    &.primary {
+      background: rgba($palette-accent,1);
+      color: $text-dark-primary;
+      &:hover {
+        background-color: lighten($palette-accent, 26%);
+      }
+      &:active, &:focus {
+        background-color: lighten($palette-accent, 57%);
+      }
+    }
   }
-  .btn-dense {
+  &.raised {
+    &:hover {
+      background-color: rgba(152,152,152,.12);
+    }
+    &:active, &:focus {
+      background-color: rgba(152,152,152,.4);
+    }
+
+    &.primary {
+      background-color: rgba(0,184,212,1);
+
+      &:hover {
+        background-color: rgba(0,184,212,.12);
+      }
+      &:active, &:focus {
+        background-color: rgba(0,184,212,.4);
+      }
+    }
+  }
+  &.dense {
     height: 32px;
+    font-size: 13px;
   }
 
 
   /* Color classes */
-  // Primary colors
-  &.primary {
-    background-color: rgba(0,184,212,1);
-  }
-  &.primary:hover {
-    background-color: rgba(0,184,212,.12);
-  }
-  &.primary:active, &.primary:focus {
-    background-color: rgba(0,184,212,.4);
-  }
   // Default colors
   &:hover {
     background-color: rgba(152,152,152,.12);
@@ -195,29 +251,52 @@
   }
 }
 
-/* Text fields */
+
+/* Text fields and Forms */
+input, textarea, div[contenteditable] {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-bottom: 1px solid rgba(117,117,117,0.15);
+  background-color: transparent;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 15px;
+  color: $text-dark-primary;
+
+  &.active, &:focus {
+    outline: none;
+    border-bottom: 2px solid $palette-accent;
+    box-shadow: none;
+  }
+  &:empty {
+    // color: $text-dark-secondary;
+  }
+  // &:invalid {
+  //   border-bottom: 2px solid $palette-error;
+  // }
+}
+textarea, div[contenteditable] {
+  min-height: 36px;
+  height: auto;
+  max-height: 300px;
+  padding-top: 8px;
+  resize: none; //Stop user from changing height of item
+  overflow: auto;
+}
+div[contenteditable] {
+  &:empty:before {
+    display: block;
+    content: attr(placeholder);
+    color: $text-dark-secondary;
+  }
+}
 .md-form {
   * {
     margin-top: 8px;
   }
-  input {
-    width: 100%;
-    height: 36px;
-    border: none;
-    border-bottom: 1px solid rgba(117, 117, 117, 0.15);
-    background-color: transparent;
-    box-shadow: none;
-    font-size: 15px;
-    font-family: inherit;
-    font-weight: 300;
-
-    &.active, &:focus {
-      outline: none;
-      border-bottom: 2px solid rgba(0,0,0, 1);
-      box-shadow: none;
-    }
-  }
 }
+
 
 /* Data table */
 table.md-table {

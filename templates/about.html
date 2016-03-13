@@ -6,7 +6,7 @@
   <!-- , user-scalable=no -->
   <meta name="theme-color" content="#ffffff"> <!-- Theme color for Chrome mobile -->
 
-  <title>Watson PT</title>
+  <title>About CoachWatson</title>
 
   <!-- bootstrap -->
   <link rel="stylesheet" href="../static/bootstrap-3.3.6-dist/css/bootstrap.min.css" type='text/css'>
@@ -17,24 +17,26 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- My files -->
   <link rel="stylesheet" href="../static/css/info_pages.css">
+  <script src="../static/js/material.js"></script>
 </head>
 
 <body class="container-fluid">
+
   <div class="row">
     <!-- top nav bar -->
     <div id="about-app-bar" class="col-xs-12">
       <div class="row">
         <div class="col-xs-12 col-sm-7">
-          <h2>Coach <b>Watson</b></h2>
+          <h2>Coach<b>Watson</b></h2>
         </div>
         <div class="col-xs-12 col-sm-5 ">
-          <button class="md-button">LOG IN</button>
-          <button class="md-button primary">SIGN UP</button>
+          <button class="md-button flat">LOG IN</button>
+          <button class="md-button flat primary">SIGN UP</button>
         </div>
       </div>
     </div>
 
-    <!-- Dialog -->
+    <!-- Page content stream -->
     <div id="page-content" class="col-xs-12">
       <div id="banner">
         <img src="../static/res/header.jpg" alt="">
@@ -42,8 +44,8 @@
       <div class="row">
         <div id="content-stream" class="col-xs-12 col-sm-offset-2 col-sm-8">
           <!-- Login -->
-          <div class="card bottom-0">
-            <div class="card-heading">
+          <div class="md-card bottom-0">
+            <div class="md-card-heading">
               <div class="title">
                 Welcome back!
                 <div class="subtitle">
@@ -51,64 +53,65 @@
                 </div>
               </div>
             </div>
-            <div class="card-body">
+            <div class="md-card-body">
+
               <form id="login-form" class="md-form" action="/auth/login" method="post">
                 <input name="user-name" placeholder="Email" type="text">
                 <input name="user-pass" placeholder="Password" type="password">
               </form>
             </div>
-            <div class="card-actions-layer">
-              <button class="md-button" type="submit" form="login-form">
+            <div class="md-card-actions-layer">
+              <button class="md-button flat primary" type="submit" form="login-form">
                 SIGN IN
               </button>
             </div>
           </div>
 
           <!-- Account creation -->
-          <div class="card bottom-0">
-            <div class="card-heading">
+          <div class="md-card bottom-0">
+            <div class="md-card-heading">
               <div class="title">
                 Make an Account!
               </div>
             </div>
-            <div class="card-body">
+            <div class="md-card-body">
               <form id="signup-form" class="md-form" action="/auth/register" method="post">
-                <input name="first-name" placeholder="First name" type="text">
-                <input name="last-name" placeholder="Last name" type="text">
-                <input name="user-name" placeholder="Email" type="text">
-                <input name="user-pass-first" placeholder="Password" type="password">
-                <input name="user-pass-second" placeholder="Verify Password" type="password">
+                <input required name="first-name" placeholder="First name" type="text">
+                <input required name="last-name" placeholder="Last name" type="text">
+                <input required name="user-name" placeholder="Email" type="text">
+                <input required name="user-pass-first" placeholder="Password" type="password">
+                <input required name="user-pass-second" placeholder="Verify Password" type="password">
               </form>
             </div>
-            <div class="card-actions-layer">
-              <button class="md-button" type="submit" form="signup-form">
+            <div class="md-card-actions-layer">
+              <button class="md-button flat primary" type="submit" form="signup-form">
                 CONFIRM
               </button>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body">
+          <div class="md-card">
+            <div class="md-card-body">
               Bacon ipsum dolor amet dolor drumstick lorem rump, pork loin qui flank. Deserunt aute beef ribs sunt in fatback. Est in mollit beef ribs voluptate excepteur laboris dolore prosciutto shank ground round. Ribeye capicola ball tip sed drumstick in alcatra, eiusmod pancetta lorem short loin dolore salami beef turkey.
               Incididunt tongue nostrud, chicken brisket eiusmod picanha officia ribeye cupidatat mollit shoulder spare ribs exercitation magna. Nisi ut capicola id ball tip. Dolore cow bresaola voluptate pastrami ham, venison pancetta boudin. Short ribs non sint, est cillum culpa dolor incididunt commodo short loin beef. Ea irure sausage sint biltong.
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body">
+          <div class="md-card">
+            <div class="md-card-body">
               Laboris proident doner fugiat commodo enim, flank salami chicken sint. Excepteur jowl pig t-bone nostrud swine. Est sint prosciutto pork, fugiat beef sirloin andouille tail non pork belly. Sausage boudin porchetta t-bone corned beef turkey ut id frankfurter ball tip doner venison deserunt sirloin sed. Shoulder deserunt frankfurter salami elit pastrami consequat sed excepteur jerky pancetta pork belly.
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body">
+          <div class="md-card">
+            <div class="md-card-body">
               Ball tip reprehenderit eu laboris, occaecat ut exercitation. Brisket ut dolore shank. In commodo shankle tongue eu. Capicola laboris magna enim landjaeger bacon dolore kevin pork tempor meatloaf quis alcatra. Cow turkey porchetta veniam, sunt anim irure kevin consequat ut tri-tip cillum ut officia in.
               Short loin frankfurter veniam cupim. Cupim pariatur consectetur id pancetta. Minim kielbasa dolore, kevin magna swine pariatur laboris shoulder exercitation do. Culpa quis nisi short loin. Strip steak tenderloin pork belly elit.
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-body">
+          <div class="md-card">
+            <div class="md-card-body">
               Labore esse et nostrud fatback eiusmod short loin beef ribs rump brisket t-bone picanha prosciutto in cupidatat. Qui kielbasa doner ball tip ea flank. Pork belly jerky dolor short loin veniam eu magna venison. Pig jowl anim qui ea. Ribeye strip steak ad bacon deserunt ex sint filet mignon fugiat capicola short ribs consequat officia turducken boudin. Biltong reprehenderit sed ut non culpa sunt.
               Meatball jerky id occaecat enim non. Cow prosciutto eu, pork belly salami reprehenderit kielbasa kevin sunt corned beef esse drumstick. Ut drumstick bresaola t-bone. In kielbasa proident frankfurter mollit flank est short ribs commodo aute venison spare ribs ut hamburger minim.
               Does your lorem ipsum text long for something a little meatier? Give our generator a try… it’s tasty!
