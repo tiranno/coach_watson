@@ -35,15 +35,20 @@ class Application(tornado.web.Application):
             default_handler_class = fourOhFourHandler
         )
         handlers = [
+            # Main Pages
             (r'/', IndexHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
             (r'/nutrition', NutritionHandler),
             (r'/404', fourOhFourHandler),
+            # Websockets
             (r'/ws', WebSocketHandler, {'watson':watson}),
+            # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
             (r'/auth/register', RegisterHandler)
+            # Form validation
+            (r'/form/feedback', FeedbackHandler)
         ]
         tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -111,6 +116,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if self.ws_connection:
             print(message)
             answer = self.watson.ask(message)
+            # save to db
+            qa = {
+                'question': message,
+                'answer': answer
+            }
+            qaid = self.application.db['qu'].insert_one(qa).inserted_id
+            # send to user
             self.write_message(tornado.escape.json_encode(answer))
 
     def on_close(self):
@@ -144,7 +156,6 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("user")
         self.redirect(self.get_argument("next", "/"))
 
-
 class RegisterHandler(LoginHandler):
     def post(self):
         email = self.get_argument('user-name','')
@@ -169,6 +180,17 @@ class RegisterHandler(LoginHandler):
         self.redirect('/askwatson')
 
 # FEEDBACK HANDLER
+class FeedbackHandler(BaseHandler):
+    def post(self):
+        recieved_text = self.get_argument('feedback-text','')
+
+        feedback = { }
+        feedback['user'] = get_current_user()
+        feedback['text'] = recieved_text
+        feedback['url'] = self.request.uri
+
+        fbid = self.application.db['feedback'].insert_one(feedback).inserted_id
+        print('feedback recieved from: ' + get_current_user() + 'with id' + fbid)
 
 
 
