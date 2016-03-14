@@ -11,7 +11,7 @@ import tornado.websocket
 import tornado.escape
 
 from pymongo import MongoClient
-import datetime
+from datetime import datetime
 import bcrypt
 
 
@@ -46,7 +46,7 @@ class Application(tornado.web.Application):
             # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
-            (r'/auth/register', RegisterHandler)
+            (r'/auth/register', RegisterHandler),
             # Form validation
             (r'/form/feedback', FeedbackHandler)
         ]
@@ -64,12 +64,12 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 # PAGE REQUEST HANDLERS
-class fourOhFourHandler(tornado.web.RequestHandler):
+class fourOhFourHandler(BaseHandler):
     def prepare(self):
         self.set_status(404)
         self.render('404.html')
 
-class IndexHandler(tornado.web.RequestHandler):
+class IndexHandler(BaseHandler):
     def get(self):
         self.render('about.html')
 
@@ -117,11 +117,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             print(message)
             answer = self.watson.ask(message)
             # save to db
-            qa = {
-                'question': message,
-                'answer': answer
-            }
-            qaid = self.application.db['qu'].insert_one(qa).inserted_id
+
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
 
@@ -179,18 +175,36 @@ class RegisterHandler(LoginHandler):
 
         self.redirect('/askwatson')
 
+
 # FEEDBACK HANDLER
 class FeedbackHandler(BaseHandler):
     def post(self):
         recieved_text = self.get_argument('feedback-text','')
 
         feedback = { }
-        feedback['user'] = get_current_user()
+        feedback['userid'] = self.get_current_user()
         feedback['text'] = recieved_text
         feedback['url'] = self.request.uri
 
         fbid = self.application.db['feedback'].insert_one(feedback).inserted_id
-        print('feedback recieved from: ' + get_current_user() + 'with id' + fbid)
+        print('feedback recieved with id' + str(fbid))
+
+
+# QA HISTORY HANDLER
+class QAHistoryHandler(BaseHandler):
+    def get(self):
+        user = self.get_current_user()
+        self.application.db['qa-pairs'].find({userid: user}).sort({_id:-1})
+        # Need to only get and return ten at a time wrt the latest one loaded
+
+    def post(self):
+        qa = { }
+        qa['userid'] = self.get_current_user()
+        qa['question'] = message
+        qa['answer'] = answer
+        qa['datetime'] = datetime.isoformat(datetime.utcnow())
+
+        qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
 
 
 

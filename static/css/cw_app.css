@@ -182,7 +182,8 @@ input, textarea, div[contenteditable] {
   box-shadow: none;
   font-family: inherit;
   font-size: 15px;
-  color: rgba(0, 0, 0, 0.87); }
+  color: rgba(0, 0, 0, 0.87);
+  cursor: text; }
   input.active, input:focus, textarea.active, textarea:focus, div[contenteditable].active, div[contenteditable]:focus {
     outline: none;
     border-bottom: 2px solid aqua;
@@ -241,6 +242,9 @@ hr {
   height: 1px;
   background-color: rgba(0, 0, 0, 0.12); }
 
+.visible {
+  display: block !important; }
+
 /*Main content styles*/
 @media screen and (max-width: 767px) {
   #panel-left {
@@ -267,8 +271,6 @@ hr {
     position: absolute;
     top: 0;
     left: 0; }
-    #page-mask.visible {
-      display: block; }
 
   #query-group input {
     padding: 0 64px !important; }
@@ -404,14 +406,20 @@ hr {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 500; }
+  z-index: 500;
+  display: none; }
   #feedback-dialog .md-dialog {
     width: 60%;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto; }
     #feedback-dialog .md-dialog .md-card .md-card-heading {
-      background-color: inherit; }
+      background-color: inherit;
+      position: relative; }
+      #feedback-dialog .md-dialog .md-card .md-card-heading .exit {
+        position: absolute;
+        top: 0;
+        right: 0; }
 
 /* Material extenders */
 .card-question {

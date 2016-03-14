@@ -182,7 +182,8 @@ input, textarea, div[contenteditable] {
   box-shadow: none;
   font-family: inherit;
   font-size: 15px;
-  color: rgba(0, 0, 0, 0.87); }
+  color: rgba(0, 0, 0, 0.87);
+  cursor: text; }
   input.active, input:focus, textarea.active, textarea:focus, div[contenteditable].active, div[contenteditable]:focus {
     outline: none;
     border-bottom: 2px solid aqua;

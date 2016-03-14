@@ -262,6 +262,7 @@ input, textarea, div[contenteditable] {
   font-family: inherit;
   font-size: 15px;
   color: $text-dark-primary;
+  cursor: text;
 
   &.active, &:focus {
     outline: none;

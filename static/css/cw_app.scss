@@ -16,6 +16,9 @@ hr {
   background-color: rgba(0,0,0,.12);
 }
 
+.visible {
+  display: block !important;
+}
 
 
 /*Main content styles*/
@@ -46,9 +49,6 @@ hr {
     position: absolute;
     top: 0;
     left: 0;
-    &.visible {
-      display: block;
-    }
   }
 
   #query-group {
@@ -219,6 +219,7 @@ hr {
   top: 0;
   left: 0;
   z-index: 500;
+  display: none;
 
   .md-dialog {
     width: 60%;
@@ -227,6 +228,12 @@ hr {
     margin-right: auto;
     .md-card .md-card-heading {
       background-color: inherit;
+      position: relative;
+      .exit {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
   }
 }
