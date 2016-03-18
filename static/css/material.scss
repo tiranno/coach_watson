@@ -22,6 +22,15 @@ $text-light-disabled: rgba(255,255,255,.50); //#FFFFFF 50%
 $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
 
 
+/* Text Color Overrides */
+.dark-prm {  color: $text-dark-primary !important;  }
+.dark-sec {  color: $text-dark-secondary !important;  }
+.dark-dis {  color: $text-dark-disabled !important;  }
+.light-prm {  color: $text-light-primary !important;  }
+.light-sec {  color: $text-light-secondary !important;  }
+.light-dis {  color: $text-light-disabled !important;  }
+
+
 /* Material Icons */
 .material-icons {
   -webkit-user-select: none;
@@ -53,16 +62,40 @@ $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
     border-top-right-radius: inherit;
     padding-bottom: 16px;
 
-    .title {
-      padding: 24px 16px 0px;
-      font-size: 24px;
-      .subtitle {
+    &.avatar {
+      padding: 16px 16px 0;
+
+      img {
+        height: 40px;
+        width: 40px;
+        margin-right: 16px;
+        border-radius: 100%;
+        vertical-align: initial;
+        display: inline-block;
+      }
+      .title {
+        height: 40px;
         font-size: 16px;
-        color: $text-dark-secondary;
+        display: inline-block;
+        .subtitle {
+          font-size: 16px;
+          color: $text-dark-secondary;
+        }
       }
     }
+    &.default {
+      .title {
+        padding: 24px 16px 0;
+        font-size: 24px;
+        .subtitle {
+          font-size: 16px;
+          color: $text-dark-secondary;
+        }
+      }
+    }
+
     .md-tabs {
-      margin-bottom: -24px;
+      margin-bottom: -16px;
     }
   }
   .md-card-body {
@@ -110,7 +143,7 @@ $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
         display: block;
         line-height: 1;
         &:hover {  background-color: #0097A7;  }
-        &:focus {  background-color: inherit;  }
+        &:focus, &:active { background-color: darken(#0097A7, 1);}
       }
       .icon {
         padding: 0 0 0 16px;
@@ -118,6 +151,9 @@ $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
         line-height: 0.7;
       }
       .text {  padding: 0 16px 0 72px;  }
+    }
+    li {
+
     }
   }
 
@@ -148,7 +184,8 @@ $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
-    display: table;
+    display: inline-block;
+    position: relative;
 
     li {
       // min-width: 160px;
@@ -158,17 +195,23 @@ $text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
       margin: 0;
       padding: 0px 12px;
       display: inline-block;
-      text-align: center;
-      vertical-align: middle;
       line-height: 46px;
       text-transform: uppercase;
+      font-size: 14px;
+
+      a {
+        padding: 16px 0;
+        vertical-align: middle;
+        text-decoration: none;
+      }
     }
-    .indicator {
+    span.indicator {
+      min-width: 72px;
+      background-color: #f6b2b5;
       position: absolute;
       bottom: 0;
       height: 2px;
-      background-color: #f6b2b5;
-      will-change: left, right;
+      z-index: 20;
     }
 
   }

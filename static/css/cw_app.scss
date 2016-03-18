@@ -73,7 +73,7 @@ hr {
   height: 100vh;
   // background-color: #006064;
   background-color: #005b64;
-  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+  // box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
   overflow-y: auto;
   z-index: 50;
   color: white;
@@ -98,19 +98,11 @@ hr {
   }
 
   #account {
-    padding: 16px 0px;
+    padding: 8px 0px;
 
-    span .user-pic {
-      font-size: 36px;
-      margin-bottom: 4px;
-    }
-    span .user-name {
-      margin: 0px;
-      float: left;
-    }
-    span .carrot {
-      float: right;
-    }
+    #user-pic {  height: 48px;  }
+    .user-name {  }
+    .carrot {  float: right;  }
   }
 
   #feedback {
@@ -188,7 +180,7 @@ hr {
   overflow-y: auto;
 }
 .center-wrapper {
-  max-width: 950px;
+  max-width: 970px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 15px;
@@ -198,6 +190,16 @@ hr {
 
   &.visible  {  display: block;}
   .col-xs-12 {  padding: 0;    }
+  img.watson-pic {
+    height: 40px;
+    width: 40px;
+    margin-right: 8px;
+    margin-left: -4px;
+    border-radius: 100%;
+    vertical-align: initial;
+    display: inline-block;
+    float: left;
+  }
 }
 #no-content {
   position: relative;

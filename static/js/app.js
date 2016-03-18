@@ -8,11 +8,15 @@ $(function () {
         var answer = $('<div />', {
             'class': 'col-xs-12'
         });
+        answer.append($('<img />', {
+            'src': '../static/res/watson_logo.png',
+            'class': 'watson-pic'
+        }));
         answer.append($('<div />', {
             'class': 'md-card card-answer bottom-16'
         }));
         if(evt.data[0] === '<') {
-            answer.children(0).append($('<div class="md-card-heading">I think this might work for you ...</div>'));
+            answer.children(0).append($('<div class="md-card-heading default">I think this might work for you ...</div>'));
             answer.children(0).append($(evt.data));
         } else {
             answer.children(0).append($('<div />', {

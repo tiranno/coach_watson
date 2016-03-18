@@ -18,6 +18,9 @@ import bcrypt
 # SERVER APPLICATION
 class Application(tornado.web.Application):
     def __init__(self):
+        # Global Variables
+
+
         # Open connection to Mongo DB
         dbuser = 'HerokuWatson'
         dbpass = 'hweartoskoun'
@@ -79,7 +82,8 @@ class IndexHandler(BaseHandler):
 class QueryPageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='partials/_askwatson.html')
+        title = "Ask Watson"
+        self.render('app.html', content='partials/_askwatson.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -87,7 +91,8 @@ class QueryPageHandler(BaseHandler):
 class WorkoutHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='partials/_workout.html')
+        title = "Workout Plan"
+        self.render('app.html', content='partials/_workout.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -95,7 +100,8 @@ class WorkoutHandler(BaseHandler):
 class NutritionHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='partials/_nutrition.html')
+        title = "Nutrition Plan"
+        self.render('app.html', content='partials/_nutrition.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)

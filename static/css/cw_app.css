@@ -2,6 +2,25 @@
   Material Design components
 */
 /* Variables */
+/* Text Color Overrides */
+.dark-prm {
+  color: rgba(0, 0, 0, 0.87) !important; }
+
+.dark-sec {
+  color: rgba(0, 0, 0, 0.54) !important; }
+
+.dark-dis {
+  color: rgba(0, 0, 0, 0.38) !important; }
+
+.light-prm {
+  color: white !important; }
+
+.light-sec {
+  color: rgba(255, 255, 255, 0.7) !important; }
+
+.light-dis {
+  color: rgba(255, 255, 255, 0.5) !important; }
+
 /* Material Icons */
 .material-icons {
   -webkit-user-select: none;
@@ -33,14 +52,30 @@
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     padding-bottom: 16px; }
-    .md-card .md-card-heading .title {
-      padding: 24px 16px 0px;
+    .md-card .md-card-heading.avatar {
+      padding: 16px 16px 0; }
+      .md-card .md-card-heading.avatar img {
+        height: 40px;
+        width: 40px;
+        margin-right: 16px;
+        border-radius: 100%;
+        vertical-align: initial;
+        display: inline-block; }
+      .md-card .md-card-heading.avatar .title {
+        height: 40px;
+        font-size: 16px;
+        display: inline-block; }
+        .md-card .md-card-heading.avatar .title .subtitle {
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.54); }
+    .md-card .md-card-heading.default .title {
+      padding: 24px 16px 0;
       font-size: 24px; }
-      .md-card .md-card-heading .title .subtitle {
+      .md-card .md-card-heading.default .title .subtitle {
         font-size: 16px;
         color: rgba(0, 0, 0, 0.54); }
     .md-card .md-card-heading .md-tabs {
-      margin-bottom: -24px; }
+      margin-bottom: -16px; }
   .md-card .md-card-body {
     padding: 16px 16px 0px;
     font-size: 16px; }
@@ -74,8 +109,8 @@
     line-height: 1; }
     .md-list ul li a:hover {
       background-color: #0097A7; }
-    .md-list ul li a:focus {
-      background-color: inherit; }
+    .md-list ul li a:focus, .md-list ul li a:active {
+      background-color: #0092a2; }
   .md-list ul li .icon {
     padding: 0 0 0 16px;
     position: absolute;
@@ -105,7 +140,8 @@
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
-    display: table; }
+    display: inline-block;
+    position: relative; }
     .md-tabs ul li {
       min-width: 72px;
       max-width: 264px;
@@ -113,16 +149,20 @@
       margin: 0;
       padding: 0px 12px;
       display: inline-block;
-      text-align: center;
-      vertical-align: middle;
       line-height: 46px;
-      text-transform: uppercase; }
-    .md-tabs ul .indicator {
+      text-transform: uppercase;
+      font-size: 14px; }
+      .md-tabs ul li a {
+        padding: 16px 0;
+        vertical-align: middle;
+        text-decoration: none; }
+    .md-tabs ul span.indicator {
+      min-width: 72px;
+      background-color: #f6b2b5;
       position: absolute;
       bottom: 0;
       height: 2px;
-      background-color: #f6b2b5;
-      will-change: left, right; }
+      z-index: 20; }
   .md-tabs ul.center {
     margin-left: auto;
     margin-right: auto; }
@@ -285,7 +325,6 @@ hr {
 #panel-left {
   height: 100vh;
   background-color: #005b64;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
   overflow-y: auto;
   z-index: 50;
   color: white; }
@@ -303,14 +342,10 @@ hr {
       #panel-left .header a:hover, #panel-left .header a:focus {
         text-decoration: none; }
   #panel-left #account {
-    padding: 16px 0px; }
-    #panel-left #account span .user-pic {
-      font-size: 36px;
-      margin-bottom: 4px; }
-    #panel-left #account span .user-name {
-      margin: 0px;
-      float: left; }
-    #panel-left #account span .carrot {
+    padding: 8px 0px; }
+    #panel-left #account #user-pic {
+      height: 48px; }
+    #panel-left #account .carrot {
       float: right; }
   #panel-left #feedback {
     width: 90%;
@@ -380,7 +415,7 @@ hr {
   overflow-y: auto; }
 
 .center-wrapper {
-  max-width: 950px;
+  max-width: 970px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 15px; }
@@ -391,6 +426,15 @@ hr {
     display: block; }
   #center-dialog .col-xs-12 {
     padding: 0; }
+  #center-dialog img.watson-pic {
+    height: 40px;
+    width: 40px;
+    margin-right: 8px;
+    margin-left: -4px;
+    border-radius: 100%;
+    vertical-align: initial;
+    display: inline-block;
+    float: left; }
 
 #no-content {
   position: relative;
