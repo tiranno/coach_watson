@@ -11,6 +11,7 @@ body {
   padding-top: 15px;
   background-color: white;
   z-index: 500;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
 
   h2 {
     margin: 0px;
@@ -21,25 +22,15 @@ body {
   }
 }
 
-#app-bar-shadow {
-  width: 100vw;
-  height: 6px;
-  bottom: -6px;
-  margin-left: -15px;
-  box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-  position: fixed;
-  top: 64px;
-}
-
 #page-content {
   padding-top: 64px;
   overflow: hidden;
 
-  .banner {
+  #banner {
     width: 100vw;
     margin-left: -15px;
     overflow: hidden;
-    position: initial;
+    position: absolute;
 
     img {
       width: 100%;
@@ -47,8 +38,7 @@ body {
   }
 
   #content-stream {
-    margin: 30px auto;
-    position: relative;
+    margin-top: 45%;
   }
 }
 
@@ -63,3 +53,17 @@ body {
     display: inline;
   }
 }
+
+// @media screen and (min-width: 600px) {
+//   // #page-content > .row{
+//   //   max-width: 950px !important;
+//   //   margin-left: auto !important;
+//   //   margin-right: auto !important;
+//   // }
+//   #content-stream {
+//     margin-top: 35% !important;
+//   }
+//   #banner {
+//     transform: translate(0, -15%) !important;
+//   }
+// }

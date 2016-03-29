@@ -2,7 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!-- , user-scalable=no -->
+  <meta name="theme-color" content="#ffffff"> <!-- Theme color for Chrome mobile -->
 
   <title>Watson PT</title>
 
@@ -14,7 +16,6 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- My files -->
-  <script src="../static/js/index.js"></script>
   <link rel="stylesheet" href="../static/css/info_pages.css">
 </head>
 
@@ -26,7 +27,7 @@
         <div class="col-xs-12 col-sm-7">
           <h2>Coach <b>Watson</b></h2>
         </div>
-        <div class="col-xs-12 col-sm-5">
+        <div class="col-xs-12 col-sm-5 ">
           <button class="md-button">LOG IN</button>
           <button class="md-button primary">SIGN UP</button>
         </div>
@@ -35,27 +36,53 @@
 
     <!-- Dialog -->
     <div id="page-content" class="col-xs-12">
-      <div class="banner">
+      <div id="banner">
         <img src="../static/res/header.jpg" alt="">
       </div>
-      <div class=row>
-        <div id="content-stream" class="col-xs-12 col-sm-8">
-
-          <div class="card">
+      <div class="row">
+        <div id="content-stream" class="col-xs-12 col-sm-offset-2 col-sm-8">
+          <!-- Login -->
+          <div class="card bottom-0">
             <div class="card-heading">
               <div class="title">
-                Log In
+                Welcome back!
+                <div class="subtitle">
+                  Log in and we'll get started
+                </div>
               </div>
             </div>
             <div class="card-body">
-              <form class="md-form" action="">
-                <input id="user-name" placeholder="email" type="text">
-                <input id="user-pass" placeholder="password" type="text">
+              <form id="login-form" class="md-form" action="/auth/login" method="post">
+                <input name="user-name" placeholder="Email" type="text">
+                <input name="user-pass" placeholder="Password" type="password">
               </form>
             </div>
-            <div class="card-actions">
-              <button class="md-button raised primary" type="button" name="button">
-                Sign In
+            <div class="card-actions-layer">
+              <button class="md-button" type="submit" form="login-form">
+                SIGN IN
+              </button>
+            </div>
+          </div>
+
+          <!-- Account creation -->
+          <div class="card bottom-0">
+            <div class="card-heading">
+              <div class="title">
+                Make an Account!
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="signup-form" class="md-form" action="/auth/register" method="post">
+                <input name="first-name" placeholder="First name" type="text">
+                <input name="last-name" placeholder="Last name" type="text">
+                <input name="user-name" placeholder="Email" type="text">
+                <input name="user-pass-first" placeholder="Password" type="password">
+                <input name="user-pass-second" placeholder="Verify Password" type="password">
+              </form>
+            </div>
+            <div class="card-actions-layer">
+              <button class="md-button" type="submit" form="signup-form">
+                CONFIRM
               </button>
             </div>
           </div>
@@ -90,8 +117,6 @@
 
         </div>
       </div>
-
-      <div id="app-bar-shadow"></div>
 
       <footer class="row">
         <hr/>
