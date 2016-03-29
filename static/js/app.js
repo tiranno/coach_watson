@@ -1,22 +1,26 @@
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('wss://' + window.location.host + '/ws');
+    var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
     };
     ws.onmessage = function(evt) {
         var answer = $('<div />', {
             'class': 'col-xs-12'
         });
+        answer.append($('<img />', {
+            'src': '../static/res/watson_logo.png',
+            'class': 'watson-pic'
+        }));
         answer.append($('<div />', {
-            'class': 'card card-answer bottom-16'
+            'class': 'md-card card-answer bottom-16'
         }));
         if(evt.data[0] === '<') {
-            answer.children(0).append($('<div class="card-heading">I think this might work for you ...</div>'));
+            answer.children(0).append($('<div class="md-card-heading default">I think this might work for you ...</div>'));
             answer.children(0).append($(evt.data));
         } else {
             answer.children(0).append($('<div />', {
-                'class': 'card-body' ,
+                'class': 'md-card-body' ,
                 text: evt.data
             }))
         }
@@ -31,10 +35,10 @@ $(function () {
             'class': 'col-xs-12'
         });
         question.append($('<div />', {
-            'class': 'card card-question bottom-16'
+            'class': 'md-card card-question bottom-16'
         }));
         question.children(0).append($('<div />', {
-            'class': 'card-body',
+            'class': 'md-card-body',
             text: question_text
         }))
         var line_break = $('<hr/>')

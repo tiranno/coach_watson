@@ -11,13 +11,16 @@ import tornado.websocket
 import tornado.escape
 
 from pymongo import MongoClient
-import datetime
+from datetime import datetime
 import bcrypt
 
 
 # SERVER APPLICATION
 class Application(tornado.web.Application):
     def __init__(self):
+        # Global Variables
+
+
         # Open connection to Mongo DB
         dbuser = 'HerokuWatson'
         dbpass = 'hweartoskoun'
@@ -28,20 +31,30 @@ class Application(tornado.web.Application):
         options = tornado.options.options
         watson = Watson(options.watson_user, options.watson_pass)
         settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), 'templates'),
-            static_path=os.path.join(os.path.dirname(__file__), 'static'),
-            cookie_secret='cinnamon',
-            login_url='/'
+            template_path = os.path.join(os.path.dirname(__file__), 'templates'),
+            static_path = os.path.join(os.path.dirname(__file__), 'static'),
+            cookie_secret = 'cinnamon',
+            login_url = '/',
+            default_handler_class = fourOhFourHandler
         )
         handlers = [
+            # Main Pages
             (r'/', IndexHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
             (r'/nutrition', NutritionHandler),
+            (r'/404', fourOhFourHandler),
+            # Websockets
             (r'/ws', WebSocketHandler, {'watson':watson}),
+            # Qusetion/Answer
+            (r'/qahistory', QAHandler),
+            # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
-            (r'/auth/register', RegisterHandler)
+            (r'/auth/register', RegisterHandler),
+            # Form validation
+            (r'/form/feedback', FeedbackHandler),
+            (r'/(.*)', fourOhFourHandler)
         ]
         tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -57,7 +70,12 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 # PAGE REQUEST HANDLERS
-class IndexHandler(tornado.web.RequestHandler):
+class fourOhFourHandler(BaseHandler):
+    def prepare(self):
+        self.set_status(404)
+        self.render('404.html')
+
+class IndexHandler(BaseHandler):
     def get(self):
         self.render('about.html')
 
@@ -67,7 +85,8 @@ class IndexHandler(tornado.web.RequestHandler):
 class QueryPageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_askwatson.html')
+        title = "Ask Watson"
+        self.render('app.html', content='partials/_askwatson.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -75,7 +94,8 @@ class QueryPageHandler(BaseHandler):
 class WorkoutHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_workout.html')
+        title = "Workout Plan"
+        self.render('app.html', content='partials/_workout.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -83,13 +103,14 @@ class WorkoutHandler(BaseHandler):
 class NutritionHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        self.render('app.html', content='_nutrition.html')
+        title = "Nutrition Plan"
+        self.render('app.html', content='partials/_nutrition.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
 
-# WebSocket Handlers
+# WEBSOCKET HANDLERS
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print('WebSocket opened.')
@@ -104,13 +125,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if self.ws_connection:
             print(message)
             answer = self.watson.ask(message)
+            # save to db
+            # QAHandler.post(QAHandler, {"message":message, "answer": answer})
+            # send to user
             self.write_message(tornado.escape.json_encode(answer))
 
     def on_close(self):
         print('WebSocket closed.')
 
 
-#== User account handlers ==#
+# USER AUTHENTICATION AND RE.GISTRATION
 class LoginHandler(BaseHandler):
     def post(self):
         email = self.get_argument('user-name','')
@@ -123,8 +147,8 @@ class LoginHandler(BaseHandler):
             self.set_current_user(email)
             self.redirect('/askwatson')
         else:
-            # error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect.")
-            self.redirect('/')
+            error_msg = u"?error=" + tornado.escape.url_escape("incorrect login")
+            self.redirect('/' + error_msg)
 
     def set_current_user(self, user):
         if user:
@@ -137,16 +161,14 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("user")
         self.redirect(self.get_argument("next", "/"))
 
-
 class RegisterHandler(LoginHandler):
     def post(self):
         email = self.get_argument('user-name','')
 
         in_db = self.application.db['users'].find_one( { 'username': email } )
         if in_db:
-            # error_msg = u"?error=" + tornado.escape.url_escape("Login name already taken")
-            # self.redirect(u"/login" + error_msg)
-            self.redirect('/')
+            error_msg = u"?error=" + tornado.escape.url_escape("email already taken")
+            self.redirect('/' + error_msg)
 
         password = self.get_argument('user-pass-first','')
         passhash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(8).encode('utf-8'))
@@ -158,10 +180,50 @@ class RegisterHandler(LoginHandler):
         user['lastname'] = self.get_argument('last-name','')
 
         auth = self.application.db['users'].insert_one(user).inserted_id
-        # print(auth['_id'])
         self.set_current_user(email)
 
         self.redirect('/askwatson')
+
+
+# FEEDBACK HANDLER
+class FeedbackHandler(BaseHandler):
+    def post(self):
+        recieved_text = self.get_argument('feedback-text','')
+
+        feedback = { }
+        feedback['userid'] = self.get_current_user()
+        feedback['text'] = recieved_text
+        feedback['url'] = self.request.uri
+
+        fbid = self.application.db['feedback'].insert_one(feedback).inserted_id
+        print('feedback recieved with id' + str(fbid))
+
+
+# QA HISTORY HANDLER
+class QAHandler(BaseHandler):
+    def get(self):
+        user = self.get_current_user()
+        pair = self.application.db['qa-pairs'].find({'userid': user}).sort('_id', -1).limit(10)
+        print pair
+        # self.write(tornado.escape.json_encode(pair))
+        #Need to get x amount to return
+
+    def post(self):
+        qa = { }
+        qa['userid'] = self.get_current_user()
+        qa['question'] = message
+        qa['answer'] = answer
+        qa['datetime'] = datetime.isoformat(datetime.utcnow())
+
+        qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
+
+
+class Entry(tornado.web.UIModule):
+    def render(self, entry, show_comments=False):
+        return self.render_string(
+            "_answer-card.html", entry=entry)
+
+
 
 
 

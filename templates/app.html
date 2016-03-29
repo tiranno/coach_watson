@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#0097A7"> <!-- Theme color for Chrome mobile -->
 
-  <title>Watson PT</title>
+  <title>{{ title }} - Coach Watson</title>
+  <link rel="shortcut icon" href="{{ static_url('res/favicon.ico') }}">
 
   <!-- bootstrap -->
   <link rel="stylesheet" href="../static/bootstrap-3.3.6-dist/css/bootstrap.min.css" type='text/css'>
@@ -17,8 +18,8 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- My files -->
+  <script src="../static/js/app.js"></script>
   <script src="../static/js/ui_module.js"></script>
-  <script src="../static/js/index.js"></script>
   <link rel="stylesheet" href="../static/css/cw_app.css">
 </head>
 
@@ -29,97 +30,81 @@
     <div id="panel-left" class="col-xs-8 col-sm-4 col-sm-3 col-lg-2">
 
       <div class="row header">
-        <span class="col-xs-12">
-          <h2 class="text-center">Coach<b>Watson</b></h2>
-        </span>
+        <h2 class="text-center">Coach<b>Watson</b></h2>
       </div>
 
       <div id="account" class="row">
-        <span class="col-xs-12">
-          <i class="material-icons user-pic">account_circle</i>
-        </span>
-        <span class="col-xs-12">
+        <div id="user-pic" class="col-xs-12">
+          <i class="material-icons mi-48">account_circle</i>
+        </div>
+        <div class="col-xs-12">
           <h4 class="user-name">
             {{ escape(current_user) }}
           </h4>
           <!-- <i class="material-icons carrot">expand_more</i> -->
-        </span>
-        <span>
+        </div>
+        <div>
           <form id="logout" style="display:none" action="/auth/logout" method="get"></form>
-          <button class="md-button" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
-        </span>
+          <button class="md-button flat light-sec" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
+        </div>
       </div>
 
-<!--
-      <div>
-        <ul class="nav nav-pills nav-stacked">
-          <li role="presentation" class="active">
-            <a href="/askwatson">
-              Ask Watson
-              <i class="material-icons">question_answer</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="/workout">
-              Workouts
-              <i class="material-icons">favorite</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="/nutrition">
-              Nutrition Planner
-              <i class="material-icons">local_dining</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="goals">
-              Goal Tracker
-              <i class="material-icons">timeline</i>
-            </a>
-          </li>
-          <li role="presentation">
-            <a href="calendar">
-              Calendar
-              <i class="material-icons">event</i>
-            </a>
-          </li>
-        </ul>
-      </div>
- -->
       <div class="md-list">
         <ul class="sparse">
-          <li class="active">
+          <li
+            {% if title == "Ask Watson" %}
+              {{ escape("class='active'") }}
+            {% end %}
+          >
             <a href="/askwatson">
               <i class="material-icons icon">question_answer</i>
               <p class="text">Ask Watson</p>
             </a>
           </li>
-          <li>
+          <li
+            {% if title == "Workout Plan" %}
+              {{ escape("class='active'") }}
+            {% end %}
+          >
             <a href="/workout">
               <i class="material-icons icon">favorite</i>
               <p class="text">Workouts</p>
             </a>
           </li>
-          <li>
+          <li
+            {% if title == "Nutrition Plan" %}
+              {{ escape("class='active'") }}
+            {% end %}
+          >
             <a href="/nutrition">
               <i class="material-icons icon">local_dining</i>
               <p class="text">Nutrition Planner</p>
             </a>
           </li>
-          <li>
+          <!-- <li
+            {% if title == None %}
+              {{ escape("class='active'") }}
+            {% end %}
+          >
             <a href="goals">
               <i class="material-icons icon">timeline</i>
               <p class="text">Goal Tracker</p>
             </a>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li
+            {% if title == None %}
+              {{ escape("class='active'") }}
+            {% end %}
+          >
             <a href="calendar">
               <i class="material-icons icon">event</i>
               <p class="text">Calendar</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
+
+      <button id="feedback" class="md-button flat primary" type="button">GIVE FEEDBACK</button>
 
     </div>
 
@@ -135,7 +120,7 @@
           <form id="query-group">
             <span id="input-menu" class="query-group-addon left"><i class="material-icons">menu</i></span>
             <input id="query-bar" type="text" placeholder="What can I do ya for?" aria-describedby="basic-addon1" autocomplete="off">
-            <span id="input-mic" class="query-group-addon right"><i class="material-icons">mic</i></span>
+            <span id="input-mic" class="query-group-addon right dark-dis"><i class="material-icons">mic</i></span>
             <span id="input-clear" class="query-group-addon right"><i class="material-icons">clear</i></span>
           </form>
         </div>
@@ -150,5 +135,33 @@
       </div>
     </div>
   </div>
+
+  <!-- feeedback dialog -->
+  <div id="feedback-dialog">
+    <div class="md-dialog">
+      <div class="md-card bottom-0">
+        <div class="md-card-heading default">
+          <i id="fb-clear" class="material-icons md-24 exit">clear</i>
+          <div class="title">
+            Give Us Feedback!
+            <div class="subtitle">
+              Something not working? Did Watson give a bad answer? Can we do better?
+              Tell us below and we'll work on it!
+            </div>
+          </div>
+        </div>
+        <div class="md-card-body">
+          <form id="feedback-form" name="feedback-form" action="/form/feedback" method="post">
+            <textarea id="feedback-text" name="feedback-text" style="display: none;"></textarea>
+          </form>
+          <div id="fb-text" contenteditable placeholder="Enter text here..."></div>
+        </div>
+        <div class="md-card-actions-layer">
+          <button class="md-button flat primary" type="submit" form="feedback-form">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
