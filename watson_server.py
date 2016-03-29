@@ -46,12 +46,15 @@ class Application(tornado.web.Application):
             (r'/404', fourOhFourHandler),
             # Websockets
             (r'/ws', WebSocketHandler, {'watson':watson}),
+            # Qusetion/Answer
+            (r'/qahistory', QAHandler),
             # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
             (r'/auth/register', RegisterHandler),
             # Form validation
-            (r'/form/feedback', FeedbackHandler)
+            (r'/form/feedback', FeedbackHandler),
+            (r'/(.*)', fourOhFourHandler)
         ]
         tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -123,7 +126,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             print(message)
             answer = self.watson.ask(message)
             # save to db
-
+            QAHandler.post(QAHandler, {"message":message, "answer": answer})
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
 
@@ -197,11 +200,13 @@ class FeedbackHandler(BaseHandler):
 
 
 # QA HISTORY HANDLER
-class QAHistoryHandler(BaseHandler):
+class QAHandler(BaseHandler):
     def get(self):
         user = self.get_current_user()
-        self.application.db['qa-pairs'].find({userid: user}).sort({_id:-1})
-        # Need to only get and return ten at a time wrt the latest one loaded
+        pair = self.application.db['qa-pairs'].find({'userid': user}).sort('_id', -1).limit(10)
+        print pair
+        # self.write(tornado.escape.json_encode(pair))
+        #Need to get x amount to return
 
     def post(self):
         qa = { }
@@ -211,6 +216,14 @@ class QAHistoryHandler(BaseHandler):
         qa['datetime'] = datetime.isoformat(datetime.utcnow())
 
         qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
+
+
+class Entry(tornado.web.UIModule):
+    def render(self, entry, show_comments=False):
+        return self.render_string(
+            "_answer-card.html", entry=entry)
+
+
 
 
 

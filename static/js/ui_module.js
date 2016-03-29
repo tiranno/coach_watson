@@ -1,5 +1,5 @@
 $(function () {
-    /* Side drawer functions*/
+  /* Top bar functions*/
     var drawerExpand = function() {
         $('#panel-left').addClass('expanded');
         window.setTimeout(deB,100);
@@ -18,16 +18,16 @@ $(function () {
     };
 
     /* Event listeners */
+    $('#page-mask').on('tap click', drawerClose);
+    $('#input-menu').on('tap click', drawerExpand);
+    $('#input-clear').on('tap click', inputClear);
     // Issues with sideway scrolling currently (get rid of sideways scroll)
     // $('#panel-center').on('swiperight', drawerExpand);
     // $('#panel-center').on('swipeleft', drawerClose);
-    $('#page-mask').on('tap click', drawerClose);
-    $('#input-menu').on('tap click', drawerExpand);
-
-    $('#input-clear').on('tap click', inputClear);
 
 
-    /* Dialog functions */
+
+  /* Feedback dialog functions */
     var showFeedbackDialog = function() {
         $('#feedback-dialog').addClass('visible');
     };
@@ -58,5 +58,25 @@ $(function () {
     // $('#.fb-text').change(function(){
     //   ('#feedback-text').val(("#fb-text").html());
     // });
+
+
+
+  /* Question / Answer */
+    var displayQA = function(qaArray) {
+        console.log(qaArray);
+    }
+    var loadTenQA = function() {
+        $.get( '/qahistory', function( data ) {
+            console.log(data);
+        });
+        return true;
+    };
+    // $('').on('scroll', function() {
+    //     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+    //         loadTenQA()
+    //     }
+    // })
+
+    loadTenQA();
 
 });
