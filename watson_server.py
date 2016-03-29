@@ -126,7 +126,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             print(message)
             answer = self.watson.ask(message)
             # save to db
-            QAHandler.post(QAHandler, {"message":message, "answer": answer})
+            # QAHandler.post(QAHandler, {"message":message, "answer": answer})
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
 

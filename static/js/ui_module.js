@@ -77,6 +77,6 @@ $(function () {
     //     }
     // })
 
-    loadTenQA();
+    // loadTenQA();
 
 });
