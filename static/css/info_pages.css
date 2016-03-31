@@ -293,8 +293,10 @@ body {
     position: absolute; }
     #page-content #banner img {
       width: 100%; }
-  #page-content #content-stream {
-    margin-top: 45%; }
+  #page-content #content-buffer {
+    min-height: 64px;
+    height: 15%;
+    max-height: 100px; }
 
 #footer-links {
   list-style: none;
