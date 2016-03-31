@@ -37,8 +37,10 @@ body {
     }
   }
 
-  #content-stream {
-    margin-top: 45%;
+  #content-buffer {
+    min-height: 64px;
+    height: 15%;
+    max-height: 100px;
   }
 }
 

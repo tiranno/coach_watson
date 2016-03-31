@@ -77,6 +77,8 @@ class fourOhFourHandler(BaseHandler):
 
 class IndexHandler(BaseHandler):
     def get(self):
+        if self.get_current_user() != None:
+            self.redirect('/askwatson')
         self.render('about.html')
 
     def write_error(self, status_code, **kwargs):
@@ -126,7 +128,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             print(message)
             answer = self.watson.ask(message)
             # save to db
-            # QAHandler.post(QAHandler, {"message":message, "answer": answer})
+
+            user_json = self.get_secure_cookie("user")
+            curr_user = tornado.escape.json_decode(user_json)
+
+            #QA post
+            qa = { }
+            qa['userid'] = curr_user
+            qa['question'] = message
+            qa['answer'] = answer
+            qa['datetime'] = datetime.isoformat(datetime.utcnow())
+            qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
+
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
 
@@ -203,8 +216,8 @@ class FeedbackHandler(BaseHandler):
 class QAHandler(BaseHandler):
     def get(self):
         user = self.get_current_user()
-        pair = self.application.db['qa-pairs'].find({'userid': user}).sort('_id', -1).limit(10)
-        print pair
+        pairs = self.application.db['qa-pairs'].find({'userid': user}).sort('_id', -1).limit(10)
+        print pairs
         # self.write(tornado.escape.json_encode(pair))
         #Need to get x amount to return
 
