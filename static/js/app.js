@@ -1,7 +1,7 @@
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('ws://' + window.location.host + '/ws');
+    var ws = new WebSocket('wss://' + window.location.host + '/ws');
     ws.onopen = function() {
     };
     ws.onmessage = function(evt) {
@@ -85,6 +85,7 @@ $(function () {
 
         });
     };
+
     // $('').on('scroll', function() {
     //     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
     //         loadTenQA()

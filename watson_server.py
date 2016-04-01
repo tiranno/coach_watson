@@ -248,12 +248,6 @@ class QAHandler(BaseHandler):
         qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
 
 
-class Entry(tornado.web.UIModule):
-    def render(self, entry, show_comments=False):
-        return self.render_string(
-            "_answer-card.html", entry=entry)
-
-
 
 
 
