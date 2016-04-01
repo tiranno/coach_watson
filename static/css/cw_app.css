@@ -321,7 +321,11 @@ hr {
     display: inline !important;
     position: fixed;
     top: 5px;
-    right: 5px; } }
+    right: 5px; }
+
+  #center-dialog img.watson-pic {
+    height: 24px !important;
+    width: 24px !important; } }
 #panel-left {
   height: 100vh;
   background-color: #005b64;
