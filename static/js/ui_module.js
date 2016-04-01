@@ -60,23 +60,4 @@ $(function () {
     // });
 
 
-
-  /* Question / Answer */
-    var displayQA = function(qaArray) {
-        console.log(qaArray);
-    }
-    var loadTenQA = function() {
-        $.get( '/qahistory', function( data ) {
-            console.log(data);
-        });
-        return true;
-    };
-    // $('').on('scroll', function() {
-    //     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-    //         loadTenQA()
-    //     }
-    // })
-
-    // loadTenQA();
-
 });

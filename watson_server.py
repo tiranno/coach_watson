@@ -12,6 +12,7 @@ import tornado.escape
 
 from pymongo import MongoClient
 from datetime import datetime
+from bson import ObjectId
 import bcrypt
 
 
@@ -127,21 +128,22 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if self.ws_connection:
             print(message)
             answer = self.watson.ask(message)
-            # save to db
 
-            user_json = self.get_secure_cookie("user")
-            curr_user = tornado.escape.json_decode(user_json)
+            # save to db
+            user_json = self.get_secure_cookie("userid")
+            userid = tornado.escape.json_decode(user_json)
 
             #QA post
             qa = { }
-            qa['userid'] = curr_user
+            qa['userid'] = userid
             qa['question'] = message
             qa['answer'] = answer
             qa['datetime'] = datetime.isoformat(datetime.utcnow())
-            qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
+            self.application.db['qa-pairs'].insert_one(qa)
 
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
+
 
     def on_close(self):
         print('WebSocket closed.')
@@ -157,7 +159,7 @@ class LoginHandler(BaseHandler):
         user = self.application.db['users'].find_one( {'username': email } )
 
         if user and user['password'] and bcrypt.hashpw(password.encode('utf-8'), user['password'].encode('utf-8')) == user['password']:
-            self.set_current_user(email)
+            self.set_current_user(user)
             self.redirect('/askwatson')
         else:
             error_msg = u"?error=" + tornado.escape.url_escape("incorrect login")
@@ -165,13 +167,16 @@ class LoginHandler(BaseHandler):
 
     def set_current_user(self, user):
         if user:
-            self.set_secure_cookie("user", tornado.escape.json_encode(user))
+            self.set_secure_cookie("user", tornado.escape.json_encode( user["firstname"]+" "+user["lastname"] ))
+            self.set_secure_cookie("userid", tornado.escape.json_encode( str(user["_id"]) ))
         else:
             self.clear_cookie("user")
+            self.clear_cookie("userid")
 
 class LogoutHandler(BaseHandler):
     def get(self):
         self.clear_cookie("user")
+        self.clear_cookie("userid")
         self.redirect(self.get_argument("next", "/"))
 
 class RegisterHandler(LoginHandler):
@@ -192,8 +197,9 @@ class RegisterHandler(LoginHandler):
         user['firstname']= self.get_argument('first-name','')
         user['lastname'] = self.get_argument('last-name','')
 
-        auth = self.application.db['users'].insert_one(user).inserted_id
-        self.set_current_user(email)
+        self.application.db['users'].insert_one(user)
+        user = self.application.db['users'].find_one( { 'username': email } )
+        self.set_current_user( user )
 
         self.redirect('/askwatson')
 
@@ -215,11 +221,22 @@ class FeedbackHandler(BaseHandler):
 # QA HISTORY HANDLER
 class QAHandler(BaseHandler):
     def get(self):
-        user = self.get_current_user()
-        pairs = self.application.db['qa-pairs'].find({'userid': user}).sort('_id', -1).limit(10)
-        print pairs
-        # self.write(tornado.escape.json_encode(pair))
         #Need to get x amount to return
+        user_json = self.get_secure_cookie("userid")
+        userid = tornado.escape.json_decode(user_json)
+
+        pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
+
+        p_arr = []
+        for pair in pairs:
+            p = { }
+            p['qaid'] = str( pair['_id'] )
+            p['question'] = pair['question']
+            p['answer'] = pair['answer']
+            p_arr.append(p)
+
+        self.write(tornado.escape.json_encode( p_arr ))
+
 
     def post(self):
         qa = { }
@@ -229,12 +246,6 @@ class QAHandler(BaseHandler):
         qa['datetime'] = datetime.isoformat(datetime.utcnow())
 
         qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
-
-
-class Entry(tornado.web.UIModule):
-    def render(self, entry, show_comments=False):
-        return self.render_string(
-            "_answer-card.html", entry=entry)
 
 
 
