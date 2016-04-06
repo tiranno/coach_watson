@@ -5,9 +5,7 @@ $(function () {
     ws.onopen = function() {
     };
     ws.onmessage = function(evt) {
-
       printAnswer( evt.data );
-
     }
     // Upon submission of a quesiton
     $('#query-group').submit(function(){
@@ -77,12 +75,13 @@ $(function () {
 
     var loadTenQA = function() {
         $.get( '/qahistory', function( data ) {
-            dataArr = JSON.parse( data );
-            dataArr.reverse();
-            for (var i = 0; i < dataArr.length; i++) {
-                printQA( dataArr[i] );
+            if (!!data) {
+                dataArr = JSON.parse( data );
+                dataArr.reverse();
+                for (var i = 0; i < dataArr.length; i++) {
+                    printQA( dataArr[i] );
+                }
             }
-
         });
     };
 

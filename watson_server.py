@@ -25,7 +25,7 @@ class Application(tornado.web.Application):
         # Open connection to Mongo DB
         dbuser = 'HerokuWatson'
         dbpass = 'hweartoskoun'
-        client = MongoClient('mongodb://'+dbuser+':'+dbpass+'@ds023458.mlab.com:23458/heroku_6f2n4wp9')
+        client = MongoClient('mongodb://' + dbuser + ':' + dbpass + '@ds023458.mlab.com:23458/heroku_6f2n4wp9')
         self.db = client.heroku_6f2n4wp9
 
         # Server settings
@@ -43,6 +43,7 @@ class Application(tornado.web.Application):
             (r'/', IndexHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
+            # (r'/workout/add', WorkoutAddHandler),
             (r'/nutrition', NutritionHandler),
             (r'/404', fourOhFourHandler),
             # Websockets
@@ -128,18 +129,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         if self.ws_connection:
             print(message)
             answer = self.watson.ask(message)
-
             # save to db
             user_json = self.get_secure_cookie("userid")
-            userid = tornado.escape.json_decode(user_json)
-
-            #QA post
-            qa = { }
-            qa['userid'] = userid
-            qa['question'] = message
-            qa['answer'] = answer
-            qa['datetime'] = datetime.isoformat(datetime.utcnow())
-            self.application.db['qa-pairs'].insert_one(qa)
+            if user_json:
+                userid = tornado.escape.json_decode(user_json)
+                #QA post
+                qa = { }
+                qa['userid'] = userid
+                qa['question'] = message
+                qa['answer'] = answer
+                qa['datetime'] = datetime.isoformat(datetime.utcnow())
+                print 'y'
+                self.application.db['qa-pairs'].insert_one(qa)
 
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
@@ -223,19 +224,19 @@ class QAHandler(BaseHandler):
     def get(self):
         #Need to get x amount to return
         user_json = self.get_secure_cookie("userid")
-        userid = tornado.escape.json_decode(user_json)
+        if user_json:
+            userid = tornado.escape.json_decode(user_json)
 
-        pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
+            pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
 
-        p_arr = []
-        for pair in pairs:
-            p = { }
-            p['qaid'] = str( pair['_id'] )
-            p['question'] = pair['question']
-            p['answer'] = pair['answer']
-            p_arr.append(p)
-
-        self.write(tornado.escape.json_encode( p_arr ))
+            p_arr = []
+            for pair in pairs:
+                p = { }
+                p['qaid'] = str( pair['_id'] )
+                p['question'] = pair['question']
+                p['answer'] = pair['answer']
+                p_arr.append(p)
+            self.write(tornado.escape.json_encode( p_arr ))
 
 
     def post(self):
