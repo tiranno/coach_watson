@@ -119,14 +119,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print('WebSocket opened.')
 
     def check_origin(self, origin):
-        return True
+        print(origin)
 
     def initialize(self, watson):
         self.watson = watson
 
     def on_message(self, message):
+
+
         if self.ws_connection:
             print(message)
+
+            # add timeout?
             answer = self.watson.ask(message)
 
             # save to db
@@ -147,6 +151,12 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         print('WebSocket closed.')
+
+    def ping(self):
+        pass
+
+    def on_pong(self):
+        pass
 
 
 # USER AUTHENTICATION AND RE.GISTRATION
