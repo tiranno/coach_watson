@@ -1,6 +1,8 @@
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
+    var askWatsonBool = window.location.pathname;
+    console.log(askWatsonBool);
     var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
       // console.log(ws);
@@ -14,10 +16,6 @@ $(function () {
 
     // Upon submission of a quesiton
     $('#query-group').submit(function(){
-        if( window.location.pathname !== '/askwatson') {
-            window.location = window.location.host + '/askwatson';
-        }
-
         var question_text = $('#query-bar').val();
         ws.send(question_text);
         $('#query-bar').val('');
@@ -31,7 +29,7 @@ $(function () {
 
 
   /* Question / Answer */
-    var printQuestion = function ( question_text ) {
+    var printQuestion = function ( question_text, pend ) {
         var question = $('<div />', {
             'class': 'col-xs-12'
         });
@@ -43,8 +41,14 @@ $(function () {
             text: question_text
         }))
         var line_break = $('<hr/>')
-        $('#center-dialog').prepend(line_break);
-        $('#center-dialog').prepend(question);
+
+        if( pend === 'append'){
+            $('#center-dialog').append(question);
+            $('#center-dialog').append(line_break);
+        } else {
+            $('#center-dialog').prepend(line_break);
+            $('#center-dialog').prepend(question);
+        }
 
         // Unhide the center-dialog and hide the placeholder
         if(!$('#center-dialog').hasClass('visible')) {
@@ -53,7 +57,7 @@ $(function () {
         $('#no-content').addClass('invisible');
     }
 
-    var printAnswer = function ( answer_text ) {
+    var printAnswer = function ( answer_text, pend ) {
         var answer = $('<div />', {
             'class': 'col-xs-12'
         });
@@ -74,30 +78,32 @@ $(function () {
                 text: answer_text
             }))
         }
-
-        $('#center-dialog').prepend(answer);
+        if( pend === 'append'){
+            $('#center-dialog').append(answer);
+        } else {
+            $('#center-dialog').prepend(answer);
+        }
     }
 
     var printQA = function ( qapair ) {
-        printQuestion( qapair['question'] );
-        printAnswer( qapair['answer'] );
+        printAnswer( qapair['answer'], 'append' );
+        printQuestion( qapair['question'], 'append' );
     }
 
-    var loadTenQA = function() {
-        $.get( '/qahistory', function( data ) {
+    var loadTenQA = function( id ) {
+        $.get( '/qahistory', { fromid: id } )
+        .done ( function( data ) {
             dataArr = JSON.parse( data );
-            dataArr.reverse();
             for (var i = 0; i < dataArr.length; i++) {
                 printQA( dataArr[i] );
             }
-
         });
     };
 
-    // $('').on('scroll', function() {
-    //     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-    //         loadTenQA()
-    //     }
-    // })
+    $('#cw-app-content').on('scroll', function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            loadTenQA()
+        }
+    })
     loadTenQA();
 });

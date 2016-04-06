@@ -19,8 +19,6 @@ import bcrypt
 # SERVER APPLICATION
 class Application(tornado.web.Application):
     def __init__(self):
-        # Global Variables
-
 
         # Open connection to Mongo DB
         dbuser = 'HerokuWatson'
