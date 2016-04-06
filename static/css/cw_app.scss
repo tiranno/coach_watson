@@ -19,6 +19,9 @@ hr {
 .visible {
   display: block !important;
 }
+.invisible {
+  display: none !important;
+}
 
 
 /*Main content styles*/
@@ -170,13 +173,6 @@ hr {
     border: none;
     outline: none;
     background: transparent;
-
-    &:focus + #input-mic {
-      display: none;
-    }
-    &:focus + #input-mic + #input-clear {
-      display: block;
-    }
   }
 }
 

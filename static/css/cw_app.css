@@ -285,6 +285,9 @@ hr {
 .visible {
   display: block !important; }
 
+.invisible {
+  display: none !important; }
+
 /*Main content styles*/
 @media screen and (max-width: 767px) {
   #panel-left {
@@ -407,10 +410,6 @@ hr {
     border: none;
     outline: none;
     background: transparent; }
-    #query-group input:focus + #input-mic {
-      display: none; }
-    #query-group input:focus + #input-mic + #input-clear {
-      display: block; }
 
 #cw-app-content {
   height: calc(100vh - 64px);

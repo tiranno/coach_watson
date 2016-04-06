@@ -1,14 +1,23 @@
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('wss://' + window.location.host + '/ws');
+    var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
+      // console.log(ws);
     };
     ws.onmessage = function(evt) {
-      printAnswer( evt.data );
+      printAnswer( JSON.parse(evt.data) );
     }
+    ws.onclose = function(evt) {
+      ws = new WebSocket('ws://' + window.location.host + '/ws');
+    }
+
     // Upon submission of a quesiton
     $('#query-group').submit(function(){
+        if( window.location.pathname !== '/askwatson') {
+            window.location = window.location.host + '/askwatson';
+        }
+
         var question_text = $('#query-bar').val();
         ws.send(question_text);
         $('#query-bar').val('');
@@ -19,6 +28,7 @@ $(function () {
         $('#cw-app-content').scrollTop(0);
         return false;
     });
+
 
   /* Question / Answer */
     var printQuestion = function ( question_text ) {
