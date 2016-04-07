@@ -248,6 +248,17 @@ hr {
   }
 }
 
+// nutrition
+.nutrition-header {
+  .icon {
+    position: absolute;
+    line-height: 0.9;
+  }
+  .text {
+    padding: 0 0 0 36px;
+  }
+}
+
 
 #feedback-dialog {
   width: 100vw;
