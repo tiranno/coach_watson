@@ -56,9 +56,11 @@ $(function () {
             'class': 'md-card card-answer bottom-16'
         }));
 
+        var script = answer_text;
         if(answer_text[0] === '<') {
             answer.children(0).append($('<div class="md-card-heading default">I think this might work for you ...</div>'));
             answer.children(0).append($(answer_text));
+            script = 'I think this might work for you...'
         } else {
             answer.children(0).append($('<div />', {
                 'class': 'md-card-body' ,
@@ -67,6 +69,7 @@ $(function () {
         }
 
         $('#center-dialog').prepend(answer);
+        answer.click(function() {responsiveVoice.speak(script);});
     }
 
     var printQA = function ( qapair ) {
@@ -92,7 +95,6 @@ $(function () {
     //     }
     // })
     loadTenQA();
-
 
    ////////////////////////////////////////////
   //                                        //

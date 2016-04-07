@@ -60,6 +60,12 @@ class Watson:
         token = r.text
         return token
 
+    @staticmethod
+    def get_T2S_token():
+        auth = requests.auth.HTTPBasicAuth('5f6e100d-796c-4e85-879f-671b96332e0e', 'JAiEdmecnpzJ') 
+        token = ''
+        return token
+
 def main(question, user, password):
     watson = Watson(user, password)
     print(watson.get_S2T_token())
