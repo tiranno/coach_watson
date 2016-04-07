@@ -85,6 +85,7 @@ $(function () {
         } else {
             $('#center-dialog').prepend(answer);
         }
+        answer.click(function() {responsiveVoice.speak(script);});
     }
 
     var printQA = function ( qapair ) {
@@ -109,7 +110,7 @@ $(function () {
     })
     loadTenQA();
 
-    $('#input-mic').on('click', function() {responsiveVoice.speak(script);});
+
 
 
    ////////////////////////////////////////////

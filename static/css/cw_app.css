@@ -500,11 +500,13 @@ hr {
 #workouts-list input {
   margin-top: -16px; }
 
-.nutrition-header .icon {
-  position: absolute;
-  line-height: 0.9; }
-.nutrition-header .text {
-  padding: 0 0 0 36px; }
+.nutrition-header {
+  display: block; }
+  .nutrition-header .icon {
+    position: absolute;
+    line-height: 0.9; }
+  .nutrition-header .text {
+    padding: 0 0 0 36px; }
 
 #feedback-dialog {
   width: 100vw;
