@@ -50,6 +50,8 @@ class Application(tornado.web.Application):
             (r'/ws', WebSocketHandler, {'watson':watson}),
             # Qusetion/Answer
             (r'/qahistory', QAHandler),
+            # S2T
+            (r'/speech_to_text', S2THandler),
             # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
@@ -248,7 +250,10 @@ class QAHandler(BaseHandler):
 
         qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
 
-
+# SPEECH TO TEXT HANDLER
+class S2THandler(BaseHandler):
+    def get(self):
+        self.write(Watson.get_S2T_token())
 
 
 

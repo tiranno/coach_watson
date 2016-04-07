@@ -20,6 +20,8 @@
   <!-- My files -->
   <script src="../static/js/app.js"></script>
   <script src="../static/js/ui_module.js"></script>
+  <script src="../static/js/recorderjs/recorder.js"></script>
+  <!-- <script src="../static/js/speech_to_text.js"></script> -->
   <link rel="stylesheet" href="../static/css/cw_app.css">
 </head>
 
@@ -120,12 +122,12 @@
           <form id="query-group">
             <span id="input-menu" class="query-group-addon left"><i class="material-icons">menu</i></span>
             <input id="query-bar" type="text" placeholder="What can I do ya for?" aria-describedby="basic-addon1" autocomplete="off">
-            <span id="input-mic" class="query-group-addon right dark-dis"><i class="material-icons">mic</i></span>
+            <canvas id="analyser" class="query-group-addon right" width="48" height="29"></canvas>
+            <a id="record" href="#" onclick="toggleRecordingGlobal(this)"><span id="input-mic" class="query-group-addon right dark-dis"><i class="material-icons">mic</i></span></a>
             <span id="input-clear" class="query-group-addon right"><i class="material-icons">clear</i></span>
           </form>
         </div>
       </div>
-
       <!-- Center content / Dialog -->
       <div id="cw-app-content" class="row">
 
