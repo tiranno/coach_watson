@@ -16,7 +16,7 @@
   <script src="../static/js/jq-mobile-events.js"></script>
   <!-- fonts -->
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <!-- My files -->
   <script src="../static/js/app.js"></script>
   <script src="../static/js/ui_module.js"></script>
@@ -34,15 +34,19 @@
       </div>
 
       <div id="account" class="row">
-        <div id="user-pic" class="col-xs-12">
-          <i class="material-icons mi-48">account_circle</i>
-        </div>
-        <div class="col-xs-12">
-          <h4 class="user-name">
-            {{ escape(current_user) }}
-          </h4>
-          <!-- <i class="material-icons carrot">expand_more</i> -->
-        </div>
+        <a id="profile" href="/profile">
+          <div>
+            <div id="user-pic" class="col-xs-12">
+              <i class="material-icons mi-48">account_circle</i>
+            </div>
+            <div class="col-xs-12">
+              <h4 class="user-name">
+                {{ escape(current_user) }}
+              </h4>
+              <!-- <i class="material-icons carrot">expand_more</i> -->
+            </div>
+          </div>
+        </a>
         <div>
           <form id="logout" style="display:none" action="/auth/logout" method="get"></form>
           <button class="md-button flat light-sec" type="submit" name="button" form="logout" style="float:right">SIGN OUT</button>
