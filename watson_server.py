@@ -38,10 +38,10 @@ class Application(tornado.web.Application):
         )
         handlers = [
             # Main Pages
-            (r'/', IndexHandler),
+            (r'/', AboutHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
-            # (r'/workout/', WorkoutAddHandler),
+            (r'/workout/day', WorkoutDayHandler),
             (r'/nutrition', NutritionHandler),
             (r'/profile', ProfileHandler),
             (r'/404', fourOhFourHandler),
@@ -69,6 +69,13 @@ class BaseHandler(tornado.web.RequestHandler):
         else:
           return None
 
+    def get_current_userid(self):
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+          return tornado.escape.json_decode(user_json)
+        else:
+          return None
+
 
 ### 404 page and related handlers ###
 class fourOhFourHandler(BaseHandler):
@@ -78,9 +85,9 @@ class fourOhFourHandler(BaseHandler):
 
 
 ### INFORMATION pages and related handlers ###
-class IndexHandler(BaseHandler):
+class AboutHandler(BaseHandler):
     def get(self):
-        if self.get_current_user() != None:
+        if self.get_current_userid() != None:
             self.redirect('/askwatson')
         self.render('about.html')
 
@@ -120,7 +127,7 @@ class QAHandler(BaseHandler):
 
     def post(self):
         qa = { }
-        qa['userid'] = self.get_current_user()
+        qa['userid'] = self.get_current_userid()
         qa['question'] = message
         qa['answer'] = answer
         qa['datetime'] = datetime.isoformat(datetime.utcnow())
@@ -178,13 +185,24 @@ class WorkoutHandler(BaseHandler):
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
-# workout plan handler
-class WorkoutPlanHandler(BaseHandler):
+# workout day handler
+class WorkoutDayHandler(WorkoutHandler):
     def get(self):
         user_json = self.get_secure_cookie("userid")
         if user_json:
-            user_id = tornado.escape.json_decode(user_json)
-            pairs = self.application.db['qa-pairs'].find({'userid': userid})
+            userid = tornado.escape.json_decode(user_json)
+            dayid = self.get_argument('dayid','')
+            day_plan = self.application.db['workout-plans'].find({'userid': userid, 'dayid': dayid})
+
+            exer_arr = []
+            for exercise in day_plan:
+                e = { }
+                e['exerid'] = str( exercise['_id'] )
+                e['name'] = exercise['name']
+                e['amount'] = exercise['amount']
+                exer_arr.append(e)
+
+            self.write(tornado.escape.json_encode( exer_arr ))
 
 
     def post(self):
@@ -193,8 +211,8 @@ class WorkoutPlanHandler(BaseHandler):
         exer = {}
         exer['userid'] = tornado.escape.json_decode(user_json)
         exer['dayid'] = self.get_argument('dayid','')
-        exer['exer-name'] = self.get_argument('exer-name','')
-        exer['exer-amount'] = self.get_argument('exer-amnt','')
+        exer['name'] = self.get_argument('exer-name','')
+        exer['amount'] = self.get_argument('exer-amnt','')
 
         self.application.db['workout-plans'].insert_one(exer)
 
@@ -221,14 +239,26 @@ class ProfileHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         title = "Profile"
-        self.render('app.html', content='partials/_profile.html', title=title)
+
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+            userid = tornado.escape.json_decode(user_json)
+            user = self.application.db['users'].find_one({'_id': ObjectId(userid)})
+            email = user['username']
+            first = user['firstname']
+            last = user['lastname']
+
+            self.render('app.html', content='partials/_profile.html', title=title,
+                first=first, last=last, email=email)
+        else:
+            return None
 
     def post(self):
         email = self.get_argument('user-name','')
 
         user = { }
 
-        self.application.db['user_profiles'].update()
+        self.application.db['users'].update()
         self.redirect('/askwatson')
 
     def write_error(self, status_code, **kwargs):
@@ -296,7 +326,7 @@ class FeedbackHandler(BaseHandler):
         recieved_text = self.get_argument('feedback-text','')
 
         feedback = { }
-        feedback['userid'] = self.get_current_user()
+        feedback['userid'] = self.get_current_userid()
         feedback['text'] = recieved_text
         feedback['url'] = self.request.uri
 
