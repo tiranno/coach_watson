@@ -60,7 +60,7 @@ hr {
 
   #query-group {
     input {
-      padding: 0 64px !important;
+      padding: 0px 112px 0px 64px !important;
     }
     #input-menu {
       display: table-cell !important;
@@ -302,4 +302,29 @@ hr {
   width: auto;
   max-width: 80%;
   float: left;
+}
+
+/* S2T elements */
+#query-group #analyser {
+    display: inline;
+    background: #ffffff;
+    right: 49px;
+    top: 10px;
+    // box-shadow: 0px 0px 10px blue;
+}
+
+#record.recording #input-mic .material-icons{
+    color: #333;
+    background: red;
+    background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
+    background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
+    background: radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
+}
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../res/material_icons.woff2) format('woff2');
 }

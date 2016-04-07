@@ -49,6 +49,8 @@ class Application(tornado.web.Application):
             (r'/ws', WebSocketHandler, {'watson':watson}),
             # Qusetion/Answer
             (r'/qahistory', QAHandler),
+            # S2T
+            (r'/speech_to_text', S2THandler),
             # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
@@ -134,6 +136,11 @@ class QAHandler(BaseHandler):
 
         qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
 
+# Speech-to-text handler
+class S2THandler(BaseHandler):
+    def get(self):
+        self.write(Watson.get_S2T_token())
+
 # websocket handler
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -150,13 +157,14 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             answer = self.watson.ask(message)
             # save to db
             user_json = self.get_secure_cookie("userid")
-            if user_json:
+            if user_json and answer:
                 userid = tornado.escape.json_decode(user_json)
                 #QA post
                 qa = { }
                 qa['userid'] = userid
                 qa['question'] = message
                 qa['answer'] = answer
+
                 qa['datetime'] = datetime.isoformat(datetime.utcnow())
                 print 'y'
                 self.application.db['qa-pairs'].insert_one(qa)
@@ -332,7 +340,6 @@ class FeedbackHandler(BaseHandler):
 
         fbid = self.application.db['feedback'].insert_one(feedback).inserted_id
         print('feedback recieved with id' + str(fbid))
-
 
 
 
