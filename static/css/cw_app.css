@@ -1,3 +1,32 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot);
+  /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(../fonts/MaterialIcons-Regular.woff2) format("woff2"), url(../fonts/MaterialIcons-Regular.woff) format("woff"), url(../fonts/MaterialIcons-Regular.ttf) format("truetype"); }
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga'; }
+
 /*
   Material Design components
 */
@@ -147,15 +176,16 @@
       max-width: 264px;
       height: 48px;
       margin: 0;
-      padding: 0px 12px;
       display: inline-block;
       line-height: 46px;
       text-transform: uppercase;
       font-size: 14px; }
       .md-tabs ul li a {
-        padding: 16px 0;
+        padding: 16px 12px;
+        color: rgba(0, 0, 0, 0.87);
         vertical-align: middle;
-        text-decoration: none; }
+        text-decoration: none;
+        cursor: pointer; }
     .md-tabs ul span.indicator {
       min-width: 72px;
       background-color: #f6b2b5;
@@ -216,6 +246,7 @@
 input, textarea, div[contenteditable] {
   width: 100%;
   height: 36px;
+  padding-bottom: 1px;
   border: none;
   border-bottom: 1px solid rgba(117, 117, 117, 0.15);
   background-color: transparent;
@@ -224,7 +255,7 @@ input, textarea, div[contenteditable] {
   font-size: 15px;
   color: rgba(0, 0, 0, 0.87);
   cursor: text; }
-  input.active, input:focus, textarea.active, textarea:focus, div[contenteditable].active, div[contenteditable]:focus {
+  input:active, input:focus, textarea:active, textarea:focus, div[contenteditable]:active, div[contenteditable]:focus {
     outline: none;
     border-bottom: 2px solid aqua;
     box-shadow: none; }
@@ -279,11 +310,16 @@ body {
     overflow-y: hidden; }
 
 hr {
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.12); }
+  width: 94%;
+  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 0;
+  border-left: 0; }
 
 .visible {
   display: block !important; }
+
+.invisible {
+  display: none !important; }
 
 /*Main content styles*/
 @media screen and (max-width: 767px) {
@@ -313,7 +349,7 @@ hr {
     left: 0; }
 
   #query-group input {
-    padding: 0 64px !important; }
+    padding: 0px 112px 0px 64px !important; }
   #query-group #input-menu {
     display: table-cell !important; }
   #query-group #drawer-exit {
@@ -321,7 +357,11 @@ hr {
     display: inline !important;
     position: fixed;
     top: 5px;
-    right: 5px; } }
+    right: 5px; }
+
+  #center-dialog img.watson-pic {
+    height: 24px !important;
+    width: 24px !important; } }
 #panel-left {
   height: 100vh;
   background-color: #005b64;
@@ -343,6 +383,16 @@ hr {
         text-decoration: none; }
   #panel-left #account {
     padding: 8px 0px; }
+    #panel-left #account #profile {
+      width: 100%;
+      height: 100%;
+      color: white;
+      text-decoration: none;
+      display: inline-block; }
+      #panel-left #account #profile:hover {
+        background-color: #0097A7; }
+      #panel-left #account #profile:focus, #panel-left #account #profile:active {
+        background-color: #0092a2; }
     #panel-left #account #user-pic {
       height: 48px; }
     #panel-left #account .carrot {
@@ -403,10 +453,6 @@ hr {
     border: none;
     outline: none;
     background: transparent; }
-    #query-group input:focus + #input-mic {
-      display: none; }
-    #query-group input:focus + #input-mic + #input-clear {
-      display: block; }
 
 #cw-app-content {
   height: calc(100vh - 64px);
@@ -443,6 +489,23 @@ hr {
   #no-content.invisible {
     display: none; }
 
+#workouts-list ul li {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12); }
+  #workouts-list ul li:first-child {
+    color: rgba(0, 0, 0, 0.54); }
+  #workouts-list ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.06); }
+#workouts-list ul li a {
+  color: black; }
+#workouts-list input {
+  margin-top: -16px; }
+
+.nutrition-header .icon {
+  position: absolute;
+  line-height: 0.9; }
+.nutrition-header .text {
+  padding: 0 0 0 36px; }
+
 #feedback-dialog {
   width: 100vw;
   height: 100vh;
@@ -477,5 +540,26 @@ hr {
   width: auto;
   max-width: 80%;
   float: left; }
+
+/* S2T elements */
+#query-group #analyser {
+  display: inline;
+  background: #ffffff;
+  right: 49px;
+  top: 10px; }
+
+#record.recording #input-mic .material-icons {
+  color: #333;
+  background: red;
+  background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%, white 75%, white 100%, #7db9e8 100%);
+  background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%, white 75%, white 100%, #7db9e8 100%);
+  background: radial-gradient(center, ellipse cover, #ff0000 0%, white 75%, white 100%, #7db9e8 100%); }
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(../res/material_icons.woff2) format("woff2"); }
 
 /*# sourceMappingURL=cw_app.css.map */
