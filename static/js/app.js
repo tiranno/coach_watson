@@ -2,7 +2,9 @@ var toggleRecordingGlobal = null;   // Uglyish workaround
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('wss://' + window.location.host + '/ws');
+    var askWatsonBool = window.location.pathname;
+    console.log(askWatsonBool);
+    var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
       // console.log(ws);
     };
@@ -79,12 +81,12 @@ $(function () {
                 text: answer_text
             }))
         }
-
         if( pend === 'append'){
             $('#center-dialog').append(answer);
         } else {
             $('#center-dialog').prepend(answer);
         }
+
         answer.click( function() {
           if( responsiveVoice.isPlaying() ) {
               responsiveVoice.cancel();

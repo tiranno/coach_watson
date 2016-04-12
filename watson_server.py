@@ -150,6 +150,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.watson = watson
 
     def on_message(self, message):
+
+
         if self.ws_connection:
             print(message)
 
@@ -180,7 +182,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_pong(self):
         pass
-
 
 
 ### WORKOUT page and related handlers ###
