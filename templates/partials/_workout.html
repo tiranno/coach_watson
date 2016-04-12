@@ -1,3 +1,5 @@
+<script src="../static/js/workout.js"></script>
+
 <div class="center-wrapper">
 
     <div class="md-card">
@@ -12,25 +14,25 @@
           <ul>
             <!-- select the day that is active -->
             <li>
-              <a href="">Monday</a>
+              <a id="0">Monday</a>
             </li>
             <li>
-              <a href="">Tuesday</a>
+              <a id="1">Tuesday</a>
             </li>
             <li>
-              <a href="">Wednesday</a>
+              <a id="2">Wednesday</a>
             </li>
             <li>
-              <a href="">Thursday</a>
+              <a id="3">Thursday</a>
             </li>
             <li>
-              <a href="">Friday</a>
+              <a id="4">Friday</a>
             </li>
             <li>
-              <a href="">Saturday</a>
+              <a id="5">Saturday</a>
             </li>
             <li>
-              <a href="">Sunday</a>
+              <a id="6">Sunday</a>
             </li>
             <span class="indicator"></span>
           </ul>
@@ -40,33 +42,80 @@
         <!-- warm up -->
 
 
+        <div id="workouts-list" class="md-list">
+          <ul class="sparse">
+            <!-- labels -->
+            <li>
+              <div class="col-xs-4">
+                Exercise
+              </div>
+              <div class="col-xs-5">
+                Sets / Reps / Time
+              </div>
+              <div class="col-xs-3">
+                <button id="add-workout" class="md-button flat" style="float:right;">
+                  <i class="material-icons">note_add</i>
+                </button>
+              </div>
+            </li>
 
-        <!-- daily workout -->
-        <!-- insert table/list of day's active workouts -->
-        <div class="table-responsive">
-          <table class="md-table">
-            <thead>
-              <tr>
-                <th>Exercise</th>
-                <th>Sets</th>
-                <th>Reps</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Crunches</td>
-                <td class="numeric">3</td>
-                <td class="numeric">25</td>
-              </tr>
-              <tr>
-                <td>Planks</td>
-                <td class="numeric">3</td>
-                <td class="numeric">1 minute</td>
-              </tr>
-            </tbody>
-          </table>
+            <!-- workout -->
+            <li>
+              <!-- normal -->
+              <a>
+                <div class="col-xs-4">
+                  Crunches
+                </div>
+                <div class="col-xs-5">
+                  6-7 reps x 3 sets
+                </div>
+                <div class="col-xs-3">
+                  <button class="md-button flat" style="float:right;">
+                    <i class="material-icons">mode_edit</i>
+                  </button>
+                </div>
+              </a>
+
+              <!-- edit mode -->
+              <!-- <a>
+                <form action="">
+                  <div class="col-xs-4">
+                    <input name="exer-name" placeholder="Name" type="text">
+                  </div>
+                  <div class="col-xs-5">
+                    <input name="exer-amnt" placeholder="Amount" type="text">
+                  </div>
+                  <div class="col-xs-3">
+                    <button class="md-button flat" style="float:right;">
+                      <i class="material-icons">cancel</i>
+                    </button>
+                    <button class="md-button flat" style="float:right;">
+                      <i class="material-icons">check</i>
+                    </button>
+                  </div>
+                </form>
+              </a> -->
+
+            </li>
+
+            <!-- workout -->
+            <li>
+              <a>
+                <div class="col-xs-4">
+                  Planks
+                </div>
+                <div class="col-xs-5">
+                  1 minute x 3 sets
+                </div>
+                <div class="col-xs-3">
+                  <button class="md-button flat" style="float:right;">
+                    <i class="material-icons">mode_edit</i>
+                  </button>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
-
 
         <!-- cool down -->
 

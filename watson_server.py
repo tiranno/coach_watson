@@ -23,7 +23,7 @@ class Application(tornado.web.Application):
         # Open connection to Mongo DB
         dbuser = 'HerokuWatson'
         dbpass = 'hweartoskoun'
-        client = MongoClient('mongodb://'+dbuser+':'+dbpass+'@ds023458.mlab.com:23458/heroku_6f2n4wp9')
+        client = MongoClient('mongodb://' + dbuser + ':' + dbpass + '@ds023458.mlab.com:23458/heroku_6f2n4wp9')
         self.db = client.heroku_6f2n4wp9
 
         # Server settings
@@ -38,15 +38,19 @@ class Application(tornado.web.Application):
         )
         handlers = [
             # Main Pages
-            (r'/', IndexHandler),
+            (r'/', AboutHandler),
             (r'/askwatson', QueryPageHandler),
             (r'/workout', WorkoutHandler),
+            (r'/workout/day', WorkoutDayHandler),
             (r'/nutrition', NutritionHandler),
+            (r'/profile', ProfileHandler),
             (r'/404', fourOhFourHandler),
             # Websockets
             (r'/ws', WebSocketHandler, {'watson':watson}),
             # Qusetion/Answer
             (r'/qahistory', QAHandler),
+            # S2T
+            (r'/speech_to_text', S2THandler),
             # User auth post reqs
             (r'/auth/login', LoginHandler),
             (r'/auth/logout', LogoutHandler),
@@ -58,7 +62,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
-# Base Handler
+### BASE HANDLER ###
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         user_json = self.get_secure_cookie("user")
@@ -67,22 +71,33 @@ class BaseHandler(tornado.web.RequestHandler):
         else:
           return None
 
+    def get_current_userid(self):
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+          return tornado.escape.json_decode(user_json)
+        else:
+          return None
 
-# PAGE REQUEST HANDLERS
+
+### 404 page and related handlers ###
 class fourOhFourHandler(BaseHandler):
     def prepare(self):
         self.set_status(404)
         self.render('404.html')
 
-class IndexHandler(BaseHandler):
+
+### INFORMATION pages and related handlers ###
+class AboutHandler(BaseHandler):
     def get(self):
-        if self.get_current_user() != None:
+        if self.get_current_userid() != None:
             self.redirect('/askwatson')
         self.render('about.html')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
+
+### ASK WATSON page and related handlers ###
 class QueryPageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
@@ -92,32 +107,44 @@ class QueryPageHandler(BaseHandler):
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
 
-class WorkoutHandler(BaseHandler):
-    @tornado.web.authenticated
+# QA history handler
+class QAHandler(BaseHandler):
     def get(self):
-        title = "Workout Plan"
-        self.render('app.html', content='partials/_workout.html', title=title)
+        #Need to get x amount to return
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+            userid = tornado.escape.json_decode(user_json)
 
-    def write_error(self, status_code, **kwargs):
-        self.write('Oops, a %d error occurred!\n' % status_code)
+            pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
 
-class NutritionHandler(BaseHandler):
-    @tornado.web.authenticated
+            p_arr = []
+            for pair in pairs:
+                p = { }
+                p['qaid'] = str( pair['_id'] )
+                p['question'] = pair['question']
+                p['answer'] = pair['answer']
+                p_arr.append(p)
+            self.write(tornado.escape.json_encode( p_arr ))
+
+
+    def post(self):
+        qa = { }
+        qa['userid'] = self.get_current_userid()
+        qa['question'] = message
+        qa['answer'] = answer
+        qa['datetime'] = datetime.isoformat(datetime.utcnow())
+
+        qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
+
+# Speech-to-text handler
+class S2THandler(BaseHandler):
     def get(self):
-        title = "Nutrition Plan"
-        self.render('app.html', content='partials/_nutrition.html', title=title)
+        self.write(Watson.get_S2T_token())
 
-    def write_error(self, status_code, **kwargs):
-        self.write('Oops, a %d error occurred!\n' % status_code)
-
-
-# WEBSOCKET HANDLERS
+# websocket handler
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print('WebSocket opened.')
-
-    def check_origin(self, origin):
-        print(origin)
 
     def initialize(self, watson):
         self.watson = watson
@@ -130,22 +157,22 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
             # add timeout?
             answer = self.watson.ask(message)
-
             # save to db
             user_json = self.get_secure_cookie("userid")
-            userid = tornado.escape.json_decode(user_json)
+            if user_json and answer:
+                userid = tornado.escape.json_decode(user_json)
+                #QA post
+                qa = { }
+                qa['userid'] = userid
+                qa['question'] = message
+                qa['answer'] = answer
 
-            #QA post
-            qa = { }
-            qa['userid'] = userid
-            qa['question'] = message
-            qa['answer'] = answer
-            qa['datetime'] = datetime.isoformat(datetime.utcnow())
-            self.application.db['qa-pairs'].insert_one(qa)
+                qa['datetime'] = datetime.isoformat(datetime.utcnow())
+                print 'y'
+                self.application.db['qa-pairs'].insert_one(qa)
 
             # send to user
             self.write_message(tornado.escape.json_encode(answer))
-
 
     def on_close(self):
         print('WebSocket closed.')
@@ -157,7 +184,97 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         pass
 
 
-# USER AUTHENTICATION AND RE.GISTRATION
+### WORKOUT page and related handlers ###
+class WorkoutHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        title = "Workout Plan"
+        self.render('app.html', content='partials/_workout.html', title=title)
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
+
+# workout day handler
+class WorkoutDayHandler(WorkoutHandler):
+    def get(self):
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+            userid = tornado.escape.json_decode(user_json)
+            dayid = self.get_argument('dayid','')
+            day_plan = self.application.db['workout-plans'].find({'userid': userid, 'dayid': dayid})
+
+            exer_arr = []
+            for exercise in day_plan:
+                e = { }
+                e['exerid'] = str( exercise['_id'] )
+                e['name'] = exercise['name']
+                e['amount'] = exercise['amount']
+                exer_arr.append(e)
+
+            self.write(tornado.escape.json_encode( exer_arr ))
+
+
+    def post(self):
+        user_json = self.get_secure_cookie("userid")
+
+        exer = {}
+        exer['userid'] = tornado.escape.json_decode(user_json)
+        exer['dayid'] = self.get_argument('dayid','')
+        exer['name'] = self.get_argument('exer-name','')
+        exer['amount'] = self.get_argument('exer-amnt','')
+
+        self.application.db['workout-plans'].insert_one(exer)
+
+    def put(self):
+        pass
+
+    def delete(self):
+        pass
+
+
+### NUTRITION page and related handlers ###
+class NutritionHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        title = "Nutrition Plan"
+        self.render('app.html', content='partials/_nutrition.html', title=title)
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
+
+
+### PROFILE page and related handles ###
+class ProfileHandler(BaseHandler):
+    @tornado.web.authenticated
+    def get(self):
+        title = "Profile"
+
+        user_json = self.get_secure_cookie("userid")
+        if user_json:
+            userid = tornado.escape.json_decode(user_json)
+            user = self.application.db['users'].find_one({'_id': ObjectId(userid)})
+            email = user['username']
+            first = user['firstname']
+            last = user['lastname']
+
+            self.render('app.html', content='partials/_profile.html', title=title,
+                first=first, last=last, email=email)
+        else:
+            return None
+
+    def post(self):
+        email = self.get_argument('user-name','')
+
+        user = { }
+
+        self.application.db['users'].update()
+        self.redirect('/askwatson')
+
+    def write_error(self, status_code, **kwargs):
+        self.write('Oops, a %d error occurred!\n' % status_code)
+
+
+### USER AUTHENTICATION and REGISTRATION handlers ###
 class LoginHandler(BaseHandler):
     def post(self):
         email = self.get_argument('user-name','')
@@ -212,50 +329,18 @@ class RegisterHandler(LoginHandler):
         self.redirect('/askwatson')
 
 
-# FEEDBACK HANDLER
+### FEEDBACK HANDLER ###
 class FeedbackHandler(BaseHandler):
     def post(self):
         recieved_text = self.get_argument('feedback-text','')
 
         feedback = { }
-        feedback['userid'] = self.get_current_user()
+        feedback['userid'] = self.get_current_userid()
         feedback['text'] = recieved_text
         feedback['url'] = self.request.uri
 
         fbid = self.application.db['feedback'].insert_one(feedback).inserted_id
         print('feedback recieved with id' + str(fbid))
-
-
-# QA HISTORY HANDLER
-class QAHandler(BaseHandler):
-    def get(self):
-        #Need to get x amount to return
-        user_json = self.get_secure_cookie("userid")
-        userid = tornado.escape.json_decode(user_json)
-
-        pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
-
-        p_arr = []
-        for pair in pairs:
-            p = { }
-            p['qaid'] = str( pair['_id'] )
-            p['question'] = pair['question']
-            p['answer'] = pair['answer']
-            p_arr.append(p)
-
-        self.write(tornado.escape.json_encode( p_arr ))
-
-
-    def post(self):
-        qa = { }
-        qa['userid'] = self.get_current_user()
-        qa['question'] = message
-        qa['answer'] = answer
-        qa['datetime'] = datetime.isoformat(datetime.utcnow())
-
-        qaid = self.application.db['qa-pairs'].insert_one(qa).inserted_id
-
-
 
 
 
