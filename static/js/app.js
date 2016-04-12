@@ -2,7 +2,7 @@ var toggleRecordingGlobal = null;   // Uglyish workaround
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var ws = new WebSocket('ws://' + window.location.host + '/ws');
+    var ws = new WebSocket('wss://' + window.location.host + '/ws');
     ws.onopen = function() {
       // console.log(ws);
     };
@@ -10,7 +10,7 @@ $(function () {
       printAnswer( JSON.parse(evt.data) );
     }
     ws.onclose = function(evt) {
-      ws = new WebSocket('ws://' + window.location.host + '/ws');
+      ws = new WebSocket('wss://' + window.location.host + '/ws');
     }
 
     // Upon submission of a quesiton
@@ -85,6 +85,13 @@ $(function () {
         } else {
             $('#center-dialog').prepend(answer);
         }
+        answer.click( function() {
+          if( responsiveVoice.isPlaying() ) {
+              responsiveVoice.cancel();
+          } else {
+              responsiveVoice.speak(script);
+          }
+        });
     }
 
     var printQA = function ( qapair ) {
@@ -109,7 +116,7 @@ $(function () {
     })
     loadTenQA();
 
-    $('#input-mic').on('click', function() {responsiveVoice.speak(script);});
+
 
 
    ////////////////////////////////////////////

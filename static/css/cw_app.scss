@@ -250,6 +250,8 @@ hr {
 
 // nutrition
 .nutrition-header {
+  display: block;
+
   .icon {
     position: absolute;
     line-height: 0.9;
@@ -319,12 +321,4 @@ hr {
     background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
     background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
     background: radial-gradient(center, ellipse cover, #ff0000 0%,white 75%,white 100%,#7db9e8 100%);
-}
-
-/* fallback */
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../res/material_icons.woff2) format('woff2');
 }
