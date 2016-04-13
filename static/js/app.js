@@ -62,38 +62,53 @@ $(function () {
         var answer = $('<div />', {
             'class': 'col-xs-12'
         });
-        answer.append($('<img />', {
+        //MAIN ANSWER
+        var card = $('<div />', {
+            'class': 'md-card card-answer bottom-16'
+        });
+        var script = answer_text;
+        card.append($('<div />', {
+            'class': 'md-card-body' ,
+            text: answer_text
+        }));
+
+        //SIDE DIV
+        var left_div = $('<div />', {
+            'class': 'left-div'
+        });
+        left_div.append($('<img />', {
             'src': '../static/res/watson_logo.png',
             'class': 'watson-pic'
         }));
-        answer.append($('<div />', {
-            'class': 'md-card card-answer bottom-16'
-        }));
 
-        var script = answer_text;
-        if(answer_text[0] === '<') {
-            answer.children(0).append($('<div class="md-card-heading default">I think this might work for you ...</div>'));
-            answer.children(0).append($(answer_text));
-            script = 'I think this might work for you...'
-        } else {
-            answer.children(0).append($('<div />', {
-                'class': 'md-card-body' ,
-                text: answer_text
-            }))
-        }
+        var button = $('<button />', {
+            'class': 'md-button icon flat t2s-button'
+        });
+        button.append($('<i />', {
+            'class': 'material-icons',
+            text: 'volume_up'
+        }));
+        button.click( function( btn ) {
+          if( responsiveVoice.isPlaying() ) {
+              responsiveVoice.cancel();
+              btn.addClass('playing');
+          } else {
+              responsiveVoice.speak(script);
+              btn.removeClass('playing');
+          }
+        });
+        left_div.append( button );
+
+        // APPEND TO ANSWER
+        answer.append(left_div);
+        answer.append(card);
+
+
         if( pend === 'append'){
             $('#center-dialog').append(answer);
         } else {
             $('#center-dialog').prepend(answer);
         }
-
-        answer.click( function() {
-          if( responsiveVoice.isPlaying() ) {
-              responsiveVoice.cancel();
-          } else {
-              responsiveVoice.speak(script);
-          }
-        });
     }
 
     var printQA = function ( qapair ) {

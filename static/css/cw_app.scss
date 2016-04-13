@@ -207,27 +207,36 @@ hr {
 #center-dialog {
   display: none;
 
-  &.visible  {  display: block;}
   .col-xs-12 {  padding: 0;    }
-  img.watson-pic {
-    height: 40px;
+  .left-div {
     width: 40px;
-    margin-right: 8px;
-    margin-left: -4px;
-    border-radius: 100%;
-    vertical-align: initial;
-    display: inline-block;
-    float: left;
+
+
+    img.watson-pic {
+      height: 40px;
+      width: 40px;
+      margin-right: 8px;
+      margin-left: -4px;
+      border-radius: 100%;
+      vertical-align: initial;
+      display: inline-block;
+      float: left;
+    }
+    .t2s-button {
+      position: absolute;
+      top: 48px;
+      left: -2px;
+
+      .playing {
+        color: red;
+      }
+    }
   }
 }
 #no-content {
   position: relative;
   top: 50%;
   transform: translateY(-70%);
-
-  &.invisible {
-    display: none;
-  }
 }
 
 // workouts
