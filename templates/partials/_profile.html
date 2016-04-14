@@ -1,0 +1,43 @@
+<div class="center-wrapper">
+
+  <div class="md-card bottom-0">
+    <div class="md-card-heading default">
+      <div class="title">
+        Your Profile
+      </div>
+    </div>
+
+    <div class="md-card-body">
+
+      <div class="md-list">
+        <ul class="sparse">
+          <li>
+            <i class="material-icons icon">person</i>
+            <p class="text">{{ escape(current_user) }}</p>
+          </li>
+          <li>
+            <i class="material-icons icon">email</i>
+            <p class="text">{ email }</p>
+          </li>
+        </ul>
+      </div>
+
+      <form id="profile-form" class="md-form" action="/profile" method="post">
+        <div class="col-xs-6">
+          <input name="first-name" placeholder="First Name" type="text">
+        </div>
+        <div class="col-xs-6">
+          <input name="last-name" placeholder="Last Name" type="text">
+        </div>
+        <input name="user-name" placeholder="Email" type="text">
+        <input name="password" placeholder="Password" type="text">
+        <input name="password-verify" placeholder="Verfiy Password" type="text">
+      </form>
+
+    </div>
+    <div class="md-card-actions-layer">
+      <button class="md-button flat primary" type="submit" form="profile-form">
+        SAVE PROFILE
+      </button>
+    </div>
+  </div>

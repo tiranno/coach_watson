@@ -13,9 +13,23 @@ $(function () {
         $('#page-mask').removeClass('visible');
         return;
     };
+
+
     var inputClear = function() {
         $('#query-bar').val('');
+        $('#input-clear').removeClass('visible');
+        $('#input-mic').removeClass('invisible');
     };
+    $('#query-bar').on('blur', function(){
+        if( !this.value ) {
+            $('#input-clear').removeClass('visible');
+            $('#input-mic').removeClass('invisible');
+        }
+    }).on('focus', function(){
+        $('#input-mic').addClass('invisible');
+        $('#input-clear').addClass('visible');
+    });
+
 
     /* Event listeners */
     $('#page-mask').on('tap click', drawerClose);

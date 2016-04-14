@@ -56,8 +56,24 @@ class Watson:
 
         return answer
 
+    @staticmethod
+    def get_S2T_token():
+        url = 'https://stream.watsonplatform.net/authorization/api/v1/token?url=https://stream.watsonplatform.net/speech-to-text/api'
+        token = ''
+        auth = requests.auth.HTTPBasicAuth('0b462a68-399a-4215-af5d-12d202626755', 'lZlK8NpmVSAK')
+        r = requests.get(url, auth=auth)
+        token = r.text
+        return token
+
+    @staticmethod
+    def get_T2S_token():
+        auth = requests.auth.HTTPBasicAuth('5f6e100d-796c-4e85-879f-671b96332e0e', 'JAiEdmecnpzJ') 
+        token = ''
+        return token
+
 def main(question, user, password):
     watson = Watson(user, password)
+    print(watson.get_S2T_token())
     answer = watson.ask(question)
     print(answer)
 
