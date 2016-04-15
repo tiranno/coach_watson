@@ -111,11 +111,20 @@ class QueryPageHandler(BaseHandler):
 class QAHandler(BaseHandler):
     def get(self):
         #Need to get x amount to return
+        previous_id = self.get_argument('last-id','')
+        pair_count = self.get_argument('pair-count','')
         user_json = self.get_secure_cookie("userid")
         if user_json:
             userid = tornado.escape.json_decode(user_json)
 
-            pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
+            pairs = None
+            if previous_id == "-1":
+                print(-1)
+                pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
+            else:
+                print("else")
+                pairs = self.application.db['qa-pairs'].find({'userid': userid, '_id': {"$lt": previous_id}}).sort('_id', -1).limit(10)
+
 
             p_arr = []
             for pair in pairs:
@@ -124,6 +133,10 @@ class QAHandler(BaseHandler):
                 p['question'] = pair['question']
                 p['answer'] = pair['answer']
                 p_arr.append(p)
+
+            print p_arr
+
+
             self.write(tornado.escape.json_encode( p_arr ))
 
 
