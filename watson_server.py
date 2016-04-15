@@ -123,7 +123,7 @@ class QAHandler(BaseHandler):
                 pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
             else:
                 print("else")
-                pairs = self.application.db['qa-pairs'].find({'userid': userid, '_id': {"$lt": previous_id}}).sort('_id', -1).limit(10)
+                pairs = self.application.db['qa-pairs'].find({'userid': userid, '_id': {"$lt": ObjectId(previous_id)}}).sort('_id', -1).limit(10)
 
 
             p_arr = []
