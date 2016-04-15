@@ -119,12 +119,9 @@ class QAHandler(BaseHandler):
 
             pairs = None
             if previous_id == "-1":
-                print(-1)
                 pairs = self.application.db['qa-pairs'].find({'userid': userid}).sort('_id', -1).limit(10)
             else:
-                print("else")
                 pairs = self.application.db['qa-pairs'].find({'userid': userid, '_id': {"$lt": ObjectId(previous_id)}}).sort('_id', -1).limit(10)
-
 
             p_arr = []
             for pair in pairs:
@@ -133,9 +130,6 @@ class QAHandler(BaseHandler):
                 p['question'] = pair['question']
                 p['answer'] = pair['answer']
                 p_arr.append(p)
-
-            print p_arr
-
 
             self.write(tornado.escape.json_encode( p_arr ))
 

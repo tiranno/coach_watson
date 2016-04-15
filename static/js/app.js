@@ -122,14 +122,14 @@ $(function () {
         .done ( function( data ) {
             dataArr = JSON.parse( data );
 
-            if(dataArr) {
+            if(dataArr[0] != null) {
               for (var i = 0; i < dataArr.length; i++) {
                   printPair( dataArr[i] );
               }
-            }
 
-            var lastPair = dataArr[dataArr.length-1];
-            lastPairID = lastPair["qaid"];
+              var lastPair = dataArr[dataArr.length-1];
+              lastPairID = lastPair["qaid"];
+            }
         });
     };
 
