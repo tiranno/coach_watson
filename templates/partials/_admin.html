@@ -1,0 +1,30 @@
+<div class="center-wrapper">
+
+  <div class="md-card bottom-0">
+    <div class="md-card-heading default">
+      <div class="title">
+        Admin Page
+      </div>
+    </div>
+
+    <div class="md-card-body">
+
+      <form id="nutrition_item-form" class="md-form" action="/admin" method="post">
+        <input name="food_name" placeholder="Food Name" type="text">
+        <input name="description" placeholder="Short Description" type="text">
+        <input name="protein_amount" placeholder="Protein Amount per Serving (g)" type="number">
+        <input name="fiber_amount" placeholder="Fiber Amount per Serving (g)" type="number">
+        <input name="calories_amount" placeholder="Calorie Amount per Serving" type="number">
+		<input name="fat_amount" placeholder="Fat Amount per Serving (g)" type="number">
+		<input name="cholesterol_amount" placeholder="Cholesterol Amount per Serving (mg)" type="number">
+		<input name="sodium_amount" placeholder="Sodium Amount per Serving (mg)" type="number">
+		<input name="sugar_amount" placeholder="Sugar Amount per Serving (g)" type="number">
+      </form>
+
+    </div>
+    <div class="md-card-actions-layer">
+      <button class="md-button flat primary" type="submit" form="nutrition_item-form">
+        Submit FoodItem
+      </button>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+<div class="center-wrapper">
+
+  <div class="md-card bottom-0">
+    <div class="md-card-heading default">
+      <div class="title">
+        Nutrition Recommendations
+      </div>
+    </div>
+	The CoachWatson nutrition recommendation service can help you discover new foods and meals that most closely match the nutrition facts you provide.  
+	<br>
+	Note that all nutrition facts and foods given are of most closely estimated value.  Specific nutrition facts change depending on the brand of food, size, method of preparation, etc. 
+	<br>
+	Please consult your physician before eating ANY food if you have dietary restrictions or allergies.
+	<br>
+    <div class="md-card-body">
+      <form id="find-food-form" class="md-form" action="/nutrition" method="post">
+        <input name="protein_amount" placeholder="Protein Amount per Serving (g)" type="number">
+        <input name="fiber_amount" placeholder="Fiber Amount per Serving (g)" type="number">
+        <input name="calories_amount" placeholder="Calorie Amount per Serving" type="number">
+		<input name="fat_amount" placeholder="Fat Amount per Serving (g)" type="number">
+		<input name="cholesterol_amount" placeholder="Cholesterol Amount per Serving (mg)" type="number">
+		<input name="sodium_amount" placeholder="Sodium Amount per Serving (mg)" type="number">
+		<input name="sugar_amount" placeholder="Sugar Amount per Serving (g)" type="number">
+      </form>
+    </div>
+	
+    <div class="md-card-actions-layer">
+      <button class="md-button flat primary" type="submit" form="find-food-form">
+        Ask CoachWatson!
+      </button>
+    </div>
+  </div>

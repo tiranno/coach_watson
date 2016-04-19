@@ -1,0 +1,388 @@
+/*
+  Material Design components
+*/
+
+/* Variables */
+// App Palette Colors
+$palette-primary: aqua;
+$palette-secondary: aqua;
+$palette-accent: aqua;
+$palette-error: rgba(244,67,54,.87);
+
+// Material Text Colors
+  // Dark text for light backgrounds
+$text-dark-primary: rgba(0,0,0,.87); //#000000 87%
+$text-dark-secondary: rgba(0,0,0,.54); //#000000 54%
+$text-dark-disabled: rgba(0,0,0,.38); //#000000 38%
+$text-dark-dividers: rgba(0,0,0,.12); //#000000 12%
+  // Light text for dark backgrounds
+$text-light-primary: rgba(255,255,255,1); //#FFFFFF 100%
+$text-light-secondary: rgba(255,255,255,.70); //#FFFFFF 70%
+$text-light-disabled: rgba(255,255,255,.50); //#FFFFFF 50%
+$text-light-dividers: rgba(255,255,255,.12); //#FFFFFF 12%
+
+
+/* Text Color Overrides */
+.dark-prm {  color: $text-dark-primary !important;  }
+.dark-sec {  color: $text-dark-secondary !important;  }
+.dark-dis {  color: $text-dark-disabled !important;  }
+.light-prm {  color: $text-light-primary !important;  }
+.light-sec {  color: $text-light-secondary !important;  }
+.light-dis {  color: $text-light-disabled !important;  }
+
+
+/* Material Icons */
+.material-icons {
+  -webkit-user-select: none;
+  user-select: none;
+
+  &.mi-18 {  font-size: 18px;  }
+  &.mi-24 {  font-size: 24px;  }
+  &.mi-36 {  font-size: 36px;  }
+  &.mi-48 {  font-size: 48px;  }
+}
+
+/* Card */
+.md-card {
+  padding-bottom: 24px; //default
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: white;
+  color: $text-dark-primary;
+
+  &.bottom-0  {  padding-bottom: 0px;   }
+  &.bottom-16 {  padding-bottom: 16px;  }
+  &.bottom-24 {  padding-bottom: 24px;  }
+
+  // Note: each module in card should have no bottom padding.
+  // The previous module and bottom of card should take care of this.
+  .md-card-heading {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding-bottom: 16px;
+
+    &.avatar {
+      padding: 16px 16px 0;
+
+      img {
+        height: 40px;
+        width: 40px;
+        margin-right: 16px;
+        border-radius: 100%;
+        vertical-align: initial;
+        display: inline-block;
+      }
+      .title {
+        height: 40px;
+        font-size: 16px;
+        display: inline-block;
+        .subtitle {
+          font-size: 16px;
+          color: $text-dark-secondary;
+        }
+      }
+    }
+    &.default {
+      .title {
+        padding: 24px 16px 0;
+        font-size: 24px;
+        .subtitle {
+          font-size: 16px;
+          color: $text-dark-secondary;
+        }
+      }
+    }
+
+    .md-tabs {
+      margin-bottom: -16px;
+    }
+  }
+  .md-card-body {
+    padding: 16px 16px 0px;
+    font-size: 16px;
+  }
+  .md-card-actions-layer {  //Wrapper for actions
+    padding: 8px;
+    margin-top: 16px;
+
+    .action-text {
+      padding: 8px;
+      margin-right: 8px;
+    }
+    .action-icon {
+      margin-right: 8px;
+    }
+  }
+  .md-card-actions-stacked {  //Wrapper for actions
+    padding: 8px 8px 4px 8px;
+    margin-top: 16px;
+
+    .action-text {
+      padding: 8px;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+/* List feeds */
+.md-list {
+  margin: 0 -15px;
+  font-size: 16px;
+
+  ul {
+    li {
+      &.active > a {
+        color: rgba(255,255,255,1);
+        background-color: #00838F;
+      }
+      a {
+        height: 100%;
+        color: rgba(255,255,255,.7);
+        text-decoration: none;
+        display: block;
+        line-height: 1;
+        &:hover {  background-color: #0097A7;  }
+        &:focus, &:active { background-color: darken(#0097A7, 1);}
+      }
+      .icon {
+        padding: 0 0 0 16px;
+        position: absolute;
+        line-height: 0.7;
+      }
+      .text {  padding: 0 16px 0 72px;  }
+    }
+    li {
+
+    }
+  }
+
+  ul.sparse {
+    padding: 8px 0 0 0;
+    li {
+      height: 48px;
+      display: block;
+      a {  padding: 16px 0;  }
+    }
+  }
+  ul.dense {
+    padding: 4px 0 0 0;
+    li {
+      height: 40px;
+      display: block;
+      a {  padding: 12px 0;  }
+    }
+  }
+}
+
+/* Tabs */
+.md-tabs {
+  overflow-x: auto;
+  font-size: 14px;
+
+  ul {
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+    position: relative;
+
+    li {
+      // min-width: 160px;
+      min-width: 72px;
+      max-width: 264px;
+      height: 48px;
+      margin: 0;
+      display: inline-block;
+      line-height: 46px;
+      text-transform: uppercase;
+      font-size: 14px;
+
+      a {
+        padding: 16px 12px;
+        color: $text-dark-primary;
+        vertical-align: middle;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    span.indicator {
+      min-width: 72px;
+      background-color: #f6b2b5;
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      z-index: 20;
+    }
+
+  }
+
+  ul.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Buttons */
+.md-button {
+  min-width: 64px;
+  height: 36px;
+  padding: 0px 16px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 2px;
+  z-index: 0;
+  line-height: 36px;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  &.icon {
+    min-width: 36px;
+    height: 36px;
+    padding: 4px;
+    z-index: 0;
+  }
+
+
+  // Style classes
+  &.flat {
+    background-color: transparent;
+    color: $text-dark-primary;
+
+    &:hover {
+      background-color: rgba(153,153,153,.18);
+    }
+    &:active, &:focus {
+      background-color: rgba(153,153,153,.4);
+    }
+
+    &.primary {
+      background: rgba($palette-accent,1);
+      color: $text-dark-primary;
+      &:hover {
+        background-color: lighten($palette-accent, 26%);
+      }
+      &:active, &:focus {
+        background-color: lighten($palette-accent, 57%);
+      }
+    }
+  }
+  &.raised {
+    &:hover {
+      background-color: rgba(152,152,152,.12);
+    }
+    &:active, &:focus {
+      background-color: rgba(152,152,152,.4);
+    }
+
+    &.primary {
+      background-color: rgba(0,184,212,1);
+
+      &:hover {
+        background-color: rgba(0,184,212,.12);
+      }
+      &:active, &:focus {
+        background-color: rgba(0,184,212,.4);
+      }
+    }
+  }
+  &.dense {
+    height: 32px;
+    font-size: 13px;
+  }
+
+  /* Color classes */
+  // Default colors
+  &:hover {
+    background-color: rgba(152,152,152,.12);
+  }
+  &:active, &:focus {
+    background-color: rgba(152,152,152,.4);
+  }
+}
+
+
+
+/* Text fields and Forms */
+input, textarea, div[contenteditable] {
+  width: 100%;
+  height: 36px;
+  padding-bottom: 1px;
+  border: none;
+  border-bottom: 1px solid rgba(117,117,117,0.15);
+  background-color: transparent;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 15px;
+  color: $text-dark-primary;
+  cursor: text;
+
+  &:active, &:focus {
+    outline: none;
+    border-bottom: 2px solid $palette-accent;
+    // margin-bottom: 1px;
+    box-shadow: none;
+  }
+  &:empty {
+    // color: $text-dark-secondary;
+  }
+  // &:invalid {
+  //   border-bottom: 2px solid $palette-error;
+  // }
+}
+textarea, div[contenteditable] {
+  min-height: 36px;
+  height: auto;
+  max-height: 300px;
+  padding-top: 8px;
+  resize: none; //Stop user from changing height of item
+  overflow: auto;
+}
+div[contenteditable] {
+  &:empty:before {
+    display: block;
+    content: attr(placeholder);
+    color: $text-dark-secondary;
+  }
+}
+.md-form {
+  * {
+    margin-top: 8px;
+  }
+}
+
+
+/* Data table */
+table.md-table {
+  width: 100%;
+
+  thead {
+    color: rgba(0,0,0,.54);
+    font-size: 12px;
+
+    tr {
+      height: 56px;
+      border-bottom: solid 1px rgba(0,0,0,.12);
+
+      th, td {
+        padding: 0 12px;
+      }
+    }
+  }
+  tbody {
+    color: rgba(0,0,0,.87);
+    font-size: 13px;
+
+    tr {
+      height: 48px;
+      border-bottom: solid 1px rgba(0,0,0,.12);
+
+      td {
+        padding: 0 12px;
+      }
+      td.numeric {
+        text-align: right;
+      }
+    }
+  }
+}
