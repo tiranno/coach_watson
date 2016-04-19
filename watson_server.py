@@ -43,6 +43,7 @@ class Application(tornado.web.Application):
             (r'/workout', WorkoutHandler),
             (r'/workout/day', WorkoutDayHandler),
             (r'/nutrition', NutritionHandler),
+			(r'/nutritionresult', NutritionResultsHandler),
             (r'/profile', ProfileHandler),
 			(r'/admin', AdminHandler),
             (r'/404', fourOhFourHandler),
@@ -251,11 +252,70 @@ class NutritionHandler(BaseHandler):
 
         # Now find closest matching results from db based on those values entered by user.
         cursor = self.application.db['foods'].find({'protein': protein})
-        for document in cursor:
-            food1name = document['foodname']
 
-        title = "Nutrition Results"
-        self.render('app.html', content='partials/_nutritionresult.html', title=title, food1name=food1name)
+        # (set up empty variables to fill)
+        food1name = "food1name"
+        food1description = "description1"
+        food1protein = 0
+        food1fiber = 0
+        food1calories = 0
+        food1fats = 0
+        food1cholesterol = 0
+        food1sodium = 0
+        food1sugar = 0
+        food2name = "food2name"
+        food2description = "description2"
+        food2protein = 0
+        food2fiber = 0
+        food2calories = 0
+        food2fats = 0
+        food2cholesterol = 0
+        food2sodium = 0
+        food2sugar = 0
+        food3name = "food3name"
+        food3description = "description3"
+        food3protein = 0
+        food3fiber = 0
+        food3calories = 0
+        food3fats = 0
+        food3cholesterol = 0
+        food3sodium = 0
+        food3sugar = 0
+
+        # Fill variables based on results we found from db
+        i = 0
+        for document in cursor:
+            if(i==1):
+                food1name = document['foodname']
+                food1description = document['description']
+                food1protein = document['protein']
+                food1fiber = document['fiber']
+                food1calories = document['calories']
+                food1sodium = document['sodium']
+                food1sugar = document['sugar']
+                food1fat = document['fat']
+            if(i==2):
+                food2name = document['foodname']
+                food2description = document['description']
+                food2protein = document['protein']
+                food2fiber = document['fiber']
+                food2calories = document['calories']
+                food2sodium = document['sodium']
+                food2sugar = document['sugar']
+                food2fat = document['fat']
+            if(i==3):
+                food3name = document['foodname']
+                food3description = document['description']
+                food3protein = document['protein']
+                food3fiber = document['fiber']
+                food3calories = document['calories']
+                food3sodium = document['sodium']
+                food3sugar = document['sugar']
+                food3fat = document['fat']
+            i = i + 1
+        
+        # Pass variables to /nutritionresult to be formatted and displayed.
+        self.redirect('/nutritionresult')
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
@@ -264,7 +324,8 @@ class NutritionResultsHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
         title = "Nutrition Results"
-        self.render('app.html', content='partials/_nutritionresults.html', title=title)
+        foodname = "test"
+        self.render('app.html', content='partials/_nutritionresult.html', title=title)
 
     def write_error(self, status_code, **kwargs):
         self.write('Oops, a %d error occurred!\n' % status_code)
