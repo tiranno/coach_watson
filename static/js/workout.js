@@ -34,23 +34,20 @@ $(function () {
         }) );
         var subrow2 = $('<div />', {'class': 'col-xs-3'});
         subrow2.append( $('<button />', {
-            'id': 'add-workout',
+            'id': 'cancel-workout',
             'class': 'md-button flat',
-            'style': 'float: right;'
+            'style': 'float: right;',
+            'html': '<i class="material-icons">cancel</i>'
         }) );
-        subrow2.children(0).append( $('<i />', {
-            'class': 'material-icons',
-            text: 'cancel'
-        }) );
-        subrow2.children(0).append( $('<i />', {
-            'class': 'material-icons',
-            text: 'check'
+        subrow2.append( $('<button />', {
+            'id': 'confirm-workout',
+            'class': 'md-button flat',
+            'style': 'float: right;',
+            'html': '<i class="material-icons">check</i>'
         }) );
         var editing = $('<li />', {'id': '?', 'class': 'visible'}).append(subrow0, subrow1, subrow2);
 
-
-        var listItem = $();
-        $('#').prepend(listItem);
+        $('#workouts-list > ul').append(editing);
     }
     var editExercise = function() {
         id = this.id;
@@ -69,7 +66,7 @@ $(function () {
         $.ajax({
           url: '/workout/exercise',
           type: 'POST',
-          data: { 'dayid': this.id, 'name': , 'amount': }
+          data: {}, //{ 'dayid': this.id, 'name': , 'amount': }
           success: function( data ) {
             // remove from list
           }
@@ -86,7 +83,7 @@ $(function () {
     }
 
     // event listeners
-    $('#add-exercise').on('tap click', addExercise);
+    $('#add-workout').on('tap click', addExercise);
     // $('#del-exercise').on('tap click', delExercise);
     // $('#edit-exercise').on('tap click', editExercise);
 
