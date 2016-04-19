@@ -1,9 +1,8 @@
 var toggleRecordingGlobal = null;   // Uglyish workaround
+
 $(function () {
   /* Fucntions for updating the dialog stream */
     // Websocket with server to preprocess sumbissions before sending to Watson
-    var askWatsonBool = window.location.pathname;
-    console.log(askWatsonBool);
     var ws = new WebSocket('ws://' + window.location.host + '/ws');
     ws.onopen = function() {
       // console.log(ws);
@@ -12,7 +11,7 @@ $(function () {
       printAnswer( JSON.parse(evt.data) );
     }
     ws.onclose = function(evt) {
-      ws = new WebSocket('wss://' + window.location.host + '/ws');
+      ws = new WebSocket('ws://' + window.location.host + '/ws');
     }
 
     // Upon submission of a quesiton
@@ -111,27 +110,36 @@ $(function () {
         }
     }
 
-    var printQA = function ( qapair ) {
+    var printPair = function ( qapair ) {
         printAnswer( qapair['answer'], 'append' );
         printQuestion( qapair['question'], 'append' );
     }
 
-    var loadTenQA = function( id ) {
-        $.get( '/qahistory', { fromid: id } )
+    var lastPairID = -1;  //the id of the last QA pair
+
+    var loadPairs = function( id, amount ) {
+        $.get( '/qahistory', { 'last-id': id, 'pair-count': amount } )
         .done ( function( data ) {
             dataArr = JSON.parse( data );
-            for (var i = 0; i < dataArr.length; i++) {
-                printQA( dataArr[i] );
+
+            if(dataArr[0] != null) {
+              for (var i = 0; i < dataArr.length; i++) {
+                  printPair( dataArr[i] );
+              }
+
+              var lastPair = dataArr[dataArr.length-1];
+              lastPairID = lastPair["qaid"];
             }
         });
     };
 
     $('#cw-app-content').on('scroll', function() {
         if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-            loadTenQA()
+            loadPairs( lastPairID, 10);
         }
-    })
-    loadTenQA();
+    });
+    loadPairs( lastPairID, 10);
+
 
 
 
